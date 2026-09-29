@@ -1,3168 +1,1205 @@
-<!DOCTYPE html>
+<!DOCT
 <html lang="fa" dir="rtl">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
-
-<title>صرافی تبادل ارز</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>صرافی آنلاین</title>
 
 <style>
-
-/* =====================================================
-   TABADOL EXCHANGE
-   COMPLETE VERSION
-===================================================== */
-
 :root{
-  --bg:#ffd600;
-  --card:#111;
+  --main:#00c853;
+  --main2:#00a844;
+  --bg:#07130d;
+  --card:#0d2116;
   --text:#fff;
-  --green:#00e676;
-  --orange:#ff9800;
-  --red:#ff3b30;
-  --blue:#2196f3;
+  --muted:#9bb0a2;
+  --border:#183b26;
+  --danger:#ff5252;
+  --warning:#ffb300;
 }
 
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 body{
   margin:0;
+  font-family:Tahoma,Arial,sans-serif;
+  background:
+    radial-gradient(circle at top,#12351e 0,#07130d 45%,#030805 100%);
+  color:var(--text);
   min-height:100vh;
-  background:var(--bg);
-  color:#111;
-  font-family:
-    Tahoma,
-    Arial,
-    sans-serif;
-  transition:.3s;
 }
-
-button,
-input,
-select{
-  font-family:inherit;
-}
-
-
-/* =====================================================
-   HEADER
-===================================================== */
 
 header{
-  background:rgba(0,0,0,.92);
-  color:white;
-  padding:15px;
-  text-align:center;
   position:sticky;
   top:0;
-  z-index:100;
-  box-shadow:0 3px 15px rgba(0,0,0,.3);
+  z-index:50;
+  background:rgba(4,12,7,.92);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  padding:15px;
 }
 
-.header-title{
-  font-size:27px;
-  font-weight:bold;
-}
-
-.header-sub{
-  font-size:12px;
-  opacity:.75;
-  margin-top:5px;
-}
-
-
-/* =====================================================
-   LOGO
-===================================================== */
-
-.logo{
-  width:70px;
-  height:70px;
-  margin:0 auto 8px;
-  border-radius:50%;
+.header{
+  max-width:1100px;
+  margin:auto;
   display:flex;
   align-items:center;
-  justify-content:center;
-  font-size:42px;
-  background:
-    radial-gradient(
-      circle,
-      #fff 0%,
-      #ffe600 35%,
-      #ff9800 60%,
-      #ff3d00 100%
-    );
-  box-shadow:
-    0 0 15px #fff,
-    0 0 35px #ff9800,
-    0 0 55px #ff3d00;
-  animation:logoGlow 1s infinite alternate;
+  justify-content:space-between;
+  gap:15px;
 }
 
-@keyframes logoGlow{
-  from{
-    transform:scale(.96);
-    box-shadow:
-      0 0 10px #fff,
-      0 0 25px #ff9800;
-  }
-  to{
-    transform:scale(1.04);
-    box-shadow:
-      0 0 20px #fff,
-      0 0 45px #ff9800,
-      0 0 70px #ff3d00;
-  }
-}
-
-
-/* =====================================================
-   MAIN
-===================================================== */
-
-.container{
-  width:94%;
-  max-width:1150px;
-  margin:22px auto;
-}
-
-
-/* =====================================================
-   LIVE STATUS
-===================================================== */
-
-.live-status{
-  background:#111;
-  color:white;
-  border-radius:15px;
-  padding:12px;
-  text-align:center;
-  margin-bottom:15px;
-  font-size:14px;
-}
-
-
-/* =====================================================
-   COIN CARDS
-===================================================== */
-
-.coin-grid{
-  display:grid;
-  grid-template-columns:
-    repeat(auto-fit,minmax(155px,1fr));
-  gap:12px;
-}
-
-.coin-card{
-  background:rgba(0,0,0,.84);
-  color:white;
-  padding:17px 10px;
-  border-radius:20px;
-  text-align:center;
-  box-shadow:0 7px 18px rgba(0,0,0,.25);
-}
-
-.coin-led{
-  width:13px;
-  height:13px;
-  background:#00ff55;
-  border-radius:50%;
-  margin:0 auto 9px;
-  box-shadow:
-    0 0 7px #00ff55,
-    0 0 20px #00ff55;
-  animation:ledBlink .7s infinite alternate;
-}
-
-@keyframes ledBlink{
-  from{
-    opacity:.25;
-    transform:scale(.7);
-  }
-  to{
-    opacity:1;
-    transform:scale(1.25);
-  }
-}
-
-.coin-name{
-  font-weight:bold;
-  font-size:16px;
-}
-
-.coin-price{
-  font-size:19px;
-  font-weight:bold;
-  margin-top:8px;
-  color:#fff;
-}
-
-.coin-time{
-  font-size:10px;
-  opacity:.55;
-  margin-top:5px;
-}
-
-
-/* =====================================================
-   PANELS
-===================================================== */
-
-.panel{
-  background:rgba(0,0,0,.88);
-  color:white;
-  border-radius:22px;
-  padding:22px;
-  margin-top:20px;
-  box-shadow:0 8px 25px rgba(0,0,0,.3);
-}
-
-.panel-title{
-  text-align:center;
-  font-size:23px;
-  font-weight:bold;
-  margin-bottom:18px;
-}
-
-
-/* =====================================================
-   BUY SELL
-===================================================== */
-
-.trade-buttons{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-  margin-bottom:18px;
-}
-
-.trade-buttons button{
-  padding:18px 10px;
-  border:0;
-  border-radius:16px;
+.logo{
   font-size:22px;
   font-weight:bold;
+  color:var(--main);
+}
+
+.logo span{
+  color:white;
+}
+
+.settings{
+  background:#10261a;
+  border:1px solid var(--border);
+  color:white;
+  padding:10px 14px;
+  border-radius:12px;
   cursor:pointer;
-  transition:.2s;
 }
 
-.trade-buttons button:hover{
-  transform:scale(1.02);
+.container{
+  width:min(1100px,94%);
+  margin:25px auto 60px;
 }
 
-.buy-btn{
+.hero{
+  text-align:center;
+  padding:25px 10px;
+}
+
+.hero h1{
+  margin:0 0 10px;
+  font-size:30px;
+}
+
+.hero p{
+  color:var(--muted);
+  margin:0;
+}
+
+.section-title{
+  margin:28px 0 14px;
+  font-size:20px;
+}
+
+.market-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:14px;
+}
+
+.market{
+  background:linear-gradient(145deg,#10271a,#09170e);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:18px;
+  box-shadow:0 8px 30px rgba(0,0,0,.2);
+}
+
+.market-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.coin{
+  font-size:18px;
+  font-weight:bold;
+}
+
+.live{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  color:#64ff91;
+  font-size:11px;
+}
+
+.dot{
+  width:8px;
+  height:8px;
+  border-radius:50%;
   background:#00e676;
-  color:#000;
+  box-shadow:0 0 10px #00e676;
+  animation:blink 1.2s infinite;
 }
 
-.sell-btn{
-  background:#ffb300;
-  color:#000;
+@keyframes blink{
+  50%{opacity:.25}
 }
 
-.trade-buttons .active{
-  box-shadow:
-    0 0 0 4px #fff,
-    0 0 25px currentColor;
+.price{
+  margin-top:16px;
+  font-size:20px;
+  font-weight:bold;
 }
 
+.usdt,.toman{
+  margin-top:7px;
+  color:var(--muted);
+  font-size:13px;
+}
 
-/* =====================================================
-   FORM
-===================================================== */
+.card{
+  background:rgba(10,29,17,.94);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:20px;
+  margin-top:20px;
+  box-shadow:0 10px 35px rgba(0,0,0,.25);
+}
 
 .form-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:13px;
+  gap:14px;
 }
 
 .field{
-  margin-bottom:13px;
+  margin-bottom:14px;
 }
 
-.field label{
+label{
   display:block;
   margin-bottom:7px;
   font-size:13px;
-  opacity:.85;
+  color:#b9c9bf;
 }
 
-.field input,
-.field select{
+input,select{
   width:100%;
-  padding:14px;
-  border:0;
+  background:#06100a;
+  color:white;
+  border:1px solid #244a31;
   border-radius:12px;
-  font-size:16px;
+  padding:13px;
   outline:none;
 }
 
-.full{
-  grid-column:1/-1;
+input:focus,select:focus{
+  border-color:var(--main);
 }
 
-
-/* =====================================================
-   RESULT
-===================================================== */
-
-.exchange-result{
-  margin-top:15px;
-  padding:18px;
-  background:rgba(255,255,255,.08);
-  border-radius:15px;
-  text-align:center;
-  line-height:2;
-  font-size:17px;
+button{
+  border:0;
+  cursor:pointer;
+  font-family:inherit;
 }
-
-.result-big{
-  font-size:22px;
-  font-weight:bold;
-  color:#00e676;
-}
-
-
-/* =====================================================
-   PRIMARY BUTTON
-===================================================== */
 
 .primary{
   width:100%;
-  padding:15px;
-  border:0;
+  padding:14px;
   border-radius:13px;
-  background:#2196f3;
-  color:white;
-  font-size:18px;
+  color:#001c0a;
   font-weight:bold;
-  cursor:pointer;
+  background:linear-gradient(135deg,var(--main),#72ff9b);
+  margin-top:5px;
 }
 
-.primary:hover{
-  filter:brightness(1.1);
-}
-
-
-/* =====================================================
-   DEPOSIT BOX
-===================================================== */
-
-.deposit-box{
+.result{
   display:none;
-  margin-top:18px;
-  background:#fff;
-  color:#111;
-  padding:18px;
-  border-radius:16px;
+  margin-top:15px;
+  background:#07170d;
+  border:1px solid #205f34;
+  border-radius:15px;
+  padding:15px;
 }
 
-.deposit-address{
-  direction:ltr;
+.result-row{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  padding:7px 0;
+  border-bottom:1px solid #14311e;
+}
+
+.result-row:last-child{
+  border-bottom:0;
+}
+
+.wallet-box{
+  background:#06100a;
+  border:1px dashed #2d633c;
+  padding:14px;
+  border-radius:13px;
   word-break:break-all;
-  background:#eee;
-  padding:13px;
-  border-radius:10px;
-  margin:10px 0;
-  font-family:monospace;
+  line-height:1.8;
 }
 
-.copy-btn{
-  background:#111;
-  color:#fff;
-  border:0;
-  border-radius:10px;
-  padding:11px 15px;
-  cursor:pointer;
+.copy{
+  background:#163c24;
+  color:white;
+  padding:8px 12px;
+  border-radius:9px;
+  margin-top:8px;
 }
 
-
-/* =====================================================
-   TRACK
-===================================================== */
-
-.track-input{
+.track{
   display:flex;
   gap:10px;
 }
 
-.track-input input{
+.track input{
   flex:1;
-  padding:14px;
-  border:0;
+}
+
+.track button{
+  background:var(--main);
+  color:#001c0a;
+  padding:0 20px;
   border-radius:12px;
-  font-size:16px;
-}
-
-.track-result{
-  margin-top:15px;
-  display:none;
-  background:#fff;
-  color:#111;
-  border-radius:15px;
-  padding:18px;
-  line-height:2;
-}
-
-.status{
-  display:inline-block;
-  padding:6px 12px;
-  border-radius:20px;
   font-weight:bold;
 }
 
-.status-pending{
-  background:#fff3cd;
-  color:#856404;
+/* transactions */
+
+.transactions{
+  margin-top:35px;
 }
 
-.status-received{
-  background:#cce5ff;
-  color:#004085;
+.transaction{
+  background:linear-gradient(145deg,#0c2014,#07140c);
+  border:1px solid var(--border);
+  border-radius:17px;
+  padding:16px;
+  margin-bottom:12px;
 }
 
-.status-completed{
-  background:#d4edda;
-  color:#155724;
-}
-
-.status-cancelled{
-  background:#f8d7da;
-  color:#721c24;
-}
-
-
-/* =====================================================
-   TXID
-===================================================== */
-
-.txid-row{
+.tx-top{
   display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:12px;
+}
+
+.tx-code{
+  font-weight:bold;
+  color:var(--main);
+}
+
+.status{
+  padding:6px 10px;
+  border-radius:30px;
+  font-size:11px;
+}
+
+.pending{
+  background:rgba(255,179,0,.13);
+  color:#ffc107;
+  border:1px solid rgba(255,179,0,.35);
+}
+
+.done{
+  background:rgba(0,230,118,.12);
+  color:#00e676;
+  border:1px solid rgba(0,230,118,.35);
+}
+
+.tx-info{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
   gap:8px;
-  margin-top:10px;
+  color:#b9c9bf;
+  font-size:13px;
 }
 
-.txid-row input{
-  flex:1;
-  padding:12px;
-  border:1px solid #ddd;
-  border-radius:10px;
-  direction:ltr;
-}
-
-
-/* =====================================================
-   SETTINGS
-===================================================== */
-
-.settings-btn{
-  position:fixed;
-  left:15px;
-  bottom:15px;
-  width:55px;
-  height:55px;
-  border-radius:50%;
-  border:0;
-  background:#111;
+.address{
+  word-break:break-all;
   color:#fff;
-  font-size:25px;
-  cursor:pointer;
-  z-index:500;
-  box-shadow:0 4px 15px rgba(0,0,0,.35);
 }
 
-
-/* =====================================================
-   MODAL
-===================================================== */
+.empty{
+  text-align:center;
+  padding:25px;
+  color:#7f9687;
+}
 
 .modal{
   display:none;
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.75);
-  z-index:1000;
-  overflow:auto;
-  padding:25px 10px;
+  z-index:100;
+  background:rgba(0,0,0,.72);
+  align-items:center;
+  justify-content:center;
+  padding:20px;
 }
 
 .modal-box{
-  width:96%;
-  max-width:1000px;
-  margin:20px auto;
-  background:#fff;
-  color:#111;
+  width:min(430px,100%);
+  background:#0a1b10;
+  border:1px solid var(--border);
   border-radius:20px;
-  padding:22px;
+  padding:20px;
 }
 
-.modal-title{
-  font-size:23px;
-  font-weight:bold;
-  margin-bottom:18px;
+.theme-list{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:15px;
+}
+
+.theme-btn{
+  padding:13px;
+  border-radius:12px;
+  color:white;
+  background:#14251a;
+  border:1px solid #284c33;
 }
 
 .close{
-  float:left;
-  background:#e53935;
-  color:#fff;
-  border:0;
-  border-radius:9px;
-  padding:8px 13px;
-  cursor:pointer;
-}
-
-
-/* =====================================================
-   THEME
-===================================================== */
-
-.theme-grid{
-  display:grid;
-  grid-template-columns:
-    repeat(auto-fit,minmax(100px,1fr));
-  gap:10px;
-}
-
-.theme-grid button{
-  padding:15px;
-  border:0;
-  border-radius:12px;
-  cursor:pointer;
-  font-weight:bold;
-}
-
-.theme-green{
-  background:#16a34a;
-  color:#fff;
-}
-
-.theme-yellow{
-  background:#ffd600;
-}
-
-.theme-orange{
-  background:#ff9800;
-}
-
-.theme-blue{
-  background:#1976d2;
-  color:#fff;
-}
-
-.theme-black{
-  background:#111;
-  color:#fff;
-}
-
-
-/* =====================================================
-   ADMIN
-===================================================== */
-
-.admin-stats{
-  display:grid;
-  grid-template-columns:
-    repeat(3,1fr);
-  gap:10px;
-  margin-bottom:20px;
-}
-
-.stat{
-  background:#111;
-  color:#fff;
-  padding:15px;
-  text-align:center;
-  border-radius:13px;
-}
-
-.stat-number{
-  display:block;
-  font-size:25px;
-  font-weight:bold;
-  margin-top:5px;
-}
-
-.admin-table-wrap{
-  overflow-x:auto;
-}
-
-.admin-table{
-  width:100%;
-  border-collapse:collapse;
-  min-width:900px;
-}
-
-.admin-table th,
-.admin-table td{
-  border:1px solid #ddd;
-  padding:8px;
-  text-align:center;
-  font-size:12px;
-}
-
-.admin-table th{
-  background:#111;
-  color:#fff;
-}
-
-.admin-actions{
-  display:flex;
-  gap:5px;
-  flex-wrap:wrap;
-}
-
-.admin-actions button{
-  border:0;
-  border-radius:7px;
-  padding:6px 8px;
-  cursor:pointer;
-  font-size:11px;
-}
-
-.btn-green{
-  background:#00c853;
-  color:#fff;
-}
-
-.btn-blue{
-  background:#1976d2;
-  color:#fff;
-}
-
-.btn-red{
-  background:#e53935;
-  color:#fff;
-}
-
-.btn-gray{
-  background:#555;
-  color:#fff;
-}
-
-
-/* =====================================================
-   LOGIN
-===================================================== */
-
-.login-box{
-  max-width:420px;
-  margin:70px auto;
-}
-
-.login-box input{
-  width:100%;
-  padding:14px;
-  border:1px solid #ddd;
+  background:#222;
+  color:white;
+  padding:10px;
   border-radius:10px;
-  margin:10px 0;
-  font-size:17px;
+  width:100%;
+  margin-top:15px;
 }
 
-
-/* =====================================================
-   FOOTER
-===================================================== */
-
-footer{
-  text-align:center;
-  padding:25px;
+.notice{
+  margin-top:12px;
+  color:#8ea796;
   font-size:12px;
-  opacity:.7;
+  line-height:1.8;
 }
-
-
-/* =====================================================
-   MOBILE
-===================================================== */
 
 @media(max-width:650px){
-
-  .form-grid{
+  .form-grid,
+  .tx-info{
     grid-template-columns:1fr;
   }
 
-  .full{
-    grid-column:auto;
-  }
-
-  .trade-buttons{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .trade-buttons button{
-    font-size:18px;
-  }
-
-  .admin-stats{
-    grid-template-columns:1fr;
-  }
-
-  .track-input{
+  .track{
     flex-direction:column;
   }
 
+  .track button{
+    padding:13px;
+  }
+
+  .hero h1{
+    font-size:25px;
+  }
 }
-
 </style>
-
 </head>
-
 
 <body>
 
-
-<!-- =====================================================
- HEADER
-===================================================== -->
-
 <header>
-
-  <div class="logo">💡</div>
-
-  <div class="header-title">
-    صرافی تبادل ارز
+  <div class="header">
+    <div class="logo">صرافی <span>آنلاین</span></div>
+    <button class="settings" onclick="openSettings()">⚙ تنظیمات</button>
   </div>
-
-  <div class="header-sub">
-    تبادل مستقیم ارزهای دیجیتال
-  </div>
-
 </header>
-
 
 <div class="container">
 
+<section class="hero">
+  <h1>تبادل سریع ارزهای دیجیتال</h1>
+  <p>تبدیل ارز، ثبت درخواست و پیگیری تراکنش</p>
+</section>
 
-<!-- =====================================================
- LIVE STATUS
-===================================================== -->
+<h2 class="section-title">قیمت لحظه‌ای</h2>
 
-<div class="live-status"
-     id="priceStatus">
+<div class="market-grid">
 
-  🟡 در حال دریافت قیمت آنلاین از CoinMarketCap...
+  <div class="market">
+    <div class="market-top">
+      <div class="coin">₿ BTC</div>
+      <div class="live"><span class="dot"></span> آنلاین</div>
+    </div>
+    <div class="price" id="btcPrice">در حال دریافت...</div>
+    <div class="usdt" id="btcUsdt">USDT: --</div>
+    <div class="toman" id="btcToman">تومان: --</div>
+  </div>
+
+  <div class="market">
+    <div class="market-top">
+      <div class="coin">Ð DOGE</div>
+      <div class="live"><span class="dot"></span> آنلاین</div>
+    </div>
+    <div class="price" id="dogePrice">در حال دریافت...</div>
+    <div class="usdt" id="dogeUsdt">USDT: --</div>
+    <div class="toman" id="dogeToman">تومان: --</div>
+  </div>
+
+  <div class="market">
+    <div class="market-top">
+      <div class="coin">Ł LTC</div>
+      <div class="live"><span class="dot"></span> آنلاین</div>
+    </div>
+    <div class="price" id="ltcPrice">در حال دریافت...</div>
+    <div class="usdt" id="ltcUsdt">USDT: --</div>
+    <div class="toman" id="ltcToman">تومان: --</div>
+  </div>
+
+  <div class="market">
+    <div class="market-top">
+      <div class="coin">₮ USDT</div>
+      <div class="live"><span class="dot"></span> آنلاین</div>
+    </div>
+    <div class="price" id="usdtPrice">1 USDT</div>
+    <div class="usdt">USDT: 1</div>
+    <div class="toman" id="usdtToman">تومان: --</div>
+  </div>
 
 </div>
 
+<h2 class="section-title">تبادل ارز</h2>
 
-<!-- =====================================================
- COINS
-===================================================== -->
-
-<div class="coin-grid">
-
-
-  <div class="coin-card">
-
-    <div class="coin-led"></div>
-
-    <div class="coin-name">
-      Bitcoin BTC
-    </div>
-
-    <div class="coin-price"
-         id="price-btc">
-      ---
-    </div>
-
-    <div class="coin-time"
-         id="time-btc">
-      ---
-    </div>
-
-  </div>
-
-
-  <div class="coin-card">
-
-    <div class="coin-led"></div>
-
-    <div class="coin-name">
-      Litecoin LTC
-    </div>
-
-    <div class="coin-price"
-         id="price-ltc">
-      ---
-    </div>
-
-    <div class="coin-time"
-         id="time-ltc">
-      ---
-    </div>
-
-  </div>
-
-
-  <div class="coin-card">
-
-    <div class="coin-led"></div>
-
-    <div class="coin-name">
-      Bitcoin Cash BCH
-    </div>
-
-    <div class="coin-price"
-         id="price-bch">
-      ---
-    </div>
-
-    <div class="coin-time"
-         id="time-bch">
-      ---
-    </div>
-
-  </div>
-
-
-  <div class="coin-card">
-
-    <div class="coin-led"></div>
-
-    <div class="coin-name">
-      Dogecoin DOGE
-    </div>
-
-    <div class="coin-price"
-         id="price-doge">
-      ---
-    </div>
-
-    <div class="coin-time"
-         id="time-doge">
-      ---
-    </div>
-
-  </div>
-
-
-  <div class="coin-card">
-
-    <div class="coin-led"></div>
-
-    <div class="coin-name">
-      Tether USDT
-    </div>
-
-    <div class="coin-price"
-         id="price-usdt">
-      ---
-    </div>
-
-    <div class="coin-time"
-         id="time-usdt">
-      ---
-    </div>
-
-  </div>
-
-
-  <div class="coin-card">
-
-    <div class="coin-led"></div>
-
-    <div class="coin-name">
-      TRON TRX
-    </div>
-
-    <div class="coin-price"
-         id="price-trx">
-      ---
-    </div>
-
-    <div class="coin-time"
-         id="time-trx">
-      ---
-    </div>
-
-  </div>
-
-
-</div>
-
-
-<!-- =====================================================
- EXCHANGE
-===================================================== -->
-
-<div class="panel">
-
-  <div class="panel-title">
-    🔄 تبادل ارز
-  </div>
-
-
-  <div class="trade-buttons">
-
-    <button
-      id="buyButton"
-      class="buy-btn active"
-      onclick="setTradeType('BUY')">
-
-      🟢 خرید
-
-    </button>
-
-
-    <button
-      id="sellButton"
-      class="sell-btn"
-      onclick="setTradeType('SELL')">
-
-      🟠 فروش
-
-    </button>
-
-  </div>
-
+<div class="card">
 
   <div class="form-grid">
 
+    <div class="field">
+      <label>ارزی که می‌فرستید</label>
+      <select id="fromCoin" onchange="calculate()">
+        <option value="BTC">BTC</option>
+        <option value="DOGE">DOGE</option>
+        <option value="LTC">LTC</option>
+        <option value="USDT">USDT</option>
+        <option value="TRX">TRX</option>
+        <option value="BCH">BCH</option>
+      </select>
+    </div>
 
     <div class="field">
-
-      <label>
-        ارز مبدا
-      </label>
-
-      <select id="fromCoin"
-              onchange="calculateExchange()">
-
-        <option value="btc">
-          BTC - Bitcoin
-        </option>
-
-        <option value="ltc">
-          LTC - Litecoin
-        </option>
-
-        <option value="bch">
-          BCH - Bitcoin Cash
-        </option>
-
-        <option value="doge">
-          DOGE - Dogecoin
-        </option>
-
-        <option value="usdt">
-          USDT - Tether
-        </option>
-
-        <option value="trx">
-          TRX - TRON
-        </option>
-
+      <label>ارزی که دریافت می‌کنید</label>
+      <select id="toCoin" onchange="calculate()">
+        <option value="DOGE">DOGE</option>
+        <option value="BTC">BTC</option>
+        <option value="LTC">LTC</option>
+        <option value="USDT">USDT</option>
+        <option value="TRX">TRX</option>
+        <option value="BCH">BCH</option>
       </select>
-
     </div>
-
-
-    <div class="field">
-
-      <label>
-        ارز مقصد
-      </label>
-
-      <select id="toCoin"
-              onchange="calculateExchange()">
-
-        <option value="usdt">
-          USDT - Tether
-        </option>
-
-        <option value="btc">
-          BTC - Bitcoin
-        </option>
-
-        <option value="ltc">
-          LTC - Litecoin
-        </option>
-
-        <option value="bch">
-          BCH - Bitcoin Cash
-        </option>
-
-        <option value="doge">
-          DOGE - Dogecoin
-        </option>
-
-        <option value="trx">
-          TRX - TRON
-        </option>
-
-      </select>
-
-    </div>
-
-
-    <div class="field full">
-
-      <label>
-        مقدار ارز
-      </label>
-
-      <input
-        id="exchangeAmount"
-        type="number"
-        step="any"
-        min="0"
-        placeholder="مثلاً 0.1"
-        oninput="calculateExchange()">
-
-    </div>
-
-
-    <div class="field full">
-
-      <div class="exchange-result"
-           id="exchangeResult">
-
-        مقدار ارز را وارد کنید
-
-      </div>
-
-    </div>
-
-
-    <div class="field full">
-
-      <label>
-        آدرس کیف پول مقصد شما
-      </label>
-
-      <input
-        id="destinationAddress"
-        type="text"
-        placeholder="آدرس کیف پولی که می‌خواهید ارز به آن ارسال شود"
-        dir="ltr">
-
-    </div>
-
 
   </div>
 
+  <div class="field">
+    <label>مقدار ارز</label>
+    <input id="amount" type="number" step="any" placeholder="مثلاً 100" oninput="calculate()">
+  </div>
 
-  <button
-    class="primary"
-    onclick="prepareTrade()">
+  <div class="result" id="result">
+    <div class="result-row">
+      <span>مقدار دریافتی</span>
+      <strong id="receiveAmount">--</strong>
+    </div>
 
-    ثبت معامله و دریافت آدرس واریز
+    <div class="result-row">
+      <span>ارزش دلاری</span>
+      <strong id="receiveUsdt">-- USDT</strong>
+    </div>
 
+    <div class="result-row">
+      <span>ارزش تومانی</span>
+      <strong id="receiveToman">-- تومان</strong>
+    </div>
+  </div>
+
+  <div class="field" style="margin-top:15px">
+    <label>آدرس کیف پول دریافت‌کننده شما</label>
+    <input id="userAddress" placeholder="آدرس کیف پول خود را وارد کنید">
+  </div>
+
+  <button class="primary" onclick="submitTransaction()">
+    ثبت درخواست تبادل
   </button>
 
+</div>
 
-  <!-- DEPOSIT -->
+<h2 class="section-title">آدرس‌های واریز صرافی</h2>
 
-  <div class="deposit-box"
-       id="depositBox">
+<div class="card">
 
-    <h3>
-      📥 آدرس واریز
-    </h3>
+  <div class="field">
+    <label>ارز انتخابی برای واریز</label>
 
-    <p>
-      برای ثبت معامله، ارز مبدا را به آدرس زیر ارسال کنید:
+    <select id="depositCoin" onchange="showDepositAddress()">
+      <option value="BTC">BTC</option>
+      <option value="BCH">BCH</option>
+      <option value="TRX">TRX</option>
+      <option value="LTC">LTC</option>
+      <option value="DOGE">DOGE</option>
+      <option value="USDT">USDT BEP20</option>
+    </select>
+  </div>
+
+  <div class="wallet-box">
+    <div id="depositAddress"></div>
+    <button class="copy" onclick="copyDeposit()">کپی آدرس</button>
+  </div>
+
+  <div class="notice">
+    پس از ارسال ارز، درخواست خود را ثبت کنید تا تراکنش در پنل پایین سایت نمایش داده شود.
+  </div>
+
+</div>
+
+<h2 class="section-title">پیگیری تراکنش</h2>
+
+<div class="card">
+
+  <div class="track">
+    <input id="trackingInput" placeholder="کد پیگیری را وارد کنید">
+    <button onclick="trackTransaction()">پیگیری</button>
+  </div>
+
+  <div id="trackResult" class="result"></div>
+
+</div>
+
+<!-- پنل عمومی تراکنش‌ها -->
+
+<section class="transactions">
+
+  <h2 class="section-title">
+    تراکنش‌های صرافی
+  </h2>
+
+  <div id="transactionList">
+    <div class="empty">
+      هنوز تراکنشی ثبت نشده است.
+    </div>
+  </div>
+
+</section>
+
+</div>
+
+<!-- تنظیمات -->
+
+<div class="modal" id="settingsModal">
+
+  <div class="modal-box">
+
+    <h3>تنظیمات سایت</h3>
+
+    <p style="color:#9bb0a2;font-size:13px">
+      انتخاب رنگ سایت
     </p>
 
-    <div class="deposit-address"
-         id="depositAddress">
+    <div class="theme-list">
 
-    </div>
-
-    <button
-      class="copy-btn"
-      onclick="copyDepositAddress()">
-
-      📋 کپی آدرس
-
-    </button>
-
-
-    <div style="margin-top:15px">
-
-      <b>
-        کد معامله:
-      </b>
-
-      <div id="tradeCodeDisplay"
-           style="
-             font-size:22px;
-             font-weight:bold;
-             margin-top:8px;
-             direction:ltr;
-           ">
-
-      </div>
-
-    </div>
-
-
-    <div style="margin-top:15px">
-
-      پس از ارسال تراکنش، TXID را می‌توانید در بخش پیگیری ثبت کنید.
-
-    </div>
-
-  </div>
-
-
-</div>
-
-
-<!-- =====================================================
- TRACK
-===================================================== -->
-
-<div class="panel">
-
-  <div class="panel-title">
-    🔎 پیگیری معامله
-  </div>
-
-
-  <div class="track-input">
-
-    <input
-      id="trackCode"
-      placeholder="کد معامله مثل TB-260930-123456"
-      dir="ltr">
-
-    <button
-      class="primary"
-      onclick="trackTrade()">
-
-      پیگیری
-
-    </button>
-
-  </div>
-
-
-  <div class="track-result"
-       id="trackResult">
-
-  </div>
-
-</div>
-
-
-</div>
-
-
-<!-- =====================================================
- SETTINGS BUTTON
-===================================================== -->
-
-<button
-  class="settings-btn"
-  onclick="openSettings()">
-
-  ⚙️
-
-</button>
-
-
-<!-- =====================================================
- SETTINGS MODAL
-===================================================== -->
-
-<div class="modal"
-     id="settingsModal">
-
-  <div class="modal-box">
-
-    <button
-      class="close"
-      onclick="closeModal('settingsModal')">
-
-      ×
-
-    </button>
-
-    <div class="modal-title">
-      ⚙️ تنظیمات
-    </div>
-
-
-    <h3>
-      رنگ پس‌زمینه
-    </h3>
-
-
-    <div class="theme-grid">
-
-      <button
-        class="theme-green"
-        onclick="changeTheme('#16a34a')">
-
-        سبز
-
+      <button class="theme-btn" onclick="setTheme('green')">
+        🟢 سبز
       </button>
 
-
-      <button
-        class="theme-yellow"
-        onclick="changeTheme('#ffd600')">
-
-        زرد
-
+      <button class="theme-btn" onclick="setTheme('blue')">
+        🔵 آبی
       </button>
 
-
-      <button
-        class="theme-orange"
-        onclick="changeTheme('#ff9800')">
-
-        نارنجی
-
+      <button class="theme-btn" onclick="setTheme('purple')">
+        🟣 بنفش
       </button>
 
-
-      <button
-        class="theme-blue"
-        onclick="changeTheme('#1976d2')">
-
-        آبی
-
-      </button>
-
-
-      <button
-        class="theme-black"
-        onclick="changeTheme('#111')">
-
-        مشکی
-
+      <button class="theme-btn" onclick="setTheme('orange')">
+        🟠 نارنجی
       </button>
 
     </div>
 
-
-    <hr style="margin:25px 0">
-
-
-    <button
-      class="primary"
-      onclick="openAdminLogin()">
-
-      🔐 ورود به پنل مدیریت
-
-    </button>
+    <button class="close" onclick="closeSettings()">بستن</button>
 
   </div>
 
 </div>
-
-
-<!-- =====================================================
- ADMIN LOGIN
-===================================================== -->
-
-<div class="modal"
-     id="loginModal">
-
-  <div class="modal-box login-box">
-
-    <button
-      class="close"
-      onclick="closeModal('loginModal')">
-
-      ×
-
-    </button>
-
-    <div class="modal-title">
-      🔐 ورود مدیریت
-    </div>
-
-
-    <input
-      id="adminPassword"
-      type="password"
-      placeholder="رمز مدیریت">
-
-
-    <button
-      class="primary"
-      onclick="adminLogin()">
-
-      ورود
-
-    </button>
-
-
-    <div id="loginError"
-         style="
-           color:red;
-           text-align:center;
-           margin-top:12px;
-         ">
-
-    </div>
-
-  </div>
-
-</div>
-
-
-<!-- =====================================================
- ADMIN PANEL
-===================================================== -->
-
-<div class="modal"
-     id="adminModal">
-
-  <div class="modal-box">
-
-    <button
-      class="close"
-      onclick="closeModal('adminModal')">
-
-      خروج
-
-    </button>
-
-
-    <div class="modal-title">
-      🛠 پنل مدیریت صرافی تبادل
-    </div>
-
-
-    <div class="admin-stats">
-
-      <div class="stat">
-
-        کل معاملات
-
-        <span
-          class="stat-number"
-          id="statTotal">
-
-          0
-
-        </span>
-
-      </div>
-
-
-      <div class="stat">
-
-        در انتظار
-
-        <span
-          class="stat-number"
-          id="statPending">
-
-          0
-
-        </span>
-
-      </div>
-
-
-      <div class="stat">
-
-        تکمیل شده
-
-        <span
-          class="stat-number"
-          id="statCompleted">
-
-          0
-
-        </span>
-
-      </div>
-
-    </div>
-
-
-    <div class="admin-table-wrap">
-
-      <table class="admin-table">
-
-        <thead>
-
-          <tr>
-
-            <th>
-              کد
-            </th>
-
-            <th>
-              نوع
-            </th>
-
-            <th>
-              مبدا
-            </th>
-
-            <th>
-              مقدار
-            </th>
-
-            <th>
-              مقصد
-            </th>
-
-            <th>
-              دریافتی
-            </th>
-
-            <th>
-              آدرس کاربر
-            </th>
-
-            <th>
-              آدرس واریز
-            </th>
-
-            <th>
-              TXID
-            </th>
-
-            <th>
-              وضعیت
-            </th>
-
-            <th>
-              عملیات
-            </th>
-
-          </tr>
-
-        </thead>
-
-        <tbody id="adminTableBody">
-
-        </tbody>
-
-      </table>
-
-    </div>
-
-  </div>
-
-</div>
-
-
-<footer>
-
-  صرافی تبادل — Crypto Exchange
-
-  <br>
-
-  نرخ بازار از CoinMarketCap
-
-</footer>
-
 
 <script>
 
-/* =====================================================
-   TABADOL COMPLETE JAVASCRIPT
-===================================================== */
+/* =========================
+   آدرس‌های صرافی
+========================= */
 
-"use strict";
+const wallets = {
 
+  BTC:
+  "1Q99GpYnEU9yELNLjiJUWopNT1HatRYQrV",
 
-/* =====================================================
-   CONFIG
-===================================================== */
+  BCH:
+  "bitcoincash:qrj64uh0xlah2wzksudq3g5eeg2ewdyg6urq5kywku",
 
-const ADMIN_PASSWORD =
-  "Admin321";
+  TRX:
+  "TRb33idZSi7svRyBTRsEKq8BfL54ADYMh3",
 
+  LTC:
+  "LZeRDFWbPLpuqeAw7m5i5YcYiu32KRAM6c",
 
-const STORAGE_KEY =
-  "TABADOL_TRANSACTIONS_FINAL_V1";
+  DOGE:
+  "DA9b1AqJqgsdFNuJNjzRo2g5wFj1rEeQLk",
 
-
-const FEE =
-  0.01;
-
-
-/* =====================================================
-   COINS
-===================================================== */
-
-const COINS = {
-
-  btc:{
-    symbol:"BTC",
-    name:"Bitcoin",
-    cmcId:1,
-    address:"1Q99GpYnEU9yELNLjiJUWopNT1HatRYQrV"
-  },
-
-  ltc:{
-    symbol:"LTC",
-    name:"Litecoin",
-    cmcId:2,
-    address:"LZeRDFWbPLpuqeAw7m5i5YcYiu32KRAM6c"
-  },
-
-  bch:{
-    symbol:"BCH",
-    name:"Bitcoin Cash",
-    cmcId:1831,
-    address:"bitcoincash:qrj64uh0xlah2wzksudq3g5eeg2ewdyg6urq5kywku"
-  },
-
-  doge:{
-    symbol:"DOGE",
-    name:"Dogecoin",
-    cmcId:74,
-    address:"DA9b1AqJqgsdFNuJNjzRo2g5wFj1rEeQLk"
-  },
-
-  usdt:{
-    symbol:"USDT",
-    name:"USDT BEP-20",
-    cmcId:825,
-    address:"0x3765C083F36B7D874d3a6249436a84C9e9bDAbA6"
-  },
-
-  trx:{
-    symbol:"TRX",
-    name:"TRON",
-    cmcId:1958,
-    address:"TRb33idZSi7svRyBTRsEKq8BfL54ADYMh3"
-  }
+  USDT:
+  "0x3765C083F36B7D874d3a6249436a84C9e9bDAbA6"
 
 };
 
 
-/* =====================================================
-   PRICE DATA
-===================================================== */
+/* =========================
+   قیمت‌ها
+   این مقادیر موقت هستند.
+   برای قیمت زنده بیت برگ باید
+   API واقعی آن سرویس وصل شود.
+========================= */
 
-let livePrices = {};
+let prices = {
 
-let tradeType = "BUY";
+  BTC: 110000,
+  DOGE: 0.25,
+  LTC: 100,
+  USDT: 1,
+  TRX: 0.34,
+  BCH: 500
 
+};
 
-/* =====================================================
-   COINMARKETCAP KEYLESS API
-===================================================== */
-
-const CMC_URL =
-  "https://pro-api.coinmarketcap.com/public-api/v1/cryptocurrency/quotes/latest" +
-  "?id=1,2,1831,74,825,1958&convert=USD";
-
-
-/* =====================================================
-   STORAGE
-===================================================== */
-
-function getTrades(){
-
-  try{
-
-    const data =
-      localStorage.getItem(
-        STORAGE_KEY
-      );
-
-    if(!data){
-      return [];
-    }
-
-    const parsed =
-      JSON.parse(data);
-
-    return Array.isArray(parsed)
-      ? parsed
-      : [];
-
-  }
-  catch(e){
-
-    console.error(e);
-
-    return [];
-
-  }
-
-}
+let tomanUSDT = 100000;
 
 
-function saveTrades(trades){
+/* =========================
+   نمایش آدرس واریز
+========================= */
 
-  localStorage.setItem(
-    STORAGE_KEY,
-    JSON.stringify(trades)
-  );
-
-}
-
-
-/* =====================================================
-   PRICE FORMAT
-===================================================== */
-
-function formatUSD(value){
-
-  if(
-    value === undefined ||
-    value === null ||
-    !isFinite(value)
-  ){
-
-    return "---";
-
-  }
-
-
-  if(value >= 1000){
-
-    return "$" +
-      value.toLocaleString(
-        "en-US",
-        {
-          minimumFractionDigits:2,
-          maximumFractionDigits:2
-        }
-      );
-
-  }
-
-
-  if(value >= 1){
-
-    return "$" +
-      value.toLocaleString(
-        "en-US",
-        {
-          minimumFractionDigits:2,
-          maximumFractionDigits:8
-        }
-      );
-
-  }
-
-
-  return "$" +
-    value.toLocaleString(
-      "en-US",
-      {
-        minimumFractionDigits:4,
-        maximumFractionDigits:10
-      }
-    );
-
-}
-
-
-function formatNumber(value){
-
-  if(!isFinite(value)){
-    return "---";
-  }
-
-  return value.toLocaleString(
-    "en-US",
-    {
-      maximumFractionDigits:8
-    }
-  );
-
-}
-
-
-/* =====================================================
-   GET LIVE PRICE
-===================================================== */
-
-function getPrice(symbol){
+function showDepositAddress(){
 
   const coin =
-    COINS[symbol];
+    document.getElementById("depositCoin").value;
 
-  if(!coin){
-    return null;
-  }
+  document.getElementById("depositAddress").innerText =
+    wallets[coin];
 
-  const item =
-    livePrices[coin.cmcId];
+}
 
-  if(!item){
-    return null;
-  }
+showDepositAddress();
 
-  if(
-    !item.quote ||
-    !item.quote.USD
-  ){
 
-    return null;
+function copyDeposit(){
 
-  }
+  const text =
+    document.getElementById("depositAddress").innerText;
 
-  return item.quote.USD.price;
+  navigator.clipboard.writeText(text);
+
+  alert("آدرس کپی شد");
 
 }
 
 
-/* =====================================================
-   LOAD LIVE PRICES
-===================================================== */
-
-async function loadPrices(){
-
-  const status =
-    document.getElementById(
-      "priceStatus"
-    );
-
-
-  status.innerHTML =
-    "🟡 دریافت قیمت آنلاین از CoinMarketCap...";
-
-
-  try{
-
-    const controller =
-      new AbortController();
-
-
-    const timeout =
-      setTimeout(
-        function(){
-
-          controller.abort();
-
-        },
-        15000
-      );
-
-
-    const response =
-      await fetch(
-        CMC_URL,
-        {
-          method:"GET",
-          cache:"no-store",
-          signal:controller.signal,
-          headers:{
-            "Accept":"application/json"
-          }
-        }
-      );
-
-
-    clearTimeout(timeout);
-
-
-    if(!response.ok){
-
-      throw new Error(
-        "HTTP " +
-        response.status
-      );
-
-    }
-
-
-    const json =
-      await response.json();
-
-
-    if(
-      !json.data ||
-      !json.status
-    ){
-
-      throw new Error(
-        "Invalid CMC response"
-      );
-
-    }
-
-
-    if(
-      json.status.error_code &&
-      json.status.error_code !== 0
-    ){
-
-      throw new Error(
-        json.status.error_message ||
-        "CoinMarketCap API error"
-      );
-
-    }
-
-
-    livePrices =
-      json.data;
-
-
-    renderPrices();
-
-    calculateExchange();
-
-
-    status.innerHTML =
-      "🟢 قیمت آنلاین فعال است — CoinMarketCap — " +
-      new Date().toLocaleTimeString();
-
-
-  }
-  catch(error){
-
-    console.error(
-      "CoinMarketCap error:",
-      error
-    );
-
-
-    status.innerHTML =
-      "🔴 دریافت قیمت آنلاین ناموفق بود — تلاش مجدد خودکار فعال است";
-
-  }
-
-}
-
-
-/* =====================================================
-   RENDER PRICES
-===================================================== */
-
-function renderPrices(){
-
-  Object.keys(COINS)
-    .forEach(
-      function(symbol){
-
-        const price =
-          getPrice(symbol);
-
-
-        const priceElement =
-          document.getElementById(
-            "price-" + symbol
-          );
-
-
-        const timeElement =
-          document.getElementById(
-            "time-" + symbol
-          );
-
-
-        if(priceElement){
-
-          priceElement.textContent =
-            formatUSD(price);
-
-        }
-
-
-        if(
-          timeElement &&
-          livePrices[
-            COINS[symbol].cmcId
-          ]
-        ){
-
-          const updated =
-            livePrices[
-              COINS[symbol].cmcId
-            ].last_updated;
-
-
-          if(updated){
-
-            timeElement.textContent =
-              new Date(
-                updated
-              ).toLocaleTimeString();
-
-          }
-
-        }
-
-      }
-    );
-
-}
-
-
-/* =====================================================
-   TRADE TYPE
-===================================================== */
-
-function setTradeType(type){
-
-  tradeType =
-    type;
-
-
-  const buy =
-    document.getElementById(
-      "buyButton"
-    );
-
-
-  const sell =
-    document.getElementById(
-      "sellButton"
-    );
-
-
-  buy.classList.remove(
-    "active"
-  );
-
-
-  sell.classList.remove(
-    "active"
-  );
-
-
-  if(type === "BUY"){
-
-    buy.classList.add(
-      "active"
-    );
-
-  }
-  else{
-
-    sell.classList.add(
-      "active"
-    );
-
-  }
-
-
-  calculateExchange();
-
-}
-
-
-/* =====================================================
-   CALCULATE EXCHANGE
-===================================================== */
-
-function calculateExchange(){
-
-  const from =
-    document.getElementById(
-      "fromCoin"
-    ).value;
-
-
-  const to =
-    document.getElementById(
-      "toCoin"
-    ).value;
-
+/* =========================
+   محاسبه تبدیل
+========================= */
+
+function calculate(){
 
   const amount =
-    parseFloat(
-      document.getElementById(
-        "exchangeAmount"
-      ).value
-    );
+    parseFloat(document.getElementById("amount").value);
 
+  const from =
+    document.getElementById("fromCoin").value;
+
+  const to =
+    document.getElementById("toCoin").value;
 
   const result =
-    document.getElementById(
-      "exchangeResult"
-    );
+    document.getElementById("result");
 
+  if(!amount || amount <= 0){
 
-  if(
-    !amount ||
-    amount <= 0
-  ){
-
-    result.innerHTML =
-      "مقدار ارز را وارد کنید";
+    result.style.display = "none";
 
     return;
-
   }
 
+  const usdValue =
+    amount * prices[from];
 
-  const fromPrice =
-    getPrice(from);
+  const receive =
+    usdValue / prices[to];
 
+  const toman =
+    usdValue * tomanUSDT;
 
-  const toPrice =
-    getPrice(to);
+  result.style.display = "block";
 
+  document.getElementById("receiveAmount").innerText =
+    receive.toLocaleString(undefined,{
+      maximumFractionDigits:8
+    }) + " " + to;
 
-  if(
-    fromPrice === null ||
-    toPrice === null
-  ){
+  document.getElementById("receiveUsdt").innerText =
+    usdValue.toLocaleString(undefined,{
+      maximumFractionDigits:2
+    }) + " USDT";
 
-    result.innerHTML =
-      "🟡 در حال دریافت قیمت آنلاین...";
-
-    return;
-
-  }
-
-
-  /*
-     ارزش دلاری ارز ورودی
-  */
-
-  const dollarValue =
-    amount *
-    fromPrice;
-
-
-  /*
-     مقدار مقصد قبل از کارمزد
-  */
-
-  const beforeFee =
-    dollarValue /
-    toPrice;
-
-
-  /*
-     فقط 1 درصد کارمزد
-  */
-
-  const fee =
-    beforeFee *
-    FEE;
-
-
-  /*
-     مقدار نهایی
-  */
-
-  const finalAmount =
-    beforeFee -
-    fee;
-
-
-  result.innerHTML =
-
-    "<div>" +
-
-    (tradeType === "BUY"
-      ? "🟢 <b>خرید</b>"
-      : "🟠 <b>فروش</b>") +
-
-    "</div>" +
-
-    "<div>" +
-
-    formatNumber(amount) +
-    " " +
-    COINS[from].symbol +
-
-    " ≈ " +
-
-    "<span class='result-big'>" +
-
-    formatNumber(
-      finalAmount
-    ) +
-
-    " " +
-    COINS[to].symbol +
-
-    "</span>" +
-
-    "</div>" +
-
-    "<div>" +
-
-    "قیمت بازار " +
-    COINS[from].symbol +
-    ": " +
-    "<b>" +
-    formatUSD(fromPrice) +
-    "</b>" +
-
-    "</div>" +
-
-    "<div>" +
-
-    "قیمت بازار " +
-    COINS[to].symbol +
-    ": " +
-    "<b>" +
-    formatUSD(toPrice) +
-    "</b>" +
-
-    "</div>" +
-
-    "<div>" +
-
-    "کارمزد سایت: <b>1%</b>" +
-
-    " — " +
-
-    formatNumber(fee) +
-    " " +
-    COINS[to].symbol +
-
-    "</div>";
+  document.getElementById("receiveToman").innerText =
+    toman.toLocaleString() + " تومان";
 
 }
 
 
-/* =====================================================
-   PREPARE TRADE
-===================================================== */
+/* =========================
+   کد پیگیری
+========================= */
 
-function prepareTrade(){
+function generateTracking(){
 
-  const from =
-    document.getElementById(
-      "fromCoin"
-    ).value;
+  const random =
+    Math.random().toString(36)
+    .substring(2,8)
+    .toUpperCase();
+
+  return "EX-" +
+    Date.now().toString().slice(-6) +
+    "-" +
+    random;
+
+}
 
 
-  const to =
-    document.getElementById(
-      "toCoin"
-    ).value;
+/* =========================
+   ثبت تراکنش
+========================= */
 
+function submitTransaction(){
 
   const amount =
-    parseFloat(
-      document.getElementById(
-        "exchangeAmount"
-      ).value
-    );
+    parseFloat(document.getElementById("amount").value);
 
+  const from =
+    document.getElementById("fromCoin").value;
 
-  const destination =
-    document.getElementById(
-      "destinationAddress"
-    ).value.trim();
+  const to =
+    document.getElementById("toCoin").value;
 
+  const address =
+    document.getElementById("userAddress").value.trim();
 
-  if(
-    !amount ||
-    amount <= 0
-  ){
+  if(!amount || amount <= 0){
 
-    alert(
-      "مقدار ارز را وارد کنید"
-    );
+    alert("مقدار ارز را وارد کنید");
 
     return;
-
   }
 
+  if(!address){
 
-  if(!destination){
-
-    alert(
-      "آدرس کیف پول مقصد را وارد کنید"
-    );
+    alert("آدرس دریافت‌کننده را وارد کنید");
 
     return;
-
   }
 
+  if(from === to){
 
-  if(
-    from === to
-  ){
-
-    alert(
-      "ارز مبدا و مقصد نباید یکسان باشند"
-    );
+    alert("ارز مبدا و مقصد نباید یکسان باشند");
 
     return;
-
   }
 
+  const usd =
+    amount * prices[from];
 
-  const fromPrice =
-    getPrice(from);
+  const receive =
+    usd / prices[to];
 
+  const tx = {
 
-  const toPrice =
-    getPrice(to);
-
-
-  if(
-    fromPrice === null ||
-    toPrice === null
-  ){
-
-    alert(
-      "قیمت آنلاین هنوز دریافت نشده است"
-    );
-
-    return;
-
-  }
-
-
-  const beforeFee =
-    (
-      amount *
-      fromPrice
-    ) /
-    toPrice;
-
-
-  const fee =
-    beforeFee *
-    FEE;
-
-
-  const finalAmount =
-    beforeFee -
-    fee;
-
-
-  const code =
-    generateTradeCode();
-
-
-  const trade = {
-
-    id:code,
-
-    type:tradeType,
+    id:generateTracking(),
 
     from:from,
 
-    fromAmount:amount,
-
     to:to,
 
-    toAmount:finalAmount,
+    amount:amount,
 
-    fee:fee,
+    receive:receive,
 
-    fromPrice:fromPrice,
+    usdt:usd,
 
-    toPrice:toPrice,
+    toman:usd * tomanUSDT,
 
-    destinationAddress:destination,
+    address:address,
 
-    depositAddress:
-      COINS[from].address,
+    status:"در حال بررسی",
 
-    txid:"",
-
-    status:"در انتظار واریز",
-
-    createdAt:
-      new Date().toISOString(),
-
-    updatedAt:
-      new Date().toISOString()
+    time:new Date().toLocaleString("fa-IR")
 
   };
 
 
-  const trades =
-    getTrades();
+  /*
+     ثبت محلی برای نمایش فوری.
+     
+     توجه:
+     localStorage فقط در همین مرورگر ذخیره می‌کند.
+     برای نمایش مشترک بین تمام کاربران،
+     باید API ذخیره‌سازی مشترک وصل شود.
+  */
 
+  const list =
+    JSON.parse(
+      localStorage.getItem("exchangeTransactions") || "[]"
+    );
 
-  trades.unshift(
-    trade
+  list.unshift(tx);
+
+  localStorage.setItem(
+    "exchangeTransactions",
+    JSON.stringify(list)
   );
 
-
-  saveTrades(
-    trades
-  );
-
-
-  document.getElementById(
-    "depositAddress"
-  ).textContent =
-    COINS[from].address;
-
-
-  document.getElementById(
-    "tradeCodeDisplay"
-  ).textContent =
-    code;
-
-
-  document.getElementById(
-    "depositBox"
-  ).style.display =
-    "block";
-
+  renderTransactions();
 
   alert(
-    "معامله ثبت شد\nکد معامله: " +
-    code
+    "درخواست شما ثبت شد.\n\n" +
+    "کد پیگیری:\n" +
+    tx.id
   );
 
+  document.getElementById("trackingInput").value =
+    tx.id;
 
 }
 
 
-/* =====================================================
-   TRADE CODE
-===================================================== */
+/* =========================
+   نمایش تراکنش‌ها
+========================= */
 
-function generateTradeCode(){
+function renderTransactions(){
 
-  const d =
-    new Date();
-
-
-  const date =
-    String(
-      d.getFullYear()
-    ).slice(-2) +
-
-    String(
-      d.getMonth()+1
-    ).padStart(2,"0") +
-
-    String(
-      d.getDate()
-    ).padStart(2,"0");
-
-
-  const random =
-    Math.floor(
-      100000 +
-      Math.random()*900000
+  const list =
+    JSON.parse(
+      localStorage.getItem("exchangeTransactions") || "[]"
     );
 
+  const box =
+    document.getElementById("transactionList");
 
-  return(
-    "TB-" +
-    date +
-    "-" +
-    random
-  );
+  if(!list.length){
 
-}
+    box.innerHTML =
+      '<div class="empty">هنوز تراکنشی ثبت نشده است.</div>';
 
-
-/* =====================================================
-   COPY DEPOSIT
-===================================================== */
-
-function copyDepositAddress(){
-
-  const address =
-    document.getElementById(
-      "depositAddress"
-    ).textContent;
-
-
-  navigator.clipboard
-    .writeText(address)
-    .then(
-      function(){
-
-        alert(
-          "آدرس کپی شد"
-        );
-
-      }
-    )
-    .catch(
-      function(){
-
-        alert(
-          "کپی خودکار انجام نشد؛ آدرس را دستی کپی کنید"
-        );
-
-      }
-    );
-
-}
-
-
-/* =====================================================
-   MASK
-===================================================== */
-
-function maskText(value){
-
-  if(!value){
-    return "---";
+    return;
   }
 
+  box.innerHTML =
+    list.map(tx => {
 
-  if(value.length <= 12){
+      const statusClass =
+        tx.status === "انجام شد"
+        ? "done"
+        : "pending";
 
-    return value;
+      return `
 
-  }
+        <div class="transaction">
 
+          <div class="tx-top">
 
-  return(
-    value.substring(0,6) +
-    "••••••••••" +
-    value.substring(
-      value.length-6
-    )
-  );
+            <div class="tx-code">
+              ${tx.id}
+            </div>
+
+            <div class="status ${statusClass}">
+              ${tx.status}
+            </div>
+
+          </div>
+
+          <div class="tx-info">
+
+            <div>
+              نوع:
+              <strong>
+                تبادل
+              </strong>
+            </div>
+
+            <div>
+              ارز:
+              <strong>
+                ${tx.from} → ${tx.to}
+              </strong>
+            </div>
+
+            <div>
+              مقدار:
+              <strong>
+                ${Number(tx.amount).toLocaleString()}
+                ${tx.from}
+              </strong>
+            </div>
+
+            <div>
+              دریافتی:
+              <strong>
+                ${Number(tx.receive).toLocaleString(undefined,{
+                  maximumFractionDigits:8
+                })}
+                ${tx.to}
+              </strong>
+            </div>
+
+            <div>
+              ارزش:
+              <strong>
+                ${Number(tx.usdt).toLocaleString(undefined,{
+                  maximumFractionDigits:2
+                })}
+                USDT
+              </strong>
+            </div>
+
+            <div>
+              زمان:
+              ${tx.time}
+            </div>
+
+          </div>
+
+          <div style="margin-top:12px">
+
+            <div style="font-size:12px;color:#899f90">
+              آدرس دریافت‌کننده
+            </div>
+
+            <div class="address">
+              ${tx.address}
+            </div>
+
+          </div>
+
+        </div>
+
+      `;
+
+    }).join("");
 
 }
 
 
-/* =====================================================
-   TRACK TRADE
-===================================================== */
+/* =========================
+   پیگیری
+========================= */
 
-function trackTrade(){
+function trackTransaction(){
 
   const code =
-    document.getElementById(
-      "trackCode"
-    ).value
+    document.getElementById("trackingInput")
+    .value
     .trim()
     .toUpperCase();
 
-
-  const result =
-    document.getElementById(
-      "trackResult"
+  const list =
+    JSON.parse(
+      localStorage.getItem("exchangeTransactions") || "[]"
     );
 
+  const tx =
+    list.find(x => x.id === code);
 
-  const trades =
-    getTrades();
+  const box =
+    document.getElementById("trackResult");
 
+  box.style.display = "block";
 
-  const trade =
-    trades.find(
-      function(t){
+  if(!tx){
 
-        return(
-          t.id.toUpperCase() ===
-          code
-        );
-
-      }
-    );
-
-
-  if(!trade){
-
-    result.style.display =
-      "block";
-
-    result.innerHTML =
-      "❌ معامله‌ای با این کد پیدا نشد";
+    box.innerHTML =
+      "❌ تراکنشی با این کد پیدا نشد.";
 
     return;
-
   }
 
+  box.innerHTML = `
 
-  let statusClass =
-    "status-pending";
+    <div class="result-row">
+      <span>کد پیگیری</span>
+      <strong>${tx.id}</strong>
+    </div>
 
+    <div class="result-row">
+      <span>وضعیت</span>
+      <strong>${tx.status}</strong>
+    </div>
 
-  if(
-    trade.status ===
-    "دریافت شد"
-  ){
+    <div class="result-row">
+      <span>تبادل</span>
+      <strong>${tx.from} → ${tx.to}</strong>
+    </div>
 
-    statusClass =
-      "status-received";
+    <div class="result-row">
+      <span>مقدار دریافتی</span>
+      <strong>
+        ${Number(tx.receive).toLocaleString(undefined,{
+          maximumFractionDigits:8
+        })} ${tx.to}
+      </strong>
+    </div>
 
-  }
-
-
-  if(
-    trade.status ===
-    "تکمیل شد"
-  ){
-
-    statusClass =
-      "status-completed";
-
-  }
-
-
-  if(
-    trade.status ===
-    "لغو شد"
-  ){
-
-    statusClass =
-      "status-cancelled";
-
-  }
-
-
-  result.style.display =
-    "block";
-
-
-  result.innerHTML =
-
-    "<b>کد معامله:</b> " +
-    trade.id +
-
-    "<br>" +
-
-    "<b>نوع:</b> " +
-    trade.type +
-
-    "<br>" +
-
-    "<b>مبادله:</b> " +
-    COINS[trade.from].symbol +
-    " → " +
-    COINS[trade.to].symbol +
-
-    "<br>" +
-
-    "<b>مقدار:</b> " +
-    formatNumber(
-      trade.fromAmount
-    ) +
-    " " +
-    COINS[trade.from].symbol +
-
-    "<br>" +
-
-    "<b>مقدار دریافتی:</b> " +
-    formatNumber(
-      trade.toAmount
-    ) +
-    " " +
-    COINS[trade.to].symbol +
-
-    "<br>" +
-
-    "<b>آدرس مقصد:</b> " +
-    maskText(
-      trade.destinationAddress
-    ) +
-
-    "<br>" +
-
-    "<b>TXID:</b> " +
-    maskText(
-      trade.txid
-    ) +
-
-    "<br>" +
-
-    "<b>وضعیت:</b> " +
-
-    "<span class='status " +
-    statusClass +
-    "'>" +
-
-    trade.status +
-
-    "</span>" +
-
-    "<br><br>" +
-
-    "<div class='txid-row'>" +
-
-    "<input " +
-    "id='txid-" +
-    trade.id +
-    "' " +
-    "placeholder='TXID تراکنش را وارد کنید' " +
-    "dir='ltr'>" +
-
-    "<button " +
-    "class='copy-btn' " +
-    "onclick=\"saveTXID('" +
-    trade.id +
-    "')\">" +
-
-    "ثبت TXID" +
-
-    "</button>" +
-
-    "</div>";
+  `;
 
 }
 
 
-/* =====================================================
-   SAVE TXID
-===================================================== */
-
-function saveTXID(code){
-
-  const input =
-    document.getElementById(
-      "txid-" + code
-    );
-
-
-  if(!input){
-    return;
-  }
-
-
-  const txid =
-    input.value.trim();
-
-
-  if(!txid){
-
-    alert(
-      "TXID را وارد کنید"
-    );
-
-    return;
-
-  }
-
-
-  const trades =
-    getTrades();
-
-
-  const index =
-    trades.findIndex(
-      function(t){
-
-        return t.id === code;
-
-      }
-    );
-
-
-  if(index === -1){
-
-    alert(
-      "معامله پیدا نشد"
-    );
-
-    return;
-
-  }
-
-
-  trades[index].txid =
-    txid;
-
-
-  trades[index].status =
-    "دریافت شد";
-
-
-  trades[index].updatedAt =
-    new Date().toISOString();
-
-
-  saveTrades(
-    trades
-  );
-
-
-  alert(
-    "TXID ثبت شد"
-  );
-
-
-  trackTrade();
-
-}
-
-
-/* =====================================================
-   SETTINGS
-===================================================== */
+/* =========================
+   تنظیمات رنگ
+========================= */
 
 function openSettings(){
 
-  document.getElementById(
-    "settingsModal"
-  ).style.display =
-    "block";
+  document.getElementById("settingsModal")
+    .style.display = "flex";
 
 }
 
+function closeSettings(){
 
-function openAdminLogin(){
-
-  closeModal(
-    "settingsModal"
-  );
-
-
-  document.getElementById(
-    "loginModal"
-  ).style.display =
-    "block";
+  document.getElementById("settingsModal")
+    .style.display = "none";
 
 }
 
+function setTheme(theme){
 
-function closeModal(id){
+  const root =
+    document.documentElement;
 
-  document.getElementById(
-    id
-  ).style.display =
-    "none";
+  if(theme === "green"){
 
-}
-
-
-/* =====================================================
-   THEME
-===================================================== */
-
-function changeTheme(color){
-
-  document.documentElement
-    .style.setProperty(
-      "--bg",
-      color
-    );
-
-
-  localStorage.setItem(
-    "TABADOL_THEME",
-    color
-  );
-
-}
-
-
-function loadTheme(){
-
-  const theme =
-    localStorage.getItem(
-      "TABADOL_THEME"
-    );
-
-
-  if(theme){
-
-    document.documentElement
-      .style.setProperty(
-        "--bg",
-        theme
-      );
+    root.style.setProperty("--main","#00c853");
+    root.style.setProperty("--main2","#00a844");
 
   }
 
-}
+  if(theme === "blue"){
 
-
-/* =====================================================
-   ADMIN LOGIN
-===================================================== */
-
-function adminLogin(){
-
-  const password =
-    document.getElementById(
-      "adminPassword"
-    ).value;
-
-
-  const error =
-    document.getElementById(
-      "loginError"
-    );
-
-
-  if(
-    password !==
-    ADMIN_PASSWORD
-  ){
-
-    error.textContent =
-      "رمز مدیریت اشتباه است";
-
-    return;
+    root.style.setProperty("--main","#2196f3");
+    root.style.setProperty("--main2","#1976d2");
 
   }
 
+  if(theme === "purple"){
 
-  error.textContent =
-    "";
+    root.style.setProperty("--main","#9c27b0");
+    root.style.setProperty("--main2","#7b1fa2");
 
+  }
 
-  document.getElementById(
-    "adminPassword"
-  ).value =
-    "";
+  if(theme === "orange"){
 
+    root.style.setProperty("--main","#ff9800");
+    root.style.setProperty("--main2","#f57c00");
 
-  closeModal(
-    "loginModal"
-  );
+  }
 
-
-  document.getElementById(
-    "adminModal"
-  ).style.display =
-    "block";
-
-
-  renderAdmin();
+  localStorage.setItem("siteTheme",theme);
 
 }
 
 
-/* =====================================================
-   ADMIN RENDER
-===================================================== */
+/* =========================
+   بارگذاری رنگ ذخیره شده
+========================= */
 
-function renderAdmin(){
+const savedTheme =
+  localStorage.getItem("siteTheme");
 
-  const trades =
-    getTrades();
+if(savedTheme){
 
-
-  const total =
-    trades.length;
-
-
-  const pending =
-    trades.filter(
-      function(t){
-
-        return(
-          t.status ===
-          "در انتظار واریز"
-        );
-
-      }
-    ).length;
-
-
-  const completed =
-    trades.filter(
-      function(t){
-
-        return(
-          t.status ===
-          "تکمیل شد"
-        );
-
-      }
-    ).length;
-
-
-  document.getElementById(
-    "statTotal"
-  ).textContent =
-    total;
-
-
-  document.getElementById(
-    "statPending"
-  ).textContent =
-    pending;
-
-
-  document.getElementById(
-    "statCompleted"
-  ).textContent =
-    completed;
-
-
-  const body =
-    document.getElementById(
-      "adminTableBody"
-    );
-
-
-  if(!trades.length){
-
-    body.innerHTML =
-      "<tr>" +
-      "<td colspan='11'>" +
-      "هنوز معامله‌ای ثبت نشده است" +
-      "</td>" +
-      "</tr>";
-
-    return;
-
-  }
-
-
-  body.innerHTML =
-    trades.map(
-      function(t){
-
-        return `
-
-<tr>
-
-<td dir="ltr">
-${t.id}
-</td>
-
-<td>
-${t.type}
-</td>
-
-<td>
-${COINS[t.from].symbol}
-</td>
-
-<td>
-${formatNumber(t.fromAmount)}
-</td>
-
-<td>
-${COINS[t.to].symbol}
-</td>
-
-<td>
-${formatNumber(t.toAmount)}
-</td>
-
-<td dir="ltr"
-    style="max-width:160px;word-break:break-all">
-${t.destinationAddress}
-</td>
-
-<td dir="ltr"
-    style="max-width:160px;word-break:break-all">
-${t.depositAddress}
-</td>
-
-<td dir="ltr"
-    style="max-width:180px;word-break:break-all">
-${t.txid || "---"}
-</td>
-
-<td>
-${t.status}
-</td>
-
-<td>
-
-<div class="admin-actions">
-
-<button
-class="btn-green"
-onclick="changeStatus('${t.id}','تکمیل شد')">
-
-تکمیل
-
-</button>
-
-<button
-class="btn-blue"
-onclick="changeStatus('${t.id}','دریافت شد')">
-
-دریافت
-
-</button>
-
-<button
-class="btn-gray"
-onclick="changeStatus('${t.id}','در انتظار واریز')">
-
-انتظار
-
-</button>
-
-<button
-class="btn-red"
-onclick="changeStatus('${t.id}','لغو شد')">
-
-لغو
-
-</button>
-
-<button
-class="btn-red"
-onclick="deleteTrade('${t.id}')">
-
-حذف
-
-</button>
-
-</div>
-
-</td>
-
-</tr>
-
-`;
-
-      }
-    )
-    .join("");
+  setTheme(savedTheme);
 
 }
 
 
-/* =====================================================
-   CHANGE STATUS
-===================================================== */
+/* =========================
+   قیمت‌های نمایشی
+========================= */
 
-function changeStatus(
-  code,
-  newStatus
-){
+function updatePrices(){
 
-  const trades =
-    getTrades();
+  document.getElementById("btcPrice").innerText =
+    "$" + prices.BTC.toLocaleString();
 
+  document.getElementById("dogePrice").innerText =
+    "$" + prices.DOGE;
 
-  const index =
-    trades.findIndex(
-      function(t){
+  document.getElementById("ltcPrice").innerText =
+    "$" + prices.LTC;
 
-        return(
-          t.id === code
-        );
+  document.getElementById("btcUsdt").innerText =
+    "USDT: " + prices.BTC.toLocaleString();
 
-      }
-    );
+  document.getElementById("dogeUsdt").innerText =
+    "USDT: " + prices.DOGE;
 
+  document.getElementById("ltcUsdt").innerText =
+    "USDT: " + prices.LTC;
 
-  if(index === -1){
-    return;
-  }
+  document.getElementById("btcToman").innerText =
+    "تومان: " +
+    (prices.BTC * tomanUSDT).toLocaleString();
 
+  document.getElementById("dogeToman").innerText =
+    "تومان: " +
+    (prices.DOGE * tomanUSDT).toLocaleString();
 
-  trades[index].status =
-    newStatus;
+  document.getElementById("ltcToman").innerText =
+    "تومان: " +
+    (prices.LTC * tomanUSDT).toLocaleString();
 
-
-  trades[index].updatedAt =
-    new Date().toISOString();
-
-
-  saveTrades(
-    trades
-  );
-
-
-  renderAdmin();
+  document.getElementById("usdtToman").innerText =
+    "تومان: " +
+    tomanUSDT.toLocaleString();
 
 }
 
+updatePrices();
 
-/* =====================================================
-   DELETE
-===================================================== */
-
-function deleteTrade(code){
-
-  if(
-    !confirm(
-      "این معامله حذف شود؟"
-    )
-  ){
-
-    return;
-
-  }
-
-
-  const trades =
-    getTrades();
-
-
-  const filtered =
-    trades.filter(
-      function(t){
-
-        return(
-          t.id !== code
-        );
-
-      }
-    );
-
-
-  saveTrades(
-    filtered
-  );
-
-
-  renderAdmin();
-
-}
-
-
-/* =====================================================
-   CLOSE MODAL BY CLICK OUTSIDE
-===================================================== */
-
-document
-.addEventListener(
-  "click",
-  function(event){
-
-    if(
-      event.target.classList
-        .contains("modal")
-    ){
-
-      event.target.style.display =
-        "none";
-
-    }
-
-  }
-);
-
-
-/* =====================================================
-   START
-===================================================== */
-
-loadTheme();
-
-loadPrices();
+renderTransactions();
 
 
 /*
-   قیمت‌ها هر 60 ثانیه
-   مجدداً از CoinMarketCap گرفته می‌شوند.
+=====================================================
+محل اتصال API واقعی قیمت بیت برگ
+=====================================================
+
+وقتی endpoint رسمی API بیت برگ مشخص شد،
+فقط همین تابع باید به API وصل شود:
+
+async function getBitbargPrices(){
+
+   const response =
+      await fetch("BITBARG_API_URL");
+
+   const data =
+      await response.json();
+
+   // قیمت‌های BTC / DOGE / LTC / ...
+   // از پاسخ بیت برگ خوانده می‌شوند.
+
+}
+
+=====================================================
 */
-
-setInterval(
-  loadPrices,
-  60000
-);
-
-
-/* =====================================================
-   EXPOSE PRICE DATA
-===================================================== */
-
-window.TABADOL_GET_PRICE =
-function(symbol){
-
-  return getPrice(symbol);
-
-};
-
-
-window.TABADOL_GET_ALL_PRICES =
-function(){
-
-  return livePrices;
-
-};
 
 
 </script>
 
-
 </body>
-
 </html>

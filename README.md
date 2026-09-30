@@ -2853,6 +2853,120 @@ setTimeout(
 );
 
 </script>
+<!-- ====== BANNER ====== -->
+<style>
+.crypto-banner{
+width:100%;
+box-sizing:border-box;
+margin:20px 0;
+padding:22px 15px;
+border-radius:25px;
+overflow:hidden;
+position:relative;
+background:linear-gradient(90deg,#006b2e,#00a83b,#72e000,#00a83b,#006b2e);
+background-size:300% 100%;
+animation:bgMove 6s linear infinite;
+box-shadow:0 0 25px rgba(0,255,80,.45);
+border:2px solid #b7ff00;
+}
 
+.crypto-banner-title{
+text-align:center;
+font-size:38px;
+font-weight:900;
+color:#ffe600;
+text-shadow:0 0 8px #fff000,0 0 18px #ffb300;
+white-space:nowrap;
+animation:titleMove 4s ease-in-out infinite alternate;
+}
+
+.crypto-banner-sub{
+text-align:center;
+margin-top:10px;
+font-size:22px;
+font-weight:900;
+color:white;
+text-shadow:0 0 10px #000;
+}
+
+.crypto-coins{
+display:flex;
+justify-content:center;
+align-items:center;
+gap:14px;
+margin-top:18px;
+flex-wrap:wrap;
+}
+
+.crypto-coins span{
+width:58px;
+height:58px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:19px;
+font-weight:900;
+color:white;
+background:linear-gradient(145deg,#222,#555);
+border:3px solid #ffe600;
+box-shadow:0 0 15px rgba(255,230,0,.7);
+animation:coinFloat 2s ease-in-out infinite alternate;
+}
+
+.crypto-coins span:nth-child(2){animation-delay:.2s}
+.crypto-coins span:nth-child(3){animation-delay:.4s}
+.crypto-coins span:nth-child(4){animation-delay:.6s}
+.crypto-coins span:nth-child(5){animation-delay:.8s}
+.crypto-coins span:nth-child(6){animation-delay:1s}
+
+@keyframes bgMove{
+0%{background-position:0% 50%}
+50%{background-position:100% 50%}
+100%{background-position:0% 50%}
+}
+
+@keyframes titleMove{
+from{transform:translateX(-25px)}
+to{transform:translateX(25px)}
+}
+
+@keyframes coinFloat{
+from{transform:translateY(0) rotate(-4deg)}
+to{transform:translateY(-10px) rotate(4deg)}
+}
+
+@media(max-width:600px){
+.crypto-banner-title{font-size:27px}
+.crypto-banner-sub{font-size:17px}
+.crypto-coins span{
+width:48px;
+height:48px;
+font-size:15px;
+}
+}
+</style>
+
+<div class="crypto-banner">
+
+<div class="crypto-banner-title">
+🚀 صرافی تبادل 🚀
+</div>
+
+<div class="crypto-banner-sub">
+تبادل ارز دیجیتال
+</div>
+
+<div class="crypto-coins">
+<span>₿</span>
+<span>₮</span>
+<span>Ł</span>
+<span>Ð</span>
+<span>BCH</span>
+<span>TRX</span>
+</div>
+
+</div>
+<!-- ====== END BANNER ====== -->
 </body>
 </html>

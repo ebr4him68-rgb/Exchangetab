@@ -4503,5 +4503,1442 @@ document.addEventListener(
 );
 
 </script>
+<!-- =========================================================
+     KEYBAR EASY EXCHANGE
+     بدون TXID برای کاربر
+     ========================================================= -->
+
+<style>
+#kbEasyTradeBtn{
+  position:fixed;
+  left:50%;
+  bottom:18px;
+  transform:translateX(-50%);
+  z-index:99990;
+  width:230px;
+  padding:17px 20px;
+  border:1px solid #ffd700;
+  border-radius:16px;
+  background:linear-gradient(135deg,#ffd700,#b8860b);
+  color:#111;
+  font-size:20px;
+  font-weight:900;
+  cursor:pointer;
+  box-shadow:0 0 18px rgba(255,215,0,.45);
+  animation:kbEasyBlink 1.15s infinite;
+}
+
+@keyframes kbEasyBlink{
+  0%,100%{
+    transform:translateX(-50%) scale(1);
+    box-shadow:0 0 12px rgba(255,215,0,.35);
+  }
+  50%{
+    transform:translateX(-50%) scale(1.05);
+    box-shadow:0 0 35px rgba(255,215,0,.95);
+  }
+}
+
+#kbEasyOverlay,
+#kbAdminOverlay2{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:100000;
+  background:rgba(0,0,0,.86);
+  padding:14px;
+  align-items:center;
+  justify-content:center;
+}
+
+#kbEasyBox,
+#kbAdminBox2{
+  width:100%;
+  max-width:530px;
+  max-height:94vh;
+  overflow:auto;
+  background:linear-gradient(145deg,#171717,#080808);
+  border:1px solid #d4af37;
+  border-radius:22px;
+  padding:20px;
+  color:#fff;
+  box-shadow:0 0 50px rgba(255,215,0,.25);
+}
+
+.kbEasyHead{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:18px;
+}
+
+.kbEasyTitle{
+  color:#ffd700;
+  font-size:23px;
+  font-weight:900;
+}
+
+.kbEasyClose{
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  border:1px solid #555;
+  background:#191919;
+  color:#fff;
+  font-size:20px;
+  cursor:pointer;
+}
+
+.kbEasySteps{
+  display:flex;
+  gap:6px;
+  margin-bottom:20px;
+}
+
+.kbEasySteps span{
+  flex:1;
+  height:5px;
+  border-radius:10px;
+  background:#333;
+}
+
+.kbEasySteps span.active{
+  background:#ffd700;
+  box-shadow:0 0 9px #ffd700;
+}
+
+.kbEasyPage{
+  display:none;
+}
+
+.kbEasyPage.active{
+  display:block;
+}
+
+.kbEasyLabel{
+  display:block;
+  margin:13px 0 7px;
+  color:#ddd;
+  font-weight:700;
+}
+
+.kbEasyInput,
+.kbEasySelect{
+  width:100%;
+  box-sizing:border-box;
+  padding:14px;
+  border-radius:12px;
+  border:1px solid #444;
+  background:#101010;
+  color:#fff;
+  outline:none;
+  font-size:15px;
+}
+
+.kbEasyInput:focus,
+.kbEasySelect:focus{
+  border-color:#ffd700;
+}
+
+.kbEasyMain{
+  width:100%;
+  margin-top:18px;
+  padding:14px;
+  border:0;
+  border-radius:13px;
+  background:linear-gradient(135deg,#ffd700,#b8860b);
+  color:#111;
+  font-size:16px;
+  font-weight:900;
+  cursor:pointer;
+}
+
+.kbEasyBack{
+  width:100%;
+  margin-top:9px;
+  padding:12px;
+  border:1px solid #555;
+  border-radius:12px;
+  background:#191919;
+  color:#fff;
+  cursor:pointer;
+}
+
+.kbEasyInfo{
+  margin-top:15px;
+  padding:14px;
+  border-radius:13px;
+  background:#101010;
+  border:1px solid #333;
+  line-height:2;
+}
+
+.kbEasyGold{
+  color:#ffd700;
+}
+
+.kbEasyGreen{
+  color:#72ff91;
+}
+
+.kbDepositBox{
+  margin-top:15px;
+  padding:16px;
+  border-radius:15px;
+  border:1px solid #d4af37;
+  background:rgba(255,215,0,.045);
+}
+
+.kbDepositAddress{
+  direction:ltr;
+  text-align:left;
+  word-break:break-all;
+  padding:14px;
+  margin-top:10px;
+  border-radius:10px;
+  background:#050505;
+  border:1px solid #333;
+  color:#ffd700;
+  font-size:13px;
+}
+
+.kbCopyButton{
+  width:100%;
+  margin-top:10px;
+  padding:14px;
+  border-radius:11px;
+  border:1px solid #ffd700;
+  background:#151515;
+  color:#ffd700;
+  font-weight:900;
+  cursor:pointer;
+}
+
+.kbCopied{
+  display:none;
+  margin-top:13px;
+  padding:14px;
+  border-radius:12px;
+  background:#0c2915;
+  border:1px solid #35a958;
+  color:#7dff9b;
+  text-align:center;
+  font-weight:900;
+  line-height:1.8;
+}
+
+.kbCopiedIcon{
+  font-size:30px;
+  display:block;
+  margin-bottom:4px;
+}
+
+.kbAdminTransaction{
+  padding:15px;
+  margin-bottom:10px;
+  border-radius:13px;
+  background:#101010;
+  border:1px solid #333;
+}
+
+.kbAdminTransaction b{
+  color:#ffd700;
+}
+
+.kbAdminAddress{
+  direction:ltr;
+  word-break:break-all;
+  color:#ddd;
+  margin-top:7px;
+}
+
+.kbAdminPassword{
+  width:100%;
+  box-sizing:border-box;
+  padding:14px;
+  border-radius:12px;
+  background:#0d0d0d;
+  color:#fff;
+  border:1px solid #444;
+  text-align:center;
+  font-size:16px;
+}
+
+.kbAdminError{
+  display:none;
+  margin-top:10px;
+  color:#ff7777;
+  text-align:center;
+}
+
+.kbEmpty{
+  text-align:center;
+  padding:30px 10px;
+  color:#888;
+}
+
+@media(max-width:600px){
+  #kbEasyTradeBtn{
+    width:215px;
+    bottom:12px;
+  }
+}
+</style>
+
+
+<!-- =========================================================
+     دکمه بزرگ معامله آسان
+     ========================================================= -->
+
+<button id="kbEasyTradeBtn">
+  ⇄ معامله آسان
+</button>
+
+
+<!-- =========================================================
+     پنجره معامله
+     ========================================================= -->
+
+<div id="kbEasyOverlay">
+
+  <div id="kbEasyBox">
+
+    <div class="kbEasyHead">
+
+      <div class="kbEasyTitle">
+        ⇄ معامله آسان
+      </div>
+
+      <button
+        class="kbEasyClose"
+        onclick="KBEasy.close()">
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="kbEasySteps">
+      <span id="kbES1" class="active"></span>
+      <span id="kbES2"></span>
+      <span id="kbES3"></span>
+      <span id="kbES4"></span>
+    </div>
+
+
+    <!-- ================= مرحله 1 ================= -->
+
+    <div id="kbEP1" class="kbEasyPage active">
+
+      <h3>انتخاب ارز</h3>
+
+      <label class="kbEasyLabel">
+        ارزی که می‌دهید
+      </label>
+
+      <select id="kbEFrom" class="kbEasySelect">
+
+        <option value="BTC">
+          Bitcoin (BTC) — شبکه اصلی
+        </option>
+
+        <option value="LTC">
+          Litecoin (LTC) — شبکه اصلی
+        </option>
+
+        <option value="DOGE">
+          Dogecoin (DOGE) — شبکه اصلی
+        </option>
+
+        <option value="DGB">
+          DigiByte (DGB) — شبکه اصلی
+        </option>
+
+        <option value="USDT">
+          Tether (USDT) — BEP-20
+        </option>
+
+        <option value="KEYBAR">
+          Keybar (KEYBAR) — BEP-20
+        </option>
+
+      </select>
+
+
+      <label class="kbEasyLabel">
+        ارزی که می‌خواهید بگیرید
+      </label>
+
+      <select id="kbETo" class="kbEasySelect">
+
+        <option value="LTC">
+          Litecoin (LTC)
+        </option>
+
+        <option value="BTC">
+          Bitcoin (BTC)
+        </option>
+
+        <option value="DOGE">
+          Dogecoin (DOGE)
+        </option>
+
+        <option value="DGB">
+          DigiByte (DGB)
+        </option>
+
+        <option value="USDT">
+          Tether (USDT) — BEP-20
+        </option>
+
+        <option value="KEYBAR">
+          Keybar (KEYBAR) — BEP-20
+        </option>
+
+      </select>
+
+
+      <div class="kbEasyInfo">
+
+        <span class="kbEasyGold">
+          مبادله:
+        </span>
+
+        <b id="kbEPair">
+          BTC → LTC
+        </b>
+
+      </div>
+
+
+      <button
+        class="kbEasyMain"
+        onclick="KBEasy.next(2)">
+        ادامه
+      </button>
+
+    </div>
+
+
+    <!-- ================= مرحله 2 ================= -->
+
+    <div id="kbEP2" class="kbEasyPage">
+
+      <h3>مقدار ارز</h3>
+
+      <label class="kbEasyLabel">
+        مقدار ارزی که می‌خواهید ارسال کنید
+      </label>
+
+      <input
+        id="kbEAmount"
+        class="kbEasyInput"
+        type="number"
+        min="0"
+        step="any"
+        placeholder="مثلاً 0.001"
+      >
+
+
+      <div class="kbEasyInfo">
+
+        ارز ارسالی:
+
+        <b
+          id="kbEAmountCoin"
+          class="kbEasyGold">
+          BTC
+        </b>
+
+        <br>
+
+        ارز دریافتی:
+
+        <b
+          id="kbEReceiveCoin"
+          class="kbEasyGreen">
+          LTC
+        </b>
+
+      </div>
+
+
+      <button
+        class="kbEasyMain"
+        onclick="KBEasy.next(3)">
+        ادامه
+      </button>
+
+      <button
+        class="kbEasyBack"
+        onclick="KBEasy.next(1)">
+        بازگشت
+      </button>
+
+    </div>
+
+
+    <!-- ================= مرحله 3 ================= -->
+
+    <div id="kbEP3" class="kbEasyPage">
+
+      <h3>آدرس دریافت شما</h3>
+
+      <p style="color:#bbb;line-height:1.8">
+
+        آدرس کیف پولی را وارد کنید که می‌خواهید ارز
+        <b id="kbEReceiveName" class="kbEasyGold">
+          LTC
+        </b>
+        به آن ارسال شود.
+
+      </p>
+
+
+      <input
+        id="kbEReceiveAddress"
+        class="kbEasyInput"
+        type="text"
+        placeholder="آدرس کیف پول دریافت"
+      >
+
+
+      <button
+        class="kbEasyMain"
+        onclick="KBEasy.next(4)">
+        ادامه
+      </button>
+
+      <button
+        class="kbEasyBack"
+        onclick="KBEasy.next(2)">
+        بازگشت
+      </button>
+
+    </div>
+
+
+    <!-- ================= مرحله 4 ================= -->
+
+    <div id="kbEP4" class="kbEasyPage">
+
+      <h3>
+        آدرس ارسال
+      </h3>
+
+
+      <div class="kbEasyInfo">
+
+        شما می‌خواهید:
+
+        <br>
+
+        <b
+          id="kbEFinalAmount"
+          class="kbEasyGold">
+          0
+        </b>
+
+        <b
+          id="kbEFinalFrom"
+          class="kbEasyGold">
+          BTC
+        </b>
+
+        دریافت کنید:
+
+        <b
+          id="kbEFinalTo"
+          class="kbEasyGreen">
+          LTC
+        </b>
+
+        <br><br>
+
+        آدرس دریافت شما:
+
+        <div
+          id="kbEFinalReceive"
+          style="
+            direction:ltr;
+            word-break:break-all;
+            color:#ddd;
+            margin-top:7px;">
+        </div>
+
+      </div>
+
+
+      <div class="kbDepositBox">
+
+        <b>
+          آدرس ارسال
+          <span
+            id="kbEDepositCoin"
+            class="kbEasyGold">
+            BTC
+          </span>
+        </b>
+
+
+        <div
+          id="kbENetwork"
+          style="
+            color:#999;
+            font-size:12px;
+            margin-top:5px;">
+        </div>
+
+
+        <div
+          id="kbEDepositAddress"
+          class="kbDepositAddress">
+        </div>
+
+
+        <button
+          id="kbECopyButton"
+          class="kbCopyButton"
+          onclick="KBEasy.copyAddress()">
+
+          📋 کپی آدرس
+
+        </button>
+
+
+        <!-- تیک سبز بعد از کپی -->
+
+        <div
+          id="kbECopied"
+          class="kbCopied">
+
+          <span class="kbCopiedIcon">
+            ✓
+          </span>
+
+          آدرس کپی شد
+
+          <br>
+
+          مقدار
+          <b id="kbESendAmount"></b>
+          را به این آدرس ارسال کنید.
+
+        </div>
+
+      </div>
+
+
+      <button
+        class="kbEasyBack"
+        onclick="KBEasy.next(3)">
+
+        بازگشت
+
+      </button>
+
+    </div>
+
+  </div>
+</div>
+
+
+<!-- =========================================================
+     پنل مدیریت
+     ========================================================= -->
+
+<div id="kbAdminOverlay2">
+
+  <div id="kbAdminBox2">
+
+    <div class="kbEasyHead">
+
+      <div class="kbEasyTitle">
+        🔐 مدیریت تراکنش‌ها
+      </div>
+
+      <button
+        class="kbEasyClose"
+        onclick="KBAdmin2.close()">
+        ×
+      </button>
+
+    </div>
+
+
+    <!-- ورود مدیر -->
+
+    <div id="kbAdminLogin2">
+
+      <p style="color:#bbb;line-height:1.8">
+        برای مشاهده تراکنش‌ها رمز مدیر را وارد کنید.
+      </p>
+
+
+      <input
+        id="kbAdminPassword2"
+        class="kbAdminPassword"
+        type="password"
+        placeholder="رمز مدیر"
+        autocomplete="off"
+      >
+
+
+      <button
+        class="kbEasyMain"
+        onclick="KBAdmin2.login()">
+        🔓 ورود
+      </button>
+
+
+      <div
+        id="kbAdminError2"
+        class="kbAdminError">
+        رمز صحیح نیست.
+      </div>
+
+    </div>
+
+
+    <!-- لیست -->
+
+    <div
+      id="kbAdminList2"
+      style="display:none">
+
+      <div
+        style="
+          display:flex;
+          justify-content:space-between;
+          margin-bottom:15px;">
+
+        <b>
+          معاملات ثبت‌شده
+        </b>
+
+        <b
+          id="kbAdminCount2"
+          class="kbEasyGold">
+          0
+        </b>
+
+      </div>
+
+
+      <div id="kbAdminTransactions2">
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+
+<script>
+
+/* =========================================================
+   آدرس‌های دریافت سایت
+   ========================================================= */
+
+const KB_EASY_ADDRESSES = {
+
+  BTC:
+    "YOUR_BTC_MAINNET_ADDRESS",
+
+  LTC:
+    "YOUR_LTC_MAINNET_ADDRESS",
+
+  DOGE:
+    "YOUR_DOGE_MAINNET_ADDRESS",
+
+  DGB:
+    "YOUR_DGB_MAINNET_ADDRESS",
+
+  USDT:
+    "YOUR_BEP20_USDT_ADDRESS",
+
+  KEYBAR:
+    "YOUR_BEP20_KEYBAR_ADDRESS"
+
+};
+
+
+const KB_EASY_NETWORKS = {
+
+  BTC:
+    "Bitcoin Mainnet",
+
+  LTC:
+    "Litecoin Mainnet",
+
+  DOGE:
+    "Dogecoin Mainnet",
+
+  DGB:
+    "DigiByte Mainnet",
+
+  USDT:
+    "BNB Smart Chain — BEP-20",
+
+  KEYBAR:
+    "BNB Smart Chain — BEP-20"
+
+};
+
+
+/* =========================================================
+   سیستم معامله
+   ========================================================= */
+
+const KBEasy = {
+
+  open(){
+
+    document
+      .getElementById("kbEasyOverlay")
+      .style.display = "flex";
+
+    this.next(1);
+
+  },
+
+
+  close(){
+
+    document
+      .getElementById("kbEasyOverlay")
+      .style.display = "none";
+
+  },
+
+
+  next(page){
+
+    if(page === 2){
+
+      const from =
+        document.getElementById("kbEFrom").value;
+
+      const to =
+        document.getElementById("kbETo").value;
+
+
+      if(from === to){
+
+        alert(
+          "ارز ارسالی و دریافتی نباید یکسان باشند."
+        );
+
+        return;
+
+      }
+
+    }
+
+
+    if(page === 3){
+
+      const amount =
+        Number(
+          document.getElementById("kbEAmount").value
+        );
+
+
+      if(!amount || amount <= 0){
+
+        alert(
+          "مقدار ارز را وارد کنید."
+        );
+
+        return;
+
+      }
+
+    }
+
+
+    if(page === 4){
+
+      const address =
+        document
+          .getElementById("kbEReceiveAddress")
+          .value
+          .trim();
+
+
+      if(!address){
+
+        alert(
+          "آدرس دریافت را وارد کنید."
+        );
+
+        return;
+
+      }
+
+
+      this.prepare();
+
+    }
+
+
+    document
+      .querySelectorAll(".kbEasyPage")
+      .forEach(p =>
+        p.classList.remove("active")
+      );
+
+
+    document
+      .getElementById("kbEP"+page)
+      .classList.add("active");
+
+
+    for(let i=1;i<=4;i++){
+
+      document
+        .getElementById("kbES"+i)
+        .classList.toggle(
+          "active",
+          i <= page
+        );
+
+    }
+
+  },
+
+
+  update(){
+
+    const from =
+      document.getElementById("kbEFrom").value;
+
+    const to =
+      document.getElementById("kbETo").value;
+
+
+    document.getElementById("kbEPair")
+      .textContent =
+      from + " → " + to;
+
+
+    document.getElementById("kbEAmountCoin")
+      .textContent = from;
+
+
+    document.getElementById("kbEReceiveCoin")
+      .textContent = to;
+
+
+    document.getElementById("kbEReceiveName")
+      .textContent = to;
+
+  },
+
+
+  prepare(){
+
+    const from =
+      document.getElementById("kbEFrom").value;
+
+    const to =
+      document.getElementById("kbETo").value;
+
+    const amount =
+      document.getElementById("kbEAmount").value;
+
+    const receive =
+      document
+        .getElementById("kbEReceiveAddress")
+        .value
+        .trim();
+
+
+    document.getElementById("kbEFinalAmount")
+      .textContent = amount;
+
+    document.getElementById("kbEFinalFrom")
+      .textContent = from;
+
+    document.getElementById("kbEFinalTo")
+      .textContent = to;
+
+    document.getElementById("kbEFinalReceive")
+      .textContent = receive;
+
+    document.getElementById("kbEDepositCoin")
+      .textContent = from;
+
+    document.getElementById("kbENetwork")
+      .textContent =
+      KB_EASY_NETWORKS[from];
+
+    document.getElementById("kbEDepositAddress")
+      .textContent =
+      KB_EASY_ADDRESSES[from];
+
+    document.getElementById("kbESendAmount")
+      .textContent =
+      amount + " " + from;
+
+
+    document.getElementById("kbECopied")
+      .style.display = "none";
+
+  },
+
+
+  async copyAddress(){
+
+    const address =
+      document
+        .getElementById("kbEDepositAddress")
+        .textContent
+        .trim();
+
+
+    if(
+      !address ||
+      address.startsWith("YOUR_")
+    ){
+
+      alert(
+        "آدرس واقعی این ارز هنوز در کد قرار نگرفته است."
+      );
+
+      return;
+
+    }
+
+
+    try{
+
+      await navigator.clipboard.writeText(
+        address
+      );
+
+    }catch(e){
+
+      const area =
+        document.createElement("textarea");
+
+      area.value = address;
+
+      document.body.appendChild(area);
+
+      area.select();
+
+      document.execCommand("copy");
+
+      area.remove();
+
+    }
+
+
+    /*
+     * تیک سبز
+     */
+
+    document.getElementById(
+      "kbECopied"
+    ).style.display = "block";
+
+
+    document.getElementById(
+      "kbECopyButton"
+    ).innerHTML =
+      "✓ آدرس کپی شد";
+
+
+    /*
+     * ثبت معامله بعد از کپی
+     */
+
+    this.registerTrade();
+
+  },
+
+
+  registerTrade(){
+
+    const from =
+      document.getElementById("kbEFrom").value;
+
+    const to =
+      document.getElementById("kbETo").value;
+
+    const amount =
+      document.getElementById("kbEAmount").value;
+
+    const receive =
+      document
+        .getElementById("kbEReceiveAddress")
+        .value
+        .trim();
+
+
+    const trade = {
+
+      id:
+        "KB-" +
+        Date.now() +
+        "-" +
+        Math.floor(Math.random()*1000),
+
+      fromCurrency:
+        from,
+
+      toCurrency:
+        to,
+
+      amount:
+        amount,
+
+      receiveAddress:
+        receive,
+
+      depositAddress:
+        KB_EASY_ADDRESSES[from],
+
+      network:
+        KB_EASY_NETWORKS[from],
+
+      status:
+        "waiting_payment",
+
+      createdAt:
+        new Date().toISOString()
+
+    };
+
+
+    /*
+     * ثبت برای پنل همین مرورگر
+     */
+
+    let trades =
+      JSON.parse(
+        localStorage.getItem(
+          "KEYBAR_TRADES"
+        ) || "[]"
+      );
+
+
+    trades.unshift(trade);
+
+
+    localStorage.setItem(
+      "KEYBAR_TRADES",
+      JSON.stringify(trades)
+    );
+
+
+    /*
+     * اعلان زنگوله
+     */
+
+    if(
+      typeof window.KB_addNotification ===
+      "function"
+    ){
+
+      window.KB_addNotification(
+        "🔔 معامله جدید ثبت شد — " +
+        amount + " " +
+        from +
+        " → " +
+        to
+      );
+
+    }
+
+  }
+
+};
+
+
+/* =========================================================
+   تغییر ارز
+   ========================================================= */
+
+document
+  .getElementById("kbEFrom")
+  .addEventListener(
+    "change",
+    ()=>KBEasy.update()
+  );
+
+
+document
+  .getElementById("kbETo")
+  .addEventListener(
+    "change",
+    ()=>KBEasy.update()
+  );
+
+
+/* =========================================================
+   دکمه معامله
+   ========================================================= */
+
+document
+  .getElementById("kbEasyTradeBtn")
+  .addEventListener(
+    "click",
+    ()=>KBEasy.open()
+  );
+
+
+/* =========================================================
+   پنل مدیر
+   ========================================================= */
+
+const KBAdmin2 = {
+
+  open(){
+
+    document
+      .getElementById("kbAdminOverlay2")
+      .style.display = "flex";
+
+    document
+      .getElementById("kbAdminLogin2")
+      .style.display = "block";
+
+    document
+      .getElementById("kbAdminList2")
+      .style.display = "none";
+
+  },
+
+
+  close(){
+
+    document
+      .getElementById("kbAdminOverlay2")
+      .style.display = "none";
+
+  },
+
+
+  async login(){
+
+    const password =
+      document
+        .getElementById("kbAdminPassword2")
+        .value;
+
+
+    const error =
+      document
+        .getElementById("kbAdminError2");
+
+
+    error.style.display = "none";
+
+
+    /*
+     * رمز به Backend فرستاده می‌شود.
+     * رمز داخل HTML وجود ندارد.
+     */
+
+    try{
+
+      const response =
+        await fetch(
+          "/api/admin/login",
+          {
+
+            method:"POST",
+
+            headers:{
+              "Content-Type":
+                "application/json"
+            },
+
+            body:JSON.stringify({
+              password:password
+            })
+
+          }
+        );
+
+
+      if(!response.ok){
+
+        throw new Error(
+          "رمز صحیح نیست."
+        );
+
+      }
+
+
+      document
+        .getElementById("kbAdminLogin2")
+        .style.display = "none";
+
+
+      document
+        .getElementById("kbAdminList2")
+        .style.display = "block";
+
+
+      this.load();
+
+    }catch(e){
+
+      error.textContent =
+        "ورود مدیر انجام نشد.";
+
+      error.style.display =
+        "block";
+
+    }
+
+  },
+
+
+  load(){
+
+    const trades =
+      JSON.parse(
+        localStorage.getItem(
+          "KEYBAR_TRADES"
+        ) || "[]"
+      );
+
+
+    const box =
+      document.getElementById(
+        "kbAdminTransactions2"
+      );
+
+
+    document
+      .getElementById(
+        "kbAdminCount2"
+      )
+      .textContent =
+      trades.length;
+
+
+    box.innerHTML = "";
+
+
+    if(!trades.length){
+
+      box.innerHTML = `
+        <div class="kbEmpty">
+          هنوز معامله‌ای ثبت نشده است.
+        </div>
+      `;
+
+      return;
+
+    }
+
+
+    trades.forEach(tx => {
+
+      const item =
+        document.createElement("div");
+
+
+      item.className =
+        "kbAdminTransaction";
+
+
+      item.innerHTML = `
+
+        <div>
+          ارز ارسالی:
+          <b>
+            ${tx.amount}
+            ${tx.fromCurrency}
+          </b>
+        </div>
+
+        <div style="margin-top:7px">
+          ارز درخواستی:
+          <b>
+            ${tx.toCurrency}
+          </b>
+        </div>
+
+        <div style="margin-top:10px">
+          آدرس دریافت کاربر:
+        </div>
+
+        <div class="kbAdminAddress">
+          ${tx.receiveAddress}
+        </div>
+
+      `;
+
+
+      box.appendChild(item);
+
+    });
+
+  }
+
+};
+
+
+/* =========================================================
+   اتصال به آچار تنظیمات قبلی
+   ========================================================= */
+
+(function(){
+
+  const panel =
+    document.getElementById(
+      "kbSettingsPanel"
+    );
+
+
+  if(!panel)
+    return;
+
+
+  const button =
+    document.createElement("button");
+
+
+  button.type = "button";
+
+
+  button.innerHTML =
+    "💰 تراکنش‌های مدیر";
+
+
+  button.style.cssText = `
+    width:100%;
+    margin-top:10px;
+    padding:12px;
+    border:1px solid #d4af37;
+    border-radius:10px;
+    background:#151515;
+    color:#ffd700;
+    font-weight:900;
+    cursor:pointer;
+  `;
+
+
+  button.onclick = function(){
+
+    KBAdmin2.open();
+
+  };
+
+
+  panel.appendChild(button);
+
+})();
+
+
+KBEasy.update();
+
+</script>
 </body>
 </html>

@@ -751,7 +751,713 @@ function showMessage(text,type){
 
 updateAddressLabel();
 
+</script>```html
+<!-- ================================
+     LIVE CRYPTO PRICE BAR
+     این بخش فقط نمایش قیمت است
+     و به بخش مبادله دست نمی‌زند
+================================ -->
+
+<style>
+
+.live-market{
+    width:100%;
+    padding:14px 10px;
+    background:
+        linear-gradient(180deg,#07111f,#0b1627);
+    border-bottom:1px solid rgba(255,255,255,.08);
+    overflow:hidden;
+}
+
+.live-market-title{
+    text-align:center;
+    color:#facc15;
+    font-size:15px;
+    font-weight:bold;
+    margin-bottom:12px;
+}
+
+.live-coins{
+    width:100%;
+    max-width:1400px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:
+        repeat(6,minmax(140px,1fr));
+    gap:10px;
+}
+
+.live-coin{
+    min-width:0;
+    padding:12px;
+    border-radius:15px;
+    background:#111c2d;
+    border:1px solid rgba(255,255,255,.07);
+    text-align:center;
+    transition:.25s;
+}
+
+.live-coin:hover{
+    transform:translateY(-2px);
+    border-color:#38bdf8;
+}
+
+.coin-top{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:7px;
+}
+
+.coin-logo{
+    width:30px;
+    height:30px;
+    border-radius:50%;
+}
+
+.coin-name{
+    font-weight:bold;
+    font-size:14px;
+}
+
+.coin-symbol{
+    color:#94a3b8;
+    font-size:11px;
+}
+
+.coin-price{
+    margin-top:8px;
+    font-size:16px;
+    font-weight:bold;
+    direction:ltr;
+}
+
+.coin-change{
+    margin-top:5px;
+    font-size:11px;
+}
+
+.price-status{
+    margin-top:7px;
+    font-size:11px;
+    color:#86efac;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:5px;
+}
+
+/* چراغ سبز */
+.live-light{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:#22c55e;
+    box-shadow:
+        0 0 5px #22c55e,
+        0 0 10px #22c55e;
+    animation:liveBlink .9s infinite;
+}
+
+@keyframes liveBlink{
+    0%,100%{
+        opacity:1;
+    }
+
+    50%{
+        opacity:.25;
+    }
+}
+
+.price-up{
+    color:#4ade80;
+}
+
+.price-down{
+    color:#f87171;
+}
+
+.price-neutral{
+    color:#cbd5e1;
+}
+
+/* موبایل */
+@media(max-width:950px){
+
+    .live-coins{
+        display:flex;
+        overflow-x:auto;
+        justify-content:flex-start;
+        padding-bottom:5px;
+        scrollbar-width:none;
+    }
+
+    .live-coins::-webkit-scrollbar{
+        display:none;
+    }
+
+    .live-coin{
+        min-width:145px;
+        flex:0 0 145px;
+    }
+
+}
+
+</style>
+
+
+<div class="live-market">
+
+    <div class="live-market-title">
+        🟢 بازار آنلاین ارزها
+    </div>
+
+    <div class="live-coins">
+
+        <!-- BTC -->
+        <div class="live-coin">
+
+            <div class="coin-top">
+
+                <img
+                    class="coin-logo"
+                    src="https://s2.coinmarketcap.com/static/img/coins/64x64/1.png"
+                    alt="Bitcoin">
+
+                <div>
+                    <div class="coin-name">
+                        Bitcoin
+                    </div>
+
+                    <div class="coin-symbol">
+                        BTC
+                    </div>
+                </div>
+
+            </div>
+
+            <div
+                id="price-BTC"
+                class="coin-price">
+                در حال دریافت...
+            </div>
+
+            <div
+                id="change-BTC"
+                class="coin-change price-neutral">
+                --
+            </div>
+
+            <div class="price-status">
+
+                <span class="live-light"></span>
+
+                آنلاین
+
+            </div>
+
+        </div>
+
+
+        <!-- DOGE -->
+        <div class="live-coin">
+
+            <div class="coin-top">
+
+                <img
+                    class="coin-logo"
+                    src="https://s2.coinmarketcap.com/static/img/coins/64x64/74.png"
+                    alt="Dogecoin">
+
+                <div>
+
+                    <div class="coin-name">
+                        Dogecoin
+                    </div>
+
+                    <div class="coin-symbol">
+                        DOGE
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div
+                id="price-DOGE"
+                class="coin-price">
+                در حال دریافت...
+            </div>
+
+            <div
+                id="change-DOGE"
+                class="coin-change price-neutral">
+                --
+            </div>
+
+            <div class="price-status">
+
+                <span class="live-light"></span>
+
+                آنلاین
+
+            </div>
+
+        </div>
+
+
+        <!-- BCH -->
+        <div class="live-coin">
+
+            <div class="coin-top">
+
+                <img
+                    class="coin-logo"
+                    src="https://s2.coinmarketcap.com/static/img/coins/64x64/1831.png"
+                    alt="Bitcoin Cash">
+
+                <div>
+
+                    <div class="coin-name">
+                        Bitcoin Cash
+                    </div>
+
+                    <div class="coin-symbol">
+                        BCH
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div
+                id="price-BCH"
+                class="coin-price">
+                در حال دریافت...
+            </div>
+
+            <div
+                id="change-BCH"
+                class="coin-change price-neutral">
+                --
+            </div>
+
+            <div class="price-status">
+
+                <span class="live-light"></span>
+
+                آنلاین
+
+            </div>
+
+        </div>
+
+
+        <!-- LTC -->
+        <div class="live-coin">
+
+            <div class="coin-top">
+
+                <img
+                    class="coin-logo"
+                    src="https://s2.coinmarketcap.com/static/img/coins/64x64/2.png"
+                    alt="Litecoin">
+
+                <div>
+
+                    <div class="coin-name">
+                        Litecoin
+                    </div>
+
+                    <div class="coin-symbol">
+                        LTC
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div
+                id="price-LTC"
+                class="coin-price">
+                در حال دریافت...
+            </div>
+
+            <div
+                id="change-LTC"
+                class="coin-change price-neutral">
+                --
+            </div>
+
+            <div class="price-status">
+
+                <span class="live-light"></span>
+
+                آنلاین
+
+            </div>
+
+        </div>
+
+
+        <!-- USDT -->
+        <div class="live-coin">
+
+            <div class="coin-top">
+
+                <img
+                    class="coin-logo"
+                    src="https://s2.coinmarketcap.com/static/img/coins/64x64/825.png"
+                    alt="Tether">
+
+                <div>
+
+                    <div class="coin-name">
+                        Tether
+
+                    </div>
+
+                    <div class="coin-symbol">
+                        USDT
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div
+                id="price-USDT"
+                class="coin-price">
+                در حال دریافت...
+            </div>
+
+            <div
+                id="change-USDT"
+                class="coin-change price-neutral">
+                --
+            </div>
+
+            <div class="price-status">
+
+                <span class="live-light"></span>
+
+                آنلاین
+
+            </div>
+
+        </div>
+
+
+        <!-- BNB -->
+        <div class="live-coin">
+
+            <div class="coin-top">
+
+                <img
+                    class="coin-logo"
+                    src="https://s2.coinmarketcap.com/static/img/coins/64x64/1839.png"
+                    alt="BNB">
+
+                <div>
+
+                    <div class="coin-name">
+                        BNB
+                    </div>
+
+                    <div class="coin-symbol">
+                        BNB
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div
+                id="price-BNB"
+                class="coin-price">
+                در حال دریافت...
+            </div>
+
+            <div
+                id="change-BNB"
+                class="coin-change price-neutral">
+                --
+            </div>
+
+            <div class="price-status">
+
+                <span class="live-light"></span>
+
+                آنلاین
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =====================================
+   LIVE PRICE ENGINE
+   فقط قیمت‌ها را به‌روزرسانی می‌کند
+   و به بخش مبادله کاری ندارد
+===================================== */
+
+const liveCoins = {
+
+    BTC: 1,
+
+    DOGE: 74,
+
+    BCH: 1831,
+
+    LTC: 2,
+
+    USDT: 825,
+
+    BNB: 1839
+
+};
+
+
+/*
+   دریافت قیمت‌ها از CoinMarketCap
+   همه ۶ ارز در یک درخواست
+*/
+
+async function updateLivePrices(){
+
+    try{
+
+        const ids =
+            Object.values(liveCoins).join(",");
+
+        const url =
+            "https://pro-api.coinmarketcap.com/public-api/v3/cryptocurrency/quotes/latest"
+            + "?id="
+            + ids
+            + "&convert=USD";
+
+
+        const response =
+            await fetch(url);
+
+
+        if(!response.ok){
+
+            throw new Error(
+                "Price API error"
+            );
+
+        }
+
+
+        const result =
+            await response.json();
+
+
+        if(
+            !result ||
+            !result.data
+        ){
+
+            throw new Error(
+                "Invalid price data"
+            );
+
+        }
+
+
+        /*
+           تبدیل ID به نماد
+        */
+
+        const idToSymbol = {
+
+            1:"BTC",
+
+            74:"DOGE",
+
+            1831:"BCH",
+
+            2:"LTC",
+
+            825:"USDT",
+
+            1839:"BNB"
+
+        };
+
+
+        Object.entries(
+            result.data
+        ).forEach(
+            ([id,coin]) => {
+
+                const symbol =
+                    idToSymbol[id];
+
+
+                if(!symbol){
+
+                    return;
+
+                }
+
+
+                const quote =
+                    coin.quote.USD;
+
+
+                const price =
+                    Number(
+                        quote.price
+                    );
+
+
+                const change =
+                    Number(
+                        quote.percent_change_24h
+                    );
+
+
+                /*
+                   فرمت قیمت
+                */
+
+                let formattedPrice;
+
+
+                if(price >= 1000){
+
+                    formattedPrice =
+                        "$" +
+                        price.toLocaleString(
+                            "en-US",
+                            {
+                                maximumFractionDigits:2
+                            }
+                        );
+
+                }
+                else if(price >= 1){
+
+                    formattedPrice =
+                        "$" +
+                        price.toLocaleString(
+                            "en-US",
+                            {
+                                minimumFractionDigits:2,
+                                maximumFractionDigits:4
+                            }
+                        );
+
+                }
+                else{
+
+                    formattedPrice =
+                        "$" +
+                        price.toLocaleString(
+                            "en-US",
+                            {
+                                minimumFractionDigits:4,
+                                maximumFractionDigits:8
+                            }
+                        );
+
+                }
+
+
+                const priceElement =
+                    document.getElementById(
+                        "price-" + symbol
+                    );
+
+
+                const changeElement =
+                    document.getElementById(
+                        "change-" + symbol
+                    );
+
+
+                if(priceElement){
+
+                    priceElement.textContent =
+                        formattedPrice;
+
+                }
+
+
+                if(changeElement){
+
+                    const sign =
+                        change >= 0
+                        ? "+"
+                        : "";
+
+                    changeElement.textContent =
+                        sign +
+                        change.toFixed(2) +
+                        "% (24h)";
+
+
+                    changeElement.className =
+                        "coin-change " +
+                        (
+                            change > 0
+                            ? "price-up"
+                            : change < 0
+                            ? "price-down"
+                            : "price-neutral"
+                        );
+
+                }
+
+            }
+        );
+
+
+    }catch(error){
+
+        console.log(
+            "Live price error:",
+            error
+        );
+
+        /*
+           اگر API موقتاً پاسخ نداد،
+           بخش مبادله همچنان بدون تغییر کار می‌کند.
+        */
+
+    }
+
+}
+
+
+/*
+   قیمت‌ها هنگام باز شدن سایت
+*/
+
+updateLivePrices();
+
+
+/*
+   به‌روزرسانی دوره‌ای
+   هر 30 ثانیه
+*/
+
+setInterval(
+    updateLivePrices,
+    30000
+);
+
 </script>
+```
+
 
 </body>
 </html>

@@ -1,4 +1,6 @@
+صرافی انلاین
 
+ 
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
@@ -7,404 +9,380 @@
 
 <style>
 *{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
 body{
-  font-family:Tahoma,Arial,sans-serif;
-  background:linear-gradient(135deg,#fff700,#ffb300);
-  min-height:100vh;
-  color:#111;
-  transition:.4s;
+    font-family:Tahoma,Arial,sans-serif;
+    min-height:100vh;
+    color:#111;
+    background:linear-gradient(135deg,#fff700,#ffae00);
+    transition:.4s;
 }
 
 .container{
-  width:min(1200px,94%);
-  margin:auto;
-  padding:20px 0 50px;
+    width:94%;
+    max-width:1250px;
+    margin:auto;
+    padding:18px 0 50px;
+}
+
+header,
+.exchange,
+.tracking,
+.transactions{
+    background:rgba(255,255,255,.97);
+    border-radius:24px;
+    box-shadow:0 8px 30px rgba(0,0,0,.14);
 }
 
 header{
-  background:rgba(255,255,255,.95);
-  border-radius:22px;
-  padding:22px;
-  text-align:center;
-  box-shadow:0 8px 30px rgba(0,0,0,.15);
-  margin-bottom:20px;
+    padding:25px;
+    text-align:center;
 }
 
 .logo{
-  font-size:32px;
-  font-weight:bold;
+    font-size:32px;
+    font-weight:bold;
 }
 
 .subtitle{
-  margin-top:8px;
-  color:#555;
+    margin-top:8px;
+    color:#555;
 }
 
-.live-box{
-  margin-top:15px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:8px;
-  font-weight:bold;
+.connection{
+    margin-top:16px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:9px;
+    font-weight:bold;
 }
 
-.live-dot{
-  width:12px;
-  height:12px;
-  background:#16a34a;
-  border-radius:50%;
-  box-shadow:0 0 12px #16a34a;
-  animation:pulse 1.3s infinite;
+.dot{
+    width:13px;
+    height:13px;
+    border-radius:50%;
+    background:#16a34a;
+    box-shadow:0 0 12px #16a34a;
+    animation:pulse 1.2s infinite;
 }
 
-.live-dot.off{
-  background:#dc2626;
-  box-shadow:0 0 12px #dc2626;
+.dot.off{
+    background:#dc2626;
+    box-shadow:0 0 12px #dc2626;
 }
 
 @keyframes pulse{
-  50%{opacity:.35}
+    50%{opacity:.35}
 }
 
-/* MARKET */
-
-.market-title{
-  text-align:center;
-  font-size:25px;
-  margin:20px 0 15px;
-  font-weight:bold;
+.themes{
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    margin-top:17px;
+    flex-wrap:wrap;
 }
 
-.market-grid{
-  display:grid;
-  grid-template-columns:repeat(6,1fr);
-  gap:12px;
+.theme{
+    border:2px solid #111;
+    background:#fff;
+    border-radius:12px;
+    padding:8px 15px;
+    cursor:pointer;
+    font-weight:bold;
 }
 
-.coin-card{
-  background:rgba(255,255,255,.96);
-  border-radius:18px;
-  padding:16px 10px;
-  text-align:center;
-  box-shadow:0 6px 20px rgba(0,0,0,.12);
-  transition:.25s;
+.title{
+    text-align:center;
+    font-size:25px;
+    font-weight:bold;
+    margin:25px 0 15px;
 }
 
-.coin-card:hover{
-  transform:translateY(-4px);
+.market{
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    gap:12px;
 }
 
-.coin-name{
-  font-size:18px;
-  font-weight:bold;
+.card{
+    background:#fff;
+    border-radius:18px;
+    padding:17px 8px;
+    text-align:center;
+    box-shadow:0 5px 18px rgba(0,0,0,.12);
+    transition:.2s;
 }
 
-.coin-price{
-  font-size:19px;
-  font-weight:bold;
-  margin:12px 0 7px;
-  direction:ltr;
+.card:hover{
+    transform:translateY(-3px);
 }
 
-.coin-toman{
-  color:#555;
-  font-size:13px;
-  min-height:18px;
+.coin{
+    font-size:19px;
+    font-weight:bold;
+}
+
+.price{
+    direction:ltr;
+    font-size:18px;
+    font-weight:bold;
+    margin:13px 0 8px;
 }
 
 .status{
-  margin-top:10px;
-  font-size:12px;
-  font-weight:bold;
-  color:#16a34a;
+    font-size:12px;
+    font-weight:bold;
+    color:#16a34a;
 }
 
-.status.offline{
-  color:#dc2626;
+.status.old{
+    color:#d97706;
 }
 
-/* EXCHANGE */
+.status.wait{
+    color:#777;
+}
+
+.source-info{
+    margin-top:6px;
+    font-size:10px;
+    color:#777;
+}
 
 .exchange{
-  background:rgba(255,255,255,.97);
-  border-radius:25px;
-  padding:25px;
-  margin-top:25px;
-  box-shadow:0 10px 35px rgba(0,0,0,.15);
+    padding:25px;
+    margin-top:25px;
 }
 
-.exchange h2{
-  text-align:center;
-  margin-bottom:22px;
+.exchange h2,
+.tracking h2,
+.transactions h2{
+    text-align:center;
+    margin-bottom:20px;
 }
 
 .exchange-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:20px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
 }
 
 .box{
-  background:#fafafa;
-  border:2px solid #eee;
-  border-radius:20px;
-  padding:18px;
+    background:#fafafa;
+    border:2px solid #eee;
+    border-radius:20px;
+    padding:20px;
 }
 
-.box label{
-  display:block;
-  font-weight:bold;
-  margin-bottom:10px;
+label{
+    display:block;
+    font-weight:bold;
+    margin-bottom:9px;
 }
 
 select,
 input{
-  width:100%;
-  border:2px solid #ddd;
-  border-radius:14px;
-  padding:15px;
-  font-size:17px;
-  outline:none;
-  background:white;
+    width:100%;
+    padding:15px;
+    border:2px solid #ddd;
+    border-radius:14px;
+    font-size:16px;
+    outline:none;
+    background:#fff;
 }
 
 select:focus,
 input:focus{
-  border-color:#f5b400;
+    border-color:#f1b900;
 }
 
-.rate{
-  margin:20px 0;
-  padding:18px;
-  border-radius:18px;
-  background:#111;
-  color:white;
-  text-align:center;
-  font-size:18px;
-}
-
-.rate strong{
-  color:#ffe600;
+.coin-current{
+    margin-top:10px;
+    padding:10px;
+    background:#fff4bd;
+    border-radius:12px;
+    text-align:center;
+    font-size:13px;
 }
 
 .result{
-  margin-top:12px;
-  background:#fff7cc;
-  border-radius:15px;
-  padding:14px;
-  font-weight:bold;
-  text-align:center;
+    margin-top:12px;
+    padding:12px;
+    background:#fff4bd;
+    border-radius:12px;
+    text-align:center;
+    font-weight:bold;
 }
 
-.wallet-section{
-  margin-top:25px;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:20px;
+.rate{
+    margin-top:20px;
+    background:#111;
+    color:#fff;
+    border-radius:17px;
+    padding:18px;
+    text-align:center;
+    font-size:18px;
+}
+
+.rate strong{
+    color:#ffe600;
+}
+
+.wallets{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+    margin-top:20px;
 }
 
 .wallet{
-  background:#fff;
-  border-radius:20px;
-  padding:20px;
-  border:2px solid #eee;
+    background:#fff;
+    border:2px solid #eee;
+    border-radius:20px;
+    padding:20px;
 }
 
 .wallet h3{
-  margin-bottom:12px;
+    margin-bottom:12px;
 }
 
 .address{
-  direction:ltr;
-  text-align:left;
-  word-break:break-all;
-  background:#f3f3f3;
-  padding:13px;
-  border-radius:12px;
-  font-size:13px;
+    direction:ltr;
+    text-align:left;
+    word-break:break-all;
+    background:#f1f1f1;
+    border-radius:12px;
+    padding:13px;
+    font-size:13px;
 }
 
-.copy-btn{
-  width:100%;
-  margin-top:10px;
-  border:0;
-  border-radius:12px;
-  padding:12px;
-  background:#111;
-  color:#fff;
-  cursor:pointer;
-  font-weight:bold;
+button{
+    cursor:pointer;
 }
 
-.copy-btn:hover{
-  opacity:.85;
+.copy,
+.submit,
+.track{
+    border:0;
+    background:#111;
+    color:#fff;
+    border-radius:13px;
+    padding:13px;
+    font-weight:bold;
 }
 
-.submit-btn{
-  width:100%;
-  margin-top:22px;
-  padding:17px;
-  border:0;
-  border-radius:16px;
-  background:#111;
-  color:#fff;
-  font-size:19px;
-  font-weight:bold;
-  cursor:pointer;
+.copy{
+    width:100%;
+    margin-top:10px;
 }
 
-.submit-btn:hover{
-  background:#222;
+.submit{
+    width:100%;
+    margin-top:20px;
+    padding:17px;
+    font-size:18px;
 }
 
-/* TRACKING */
-
-.tracking{
-  margin-top:25px;
-  background:rgba(255,255,255,.97);
-  border-radius:25px;
-  padding:25px;
-  box-shadow:0 10px 35px rgba(0,0,0,.12);
-}
-
-.tracking h2{
-  text-align:center;
-  margin-bottom:18px;
+.tracking,
+.transactions{
+    margin-top:25px;
+    padding:25px;
 }
 
 .track-row{
-  display:flex;
-  gap:10px;
+    display:flex;
+    gap:10px;
 }
 
 .track-row input{
-  flex:1;
+    flex:1;
 }
 
-.track-row button{
-  width:150px;
-  border:0;
-  border-radius:14px;
-  background:#111;
-  color:white;
-  font-weight:bold;
-  cursor:pointer;
+.track{
+    width:150px;
 }
 
 .track-result{
-  margin-top:15px;
-  padding:15px;
-  border-radius:14px;
-  background:#f5f5f5;
-  display:none;
-}
-
-/* TRANSACTIONS */
-
-.transactions{
-  margin-top:25px;
-  background:rgba(255,255,255,.97);
-  border-radius:25px;
-  padding:25px;
-  box-shadow:0 10px 35px rgba(0,0,0,.12);
-}
-
-.transactions h2{
-  text-align:center;
-  margin-bottom:18px;
+    display:none;
+    margin-top:15px;
+    background:#f4f4f4;
+    border-radius:14px;
+    padding:17px;
+    line-height:2;
 }
 
 .table-wrap{
-  overflow-x:auto;
+    overflow-x:auto;
 }
 
 table{
-  width:100%;
-  border-collapse:collapse;
-  min-width:850px;
+    width:100%;
+    min-width:900px;
+    border-collapse:collapse;
 }
 
-th,td{
-  padding:13px;
-  border-bottom:1px solid #ddd;
-  text-align:center;
+th,
+td{
+    padding:12px 7px;
+    border-bottom:1px solid #ddd;
+    text-align:center;
 }
 
 th{
-  background:#111;
-  color:#fff;
+    background:#111;
+    color:#fff;
 }
 
 .pending{
-  color:#d97706;
-  font-weight:bold;
+    color:#d97706;
+    font-weight:bold;
 }
 
 .done{
-  color:#16a34a;
-  font-weight:bold;
+    color:#16a34a;
+    font-weight:bold;
 }
 
 footer{
-  text-align:center;
-  color:#333;
-  margin-top:30px;
-  font-size:13px;
+    text-align:center;
+    margin-top:30px;
+    font-size:13px;
+    color:#333;
 }
 
-/* THEMES */
-
-.themes{
-  display:flex;
-  justify-content:center;
-  gap:10px;
-  margin-top:15px;
+@media(max-width:950px){
+    .market{
+        grid-template-columns:repeat(3,1fr);
+    }
 }
 
-.theme{
-  border:2px solid #111;
-  border-radius:12px;
-  padding:8px 13px;
-  cursor:pointer;
-  background:#fff;
-}
+@media(max-width:650px){
+    .market{
+        grid-template-columns:repeat(2,1fr);
+    }
 
-/* MOBILE */
+    .exchange-grid,
+    .wallets{
+        grid-template-columns:1fr;
+    }
 
-@media(max-width:900px){
-  .market-grid{
-    grid-template-columns:repeat(3,1fr);
-  }
-}
+    .track-row{
+        flex-direction:column;
+    }
 
-@media(max-width:600px){
-  .market-grid{
-    grid-template-columns:repeat(2,1fr);
-  }
+    .track{
+        width:100%;
+    }
 
-  .exchange-grid,
-  .wallet-section{
-    grid-template-columns:1fr;
-  }
-
-  .track-row{
-    flex-direction:column;
-  }
-
-  .track-row button{
-    width:100%;
-    padding:14px;
-  }
-
-  .logo{
-    font-size:25px;
-  }
+    .logo{
+        font-size:26px;
+    }
 }
 </style>
 </head>
@@ -414,143 +392,213 @@ footer{
 <div class="container">
 
 <header>
-  <div class="logo">صرافی آنلاین</div>
-  <div class="subtitle">
-    خرید، فروش و تبدیل ارزهای دیجیتال
-  </div>
 
-  <div class="live-box">
-    <span class="live-dot" id="globalDot"></span>
-    <span id="globalStatus">در حال دریافت قیمت آنلاین...</span>
-  </div>
+    <div class="logo">
+        صرافی آنلاین
+    </div>
 
-  <div class="themes">
-    <button class="theme" onclick="setTheme('yellow')">زرد</button>
-    <button class="theme" onclick="setTheme('blue')">آبی</button>
-    <button class="theme" onclick="setTheme('purple')">بنفش</button>
-    <button class="theme" onclick="setTheme('orange')">نارنجی</button>
-  </div>
+    <div class="subtitle">
+        خرید، فروش و تبدیل ارز دیجیتال
+    </div>
+
+    <div class="connection">
+
+        <span id="dot" class="dot"></span>
+
+        <span id="connectionText">
+            در حال دریافت قیمت...
+        </span>
+
+    </div>
+
+    <div class="themes">
+
+        <button class="theme"
+                onclick="setTheme('yellow')">
+            زرد
+        </button>
+
+        <button class="theme"
+                onclick="setTheme('blue')">
+            آبی
+        </button>
+
+        <button class="theme"
+                onclick="setTheme('purple')">
+            بنفش
+        </button>
+
+        <button class="theme"
+                onclick="setTheme('orange')">
+            نارنجی
+        </button>
+
+    </div>
+
 </header>
 
 
-<div class="market-title">
-  قیمت لحظه‌ای ارزها
+<div class="title">
+    قیمت آنلاین ارزها
 </div>
 
-<div class="market-grid" id="marketGrid"></div>
+<div id="market" class="market"></div>
 
 
 <section class="exchange">
 
-<h2>تبدیل ارز دیجیتال</h2>
+<h2>
+    تبدیل ارز دیجیتال
+</h2>
 
 <div class="exchange-grid">
 
-  <div class="box">
+<div class="box">
 
-    <label>ارزی که ارسال می‌کنید</label>
+<label>
+    ارزی که ارسال می‌کنید
+</label>
 
-    <select id="fromCoin" onchange="calculate()">
-      <option value="BTC">BTC</option>
-      <option value="BCH">BCH</option>
-      <option value="TRX">TRX</option>
-      <option value="LTC">LTC</option>
-      <option value="DOGE">DOGE</option>
-      <option value="USDT">USDT</option>
-    </select>
+<select id="fromCoin">
+    <option value="BTC">BTC</option>
+    <option value="BCH">BCH</option>
+    <option value="TRX">TRX</option>
+    <option value="LTC">LTC</option>
+    <option value="DOGE">DOGE</option>
+    <option value="USDT">USDT</option>
+</select>
 
-    <br><br>
+<div id="fromPrice"
+     class="coin-current">
+    قیمت: در انتظار...
+</div>
 
-    <label>مقدار ارسال</label>
+<br>
 
-    <input
-      id="amount"
-      type="number"
-      min="0"
-      step="any"
-      placeholder="مثلاً 0.01"
-      oninput="calculate()"
-    >
+<label>
+    مقدار ارسال
+</label>
 
-    <div class="result">
-      ارزش تقریبی:
-      <span id="sendUsd">0</span> USDT
-    </div>
+<input
+    id="amount"
+    type="number"
+    min="0"
+    step="any"
+    placeholder="مثلاً 0.01"
+>
 
-  </div>
+<div class="result">
+    ارزش ارسال:
+    <span id="sendUsd">0</span>
+    USDT
+</div>
+
+</div>
 
 
-  <div class="box">
+<div class="box">
 
-    <label>ارزی که دریافت می‌کنید</label>
+<label>
+    ارزی که دریافت می‌کنید
+</label>
 
-    <select id="toCoin" onchange="calculate()">
-      <option value="DOGE">DOGE</option>
-      <option value="BTC">BTC</option>
-      <option value="BCH">BCH</option>
-      <option value="TRX">TRX</option>
-      <option value="LTC">LTC</option>
-      <option value="USDT">USDT</option>
-    </select>
+<select id="toCoin">
+    <option value="DOGE">DOGE</option>
+    <option value="BTC">BTC</option>
+    <option value="BCH">BCH</option>
+    <option value="TRX">TRX</option>
+    <option value="LTC">LTC</option>
+    <option value="USDT">USDT</option>
+</select>
 
-    <br><br>
+<div id="toPrice"
+     class="coin-current">
+    قیمت: در انتظار...
+</div>
 
-    <label>مقدار دریافت</label>
+<br>
 
-    <input
-      id="receive"
-      type="text"
-      readonly
-      placeholder="محاسبه خودکار"
-    >
+<label>
+    مقدار دریافت
+</label>
 
-    <div class="result">
-      ارزش دریافتی:
-      <span id="receiveUsd">0</span> USDT
-    </div>
+<input
+    id="receive"
+    type="text"
+    readonly
+    placeholder="محاسبه خودکار"
+>
 
-  </div>
+<div class="result">
+    ارزش دریافت:
+    <span id="receiveUsd">0</span>
+    USDT
+</div>
+
+</div>
 
 </div>
 
 
 <div class="rate">
-  نرخ تبدیل:
-  <strong id="rateText">در انتظار قیمت آنلاین...</strong>
-</div>
 
+    نرخ تبدیل:
 
-<div class="wallet-section">
-
-  <div class="wallet">
-    <h3>آدرس واریز ارز ارسالی</h3>
-
-    <div class="address" id="depositAddress">
-      ابتدا ارز را انتخاب کنید
-    </div>
-
-    <button class="copy-btn" onclick="copyDeposit()">
-      کپی آدرس
-    </button>
-  </div>
-
-
-  <div class="wallet">
-    <h3>آدرس کیف پول دریافت‌کننده</h3>
-
-    <input
-      id="receiveWallet"
-      type="text"
-      placeholder="آدرس کیف پول خود را وارد کنید"
-      dir="ltr"
-    >
-  </div>
+    <strong id="rateText">
+        در انتظار قیمت...
+    </strong>
 
 </div>
 
 
-<button class="submit-btn" onclick="submitExchange()">
-  ثبت درخواست تبدیل
+<div class="wallets">
+
+<div class="wallet">
+
+<h3>
+    آدرس واریز ارز ارسالی
+</h3>
+
+<div
+    id="depositAddress"
+    class="address"
+>
+    در انتظار انتخاب ارز
+</div>
+
+<button
+    class="copy"
+    onclick="copyAddress()"
+>
+    کپی آدرس
+</button>
+
+</div>
+
+
+<div class="wallet">
+
+<h3>
+    آدرس کیف پول دریافت‌کننده
+</h3>
+
+<input
+    id="receiveWallet"
+    type="text"
+    dir="ltr"
+    placeholder="آدرس کیف پول خود را وارد کنید"
+>
+
+</div>
+
+</div>
+
+
+<button
+    class="submit"
+    onclick="submitExchange()"
+>
+    ثبت درخواست تبدیل
 </button>
 
 </section>
@@ -558,30 +606,41 @@ footer{
 
 <section class="tracking">
 
-<h2>پیگیری تراکنش</h2>
+<h2>
+    پیگیری تراکنش
+</h2>
 
 <div class="track-row">
 
 <input
-  id="trackInput"
-  placeholder="کد پیگیری را وارد کنید"
-  dir="ltr"
+    id="trackInput"
+    type="text"
+    dir="ltr"
+    placeholder="کد پیگیری"
 >
 
-<button onclick="trackTransaction()">
-  پیگیری
+<button
+    class="track"
+    onclick="trackTransaction()"
+>
+    پیگیری
 </button>
 
 </div>
 
-<div class="track-result" id="trackResult"></div>
+<div
+    id="trackResult"
+    class="track-result"
+></div>
 
 </section>
 
 
 <section class="transactions">
 
-<h2>تراکنش‌های ثبت‌شده</h2>
+<h2>
+    تراکنش‌های ثبت‌شده
+</h2>
 
 <div class="table-wrap">
 
@@ -589,15 +648,15 @@ footer{
 
 <thead>
 <tr>
-  <th>کد پیگیری</th>
-  <th>ارسال</th>
-  <th>دریافت</th>
-  <th>مقدار ارسال</th>
-  <th>مقدار دریافت</th>
-  <th>ارزش USDT</th>
-  <th>کیف پول</th>
-  <th>زمان</th>
-  <th>وضعیت</th>
+    <th>کد</th>
+    <th>ارسال</th>
+    <th>دریافت</th>
+    <th>مقدار ارسال</th>
+    <th>مقدار دریافت</th>
+    <th>USDT</th>
+    <th>کیف پول</th>
+    <th>زمان</th>
+    <th>وضعیت</th>
 </tr>
 </thead>
 
@@ -611,7 +670,7 @@ footer{
 
 
 <footer>
-  قیمت‌ها به صورت آنلاین دریافت می‌شوند و هر ۲۰ ثانیه به‌روزرسانی می‌شوند.
+    قیمت‌ها از دو منبع بازار دریافت می‌شوند و در صورت قطعی موقت، آخرین قیمت معتبر حفظ می‌شود.
 </footer>
 
 </div>
@@ -619,912 +678,1371 @@ footer{
 
 <script>
 
-/* =========================
-   تنظیمات
-========================= */
+/* ==========================================
+   API ها
+========================================== */
 
-const API =
+const COINGECKO_API =
+"https://api.coingecko.com/api/v3/simple/price";
+
+const LBANK_API =
 "https://api.lbkex.com/v2/ticker/24hr.do";
 
 
+/* ==========================================
+   CoinGecko IDs
+========================================== */
+
+const cgIds = {
+
+    BTC:"bitcoin",
+    BCH:"bitcoin-cash",
+    TRX:"tron",
+    LTC:"litecoin",
+    DOGE:"dogecoin"
+
+};
+
+
+/* ==========================================
+   ارزها
+========================================== */
+
 const coins = [
-  "BTC",
-  "BCH",
-  "TRX",
-  "LTC",
-  "DOGE",
-  "USDT"
+    "BTC",
+    "BCH",
+    "TRX",
+    "LTC",
+    "DOGE",
+    "USDT"
 ];
 
 
+/* ==========================================
+   آدرس‌ها
+========================================== */
+
 const wallets = {
 
-  BTC:
-  "1Q99GpYnEU9yELNLjiJUWopNT1HatRYQrV",
+    BTC:
+    "1Q99GpYnEU9yELNLjiJUWopNT1HatRYQrV",
 
-  BCH:
-  "bitcoincash:qrj64uh0xlah2wzksudq3g5eeg2ewdyg6urq5kywku",
+    BCH:
+    "bitcoincash:qrj64uh0xlah2wzksudq3g5eeg2ewdyg6urq5kywku",
 
-  TRX:
-  "TRb33idZSi7svRyBTRsEKq8BfL54ADYMh3",
+    TRX:
+    "TRb33idZSi7svRyBTRsEKq8BfL54ADYMh3",
 
-  LTC:
-  "LZeRDFWbPLpuqeAw7m5i5YcYiu32KRAM6c",
+    LTC:
+    "LZeRDFWbPLpuqeAw7m5i5YcYiu32KRAM6c",
 
-  DOGE:
-  "DA9b1AqJqgsdFNuJNjzRo2g5wFj1rEeQLk",
+    DOGE:
+    "DA9b1AqJqgsdFNuJNjzRo2g5wFj1rEeQLk",
 
-  USDT:
-  "0x3765C083F36B7D874d3a6249436a84C9e9bDAbA6"
+    USDT:
+    "0x3765C083F36B7D874d3a6249436a84C9e9bDAbA6"
 
 };
 
+
+/* ==========================================
+   آخرین قیمت معتبر
+========================================== */
 
 let prices = {
-  BTC:null,
-  BCH:null,
-  TRX:null,
-  LTC:null,
-  DOGE:null,
-  USDT:1
+
+    BTC:null,
+    BCH:null,
+    TRX:null,
+    LTC:null,
+    DOGE:null,
+    USDT:1
+
 };
 
 
-/* =========================
-   دریافت قیمت LBank
-========================= */
+/* ==========================================
+   زمان آخرین بروزرسانی
+========================================== */
 
-async function getLBankPrice(symbol){
+let lastUpdate = {
 
-  if(symbol === "USDT"){
-    return 1;
-  }
+    BTC:null,
+    BCH:null,
+    TRX:null,
+    LTC:null,
+    DOGE:null,
+    USDT:Date.now()
 
-  const pair =
-    symbol.toLowerCase() + "_usdt";
+};
 
-  try{
 
-    const response =
-      await fetch(
-        API +
-        "?symbol=" +
-        encodeURIComponent(pair) +
-        "&_=" +
-        Date.now(),
-        {
-          cache:"no-store"
-        }
-      );
+/* ==========================================
+   وضعیت منابع
+========================================== */
 
-    if(!response.ok){
-      throw new Error("HTTP " + response.status);
-    }
+let sourceStatus = {
 
-    const json =
-      await response.json();
+    coingecko:false,
+    lbank:false
 
-    /*
-      ساختار API ممکن است بسته به نسخه
-      کمی متفاوت باشد، بنابراین چند حالت
-      رایج بررسی می‌شود.
-    */
+};
 
-    let price = null;
 
-    if(json && json.data){
+/* ==========================================
+   CoinGecko
+========================================== */
 
-      if(Array.isArray(json.data)){
+async function getCoinGeckoPrices(){
 
-        const item = json.data[0];
+    try{
 
-        if(item){
+        const ids =
+            Object.values(cgIds)
+            .join(",");
 
-          price =
-            Number(
-              item.latest ??
-              item.latestPrice ??
-              item.price ??
-              item.close
+        const url =
+            COINGECKO_API +
+            "?ids=" +
+            encodeURIComponent(ids) +
+            "&vs_currencies=usd" +
+            "&include_last_updated_at=true" +
+            "&_=" +
+            Date.now();
+
+
+        const response =
+            await fetch(
+                url,
+                {
+                    cache:"no-store"
+                }
+            );
+
+
+        if(!response.ok){
+
+            throw new Error(
+                "CoinGecko HTTP " +
+                response.status
             );
 
         }
 
-      }else{
 
-        price =
-          Number(
-            json.data.latest ??
-            json.data.latestPrice ??
-            json.data.price ??
-            json.data.close
-          );
+        const data =
+            await response.json();
 
-      }
+
+        const result = {};
+
+
+        for(const coin of coins){
+
+            if(coin === "USDT"){
+                continue;
+            }
+
+
+            const id =
+                cgIds[coin];
+
+
+            const value =
+                Number(
+                    data?.[id]?.usd
+                );
+
+
+            if(
+                Number.isFinite(value) &&
+                value > 0
+            ){
+
+                result[coin] =
+                    value;
+
+            }
+
+        }
+
+
+        sourceStatus.coingecko =
+            Object.keys(result).length > 0;
+
+
+        return result;
+
+
+    }catch(error){
+
+        console.error(
+            "CoinGecko:",
+            error
+        );
+
+        sourceStatus.coingecko =
+            false;
+
+        return {};
 
     }
 
-    if(!Number.isFinite(price) || price <= 0){
-
-      if(json && json.data && Array.isArray(json.data.ticker)){
-
-        price =
-          Number(
-            json.data.ticker[0]?.latest
-          );
-
-      }
-
-    }
-
-    if(!Number.isFinite(price) || price <= 0){
-
-      throw new Error("قیمت معتبر دریافت نشد");
-
-    }
-
-    return price;
-
-  }catch(error){
-
-    console.error(
-      "LBank " + symbol,
-      error
-    );
-
-    return null;
-  }
 }
 
 
-/* =========================
-   دریافت تمام قیمت‌ها
-========================= */
+/* ==========================================
+   LBank
+========================================== */
+
+async function getLBankPrice(symbol){
+
+    try{
+
+        const pair =
+            symbol.toLowerCase() +
+            "_usdt";
+
+
+        const url =
+            LBANK_API +
+            "?symbol=" +
+            encodeURIComponent(pair) +
+            "&_=" +
+            Date.now();
+
+
+        const response =
+            await fetch(
+                url,
+                {
+                    cache:"no-store"
+                }
+            );
+
+
+        if(!response.ok){
+
+            throw new Error(
+                "LBank HTTP " +
+                response.status
+            );
+
+        }
+
+
+        const json =
+            await response.json();
+
+
+        let value = null;
+
+
+        if(
+            json?.data &&
+            Array.isArray(json.data)
+        ){
+
+            const item =
+                json.data[0];
+
+
+            value =
+                Number(
+                    item?.latest ??
+                    item?.latestPrice ??
+                    item?.price ??
+                    item?.close
+                );
+
+        }
+        else if(json?.data){
+
+            value =
+                Number(
+                    json.data.latest ??
+                    json.data.latestPrice ??
+                    json.data.price ??
+                    json.data.close
+                );
+
+        }
+
+
+        if(
+            !Number.isFinite(value) ||
+            value <= 0
+        ){
+
+            throw new Error(
+                "LBank price invalid"
+            );
+
+        }
+
+
+        return value;
+
+
+    }catch(error){
+
+        console.error(
+            "LBank:",
+            symbol,
+            error
+        );
+
+        return null;
+
+    }
+
+}
+
+
+/* ==========================================
+   دریافت قیمت‌های LBank
+========================================== */
+
+async function getAllLBankPrices(){
+
+    const result = {};
+
+    const responses =
+        await Promise.all(
+            coins
+                .filter(
+                    coin =>
+                    coin !== "USDT"
+                )
+                .map(
+                    async coin => {
+
+                        return {
+                            coin,
+                            price:
+                            await getLBankPrice(
+                                coin
+                            )
+                        };
+
+                    }
+                )
+        );
+
+
+    responses.forEach(item => {
+
+        if(
+            item.price !== null &&
+            Number.isFinite(item.price) &&
+            item.price > 0
+        ){
+
+            result[item.coin] =
+                item.price;
+
+        }
+
+    });
+
+
+    sourceStatus.lbank =
+        Object.keys(result).length > 0;
+
+
+    return result;
+
+}
+
+
+/* ==========================================
+   دریافت همزمان دو منبع
+========================================== */
 
 async function updatePrices(){
 
-  setGlobalStatus(
-    "در حال دریافت قیمت آنلاین...",
-    false
-  );
-
-  const results =
-    await Promise.all(
-      coins
-        .filter(c => c !== "USDT")
-        .map(async coin => {
-
-          const price =
-            await getLBankPrice(coin);
-
-          return {
-            coin,
-            price
-          };
-
-        })
+    setConnection(
+        "در حال دریافت قیمت‌های آنلاین...",
+        true
     );
 
 
-  let onlineCount = 0;
+    const [
+        gecko,
+        lbank
+    ] =
+    await Promise.all([
+        getCoinGeckoPrices(),
+        getAllLBankPrices()
+    ]);
 
 
-  results.forEach(item => {
+    let updated = 0;
+
+
+    /*
+       اگر هر دو قیمت موجود باشند،
+       میانگین آن دو استفاده می‌شود.
+
+       اگر فقط یکی موجود باشد،
+       همان استفاده می‌شود.
+
+       اگر هیچ‌کدام موجود نباشد،
+       قیمت قبلی حفظ می‌شود.
+    */
+
+    for(const coin of coins){
+
+        if(coin === "USDT"){
+            continue;
+        }
+
+
+        const a =
+            Number(gecko[coin]);
+
+
+        const b =
+            Number(lbank[coin]);
+
+
+        let newPrice = null;
+
+
+        const validA =
+            Number.isFinite(a) &&
+            a > 0;
+
+
+        const validB =
+            Number.isFinite(b) &&
+            b > 0;
+
+
+        if(validA && validB){
+
+            /*
+              میانگین دو منبع
+            */
+
+            newPrice =
+                (a + b) / 2;
+
+        }
+        else if(validA){
+
+            newPrice = a;
+
+        }
+        else if(validB){
+
+            newPrice = b;
+
+        }
+
+
+        if(
+            newPrice !== null &&
+            Number.isFinite(newPrice) &&
+            newPrice > 0
+        ){
+
+            prices[coin] =
+                newPrice;
+
+            lastUpdate[coin] =
+                Date.now();
+
+            updated++;
+
+        }
+
+    }
+
+
+    prices.USDT = 1;
+
+
+    renderMarket();
+
+    calculate();
+
+    updateDepositAddress();
+
+
+    /*
+       وضعیت اتصال
+    */
 
     if(
-      item.price !== null &&
-      Number.isFinite(item.price)
+        sourceStatus.coingecko &&
+        sourceStatus.lbank
     ){
 
-      prices[item.coin] =
-        item.price;
+        setConnection(
+            "قیمت‌ها آنلاین هستند • هر ۲۰ ثانیه بررسی می‌شوند",
+            true
+        );
 
-      onlineCount++;
+    }
+    else if(
+        sourceStatus.coingecko ||
+        sourceStatus.lbank
+    ){
+
+        setConnection(
+            "یک منبع قیمت فعال است • قیمت‌ها به‌روز می‌شوند",
+            true
+        );
+
+    }
+    else if(
+        updated === 0
+    ){
+
+        setConnection(
+            "اتصال موقتاً قطع است • آخرین قیمت حفظ شده",
+            false
+        );
+
+    }
+
+}
+
+
+/* ==========================================
+   وضعیت اتصال
+========================================== */
+
+function setConnection(text, online){
+
+    document.getElementById(
+        "connectionText"
+    ).textContent = text;
+
+
+    const dot =
+        document.getElementById(
+            "dot"
+        );
+
+
+    if(online){
+
+        dot.classList.remove(
+            "off"
+        );
 
     }else{
 
-      prices[item.coin] =
-        null;
+        dot.classList.add(
+            "off"
+        );
 
     }
 
-  });
-
-
-  prices.USDT = 1;
-
-
-  renderMarket();
-  calculate();
-  updateDepositAddress();
-
-
-  if(onlineCount === 5){
-
-    setGlobalStatus(
-      "قیمت‌ها آنلاین هستند • بروزرسانی هر ۲۰ ثانیه",
-      true
-    );
-
-  }else if(onlineCount > 0){
-
-    setGlobalStatus(
-      onlineCount +
-      " ارز آنلاین است • بعضی قیمت‌ها در دسترس نیست",
-      true
-    );
-
-  }else{
-
-    setGlobalStatus(
-      "اتصال قیمت‌ها قطع است",
-      false
-    );
-
-  }
-
 }
 
 
-/* =========================
-   وضعیت کلی
-========================= */
-
-function setGlobalStatus(text, online){
-
-  document.getElementById(
-    "globalStatus"
-  ).textContent = text;
-
-  const dot =
-    document.getElementById(
-      "globalDot"
-    );
-
-  if(online){
-
-    dot.classList.remove("off");
-
-  }else{
-
-    dot.classList.add("off");
-
-  }
-
-}
-
-
-/* =========================
-   نمایش بازار
-========================= */
+/* ==========================================
+   نمایش قیمت‌ها
+========================================== */
 
 function renderMarket(){
 
-  const grid =
-    document.getElementById(
-      "marketGrid"
-    );
+    const market =
+        document.getElementById(
+            "market"
+        );
 
-  grid.innerHTML = "";
 
-  coins.forEach(coin => {
+    market.innerHTML = "";
 
-    const price =
-      prices[coin];
 
-    const online =
-      price !== null &&
-      Number.isFinite(price);
+    coins.forEach(coin => {
 
-    const card =
-      document.createElement("div");
+        const price =
+            prices[coin];
 
-    card.className =
-      "coin-card";
 
-    card.innerHTML = `
+        const valid =
+            price !== null &&
+            Number.isFinite(price);
 
-      <div class="coin-name">
-        ${coin}
-      </div>
 
-      <div class="coin-price">
-        ${
-          online
-          ? formatPrice(price) + " USDT"
-          : "در انتظار..."
+        let status =
+            "در انتظار قیمت";
+
+        let cls =
+            "status wait";
+
+
+        if(valid){
+
+            if(
+                coin === "USDT" ||
+                sourceStatus.coingecko ||
+                sourceStatus.lbank
+            ){
+
+                status =
+                    "● آنلاین";
+
+                cls =
+                    "status";
+
+            }
+            else{
+
+                status =
+                    "● آخرین قیمت";
+
+                cls =
+                    "status old";
+
+            }
+
         }
-      </div>
 
-      <div class="coin-toman">
-        ارزش تومانی از API قیمت تومانی دریافت نمی‌شود
-      </div>
 
-      <div class="status ${online ? "" : "offline"}">
-        ${online ? "● آنلاین" : "● قطع"}
-      </div>
+        const card =
+            document.createElement(
+                "div"
+            );
 
-    `;
 
-    grid.appendChild(card);
+        card.className =
+            "card";
 
-  });
+
+        card.innerHTML = `
+
+            <div class="coin">
+                ${coin}
+            </div>
+
+            <div class="price">
+                ${
+                    valid
+                    ? formatPrice(price) +
+                      " USDT"
+                    : "در انتظار..."
+                }
+            </div>
+
+            <div class="${cls}">
+                ${status}
+            </div>
+
+            <div class="source-info">
+                ${getSourceText(coin)}
+            </div>
+
+        `;
+
+
+        market.appendChild(card);
+
+    });
 
 }
 
 
-/* =========================
-   فرمت قیمت
-========================= */
+/* ==========================================
+   منبع قیمت
+========================================== */
+
+function getSourceText(coin){
+
+    if(coin === "USDT"){
+        return "قیمت پایه";
+    }
+
+
+    const gecko =
+        sourceStatus.coingecko;
+
+    const lbank =
+        sourceStatus.lbank;
+
+
+    if(gecko && lbank){
+        return "۲ منبع فعال";
+    }
+
+    if(gecko){
+        return "۱ منبع فعال";
+    }
+
+    if(lbank){
+        return "۱ منبع فعال";
+    }
+
+    if(prices[coin] !== null){
+        return "آخرین قیمت معتبر";
+    }
+
+    return "بدون قیمت";
+
+}
+
+
+/* ==========================================
+   فرمت
+========================================== */
 
 function formatPrice(value){
 
-  if(value === null ||
-     !Number.isFinite(value))
-    return "—";
+    if(
+        value === null ||
+        !Number.isFinite(value)
+    ){
 
-  if(value >= 1000){
+        return "—";
 
-    return value.toLocaleString(
-      "en-US",
-      {
-        maximumFractionDigits:2
-      }
-    );
-
-  }
-
-  if(value >= 1){
-
-    return value.toLocaleString(
-      "en-US",
-      {
-        maximumFractionDigits:6
-      }
-    );
-
-  }
-
-  return value.toLocaleString(
-    "en-US",
-    {
-      maximumFractionDigits:10
     }
-  );
+
+
+    if(value >= 1000){
+
+        return value.toLocaleString(
+            "en-US",
+            {
+                maximumFractionDigits:2
+            }
+        );
+
+    }
+
+
+    if(value >= 1){
+
+        return value.toLocaleString(
+            "en-US",
+            {
+                maximumFractionDigits:6
+            }
+        );
+
+    }
+
+
+    return value.toLocaleString(
+        "en-US",
+        {
+            maximumFractionDigits:10
+        }
+    );
 
 }
 
 
-/* =========================
+/* ==========================================
    محاسبه تبدیل
-========================= */
+========================================== */
 
 function calculate(){
 
-  const from =
-    document.getElementById(
-      "fromCoin"
-    ).value;
-
-  const to =
-    document.getElementById(
-      "toCoin"
-    ).value;
-
-  const amount =
-    Number(
-      document.getElementById(
-        "amount"
-      ).value
-    );
+    const from =
+        document.getElementById(
+            "fromCoin"
+        ).value;
 
 
-  const fromPrice =
-    prices[from];
+    const to =
+        document.getElementById(
+            "toCoin"
+        ).value;
 
-  const toPrice =
-    prices[to];
+
+    const amount =
+        Number(
+            document.getElementById(
+                "amount"
+            ).value
+        );
 
 
-  if(
-    fromPrice === null ||
-    toPrice === null ||
-    !Number.isFinite(amount) ||
-    amount <= 0
-  ){
+    const fromPrice =
+        prices[from];
+
+
+    const toPrice =
+        prices[to];
+
 
     document.getElementById(
-      "receive"
-    ).value = "";
-
-    document.getElementById(
-      "sendUsd"
-    ).textContent = "0";
-
-    document.getElementById(
-      "receiveUsd"
-    ).textContent = "0";
-
-    document.getElementById(
-      "rateText"
+        "fromPrice"
     ).textContent =
-      "در انتظار قیمت آنلاین...";
-
-    return;
-
-  }
-
-
-  const sendUsd =
-    amount * fromPrice;
+        fromPrice !== null
+        ? "قیمت: " +
+          formatPrice(fromPrice) +
+          " USDT"
+        : "قیمت: در انتظار...";
 
 
-  const receiveAmount =
-    sendUsd / toPrice;
+    document.getElementById(
+        "toPrice"
+    ).textContent =
+        toPrice !== null
+        ? "قیمت: " +
+          formatPrice(toPrice) +
+          " USDT"
+        : "قیمت: در انتظار...";
 
 
-  document.getElementById(
-    "receive"
-  ).value =
-    receiveAmount.toLocaleString(
-      "en-US",
-      {
-        maximumFractionDigits:12
-      }
-    );
+    if(
+        fromPrice === null ||
+        toPrice === null ||
+        !Number.isFinite(amount) ||
+        amount <= 0
+    ){
+
+        document.getElementById(
+            "receive"
+        ).value = "";
 
 
-  document.getElementById(
-    "sendUsd"
-  ).textContent =
-    formatPrice(sendUsd);
+        document.getElementById(
+            "sendUsd"
+        ).textContent = "0";
 
 
-  document.getElementById(
-    "receiveUsd"
-  ).textContent =
-    formatPrice(
-      receiveAmount * toPrice
-    );
+        document.getElementById(
+            "receiveUsd"
+        ).textContent = "0";
 
 
-  const rate =
-    fromPrice / toPrice;
+        document.getElementById(
+            "rateText"
+        ).textContent =
+            "در انتظار قیمت آنلاین...";
 
 
-  document.getElementById(
-    "rateText"
-  ).innerHTML =
-    `1 ${from} = <strong>${
-      formatPrice(rate)
-    }</strong> ${to}`;
+        return;
+
+    }
+
+
+    const sendUsd =
+        amount *
+        fromPrice;
+
+
+    const receiveAmount =
+        sendUsd /
+        toPrice;
+
+
+    document.getElementById(
+        "receive"
+    ).value =
+        receiveAmount.toLocaleString(
+            "en-US",
+            {
+                maximumFractionDigits:12
+            }
+        );
+
+
+    document.getElementById(
+        "sendUsd"
+    ).textContent =
+        formatPrice(sendUsd);
+
+
+    document.getElementById(
+        "receiveUsd"
+    ).textContent =
+        formatPrice(
+            receiveAmount *
+            toPrice
+        );
+
+
+    const rate =
+        fromPrice /
+        toPrice;
+
+
+    document.getElementById(
+        "rateText"
+    ).innerHTML =
+        `1 ${from} = <strong>${formatPrice(rate)}</strong> ${to}`;
 
 }
 
 
-/* =========================
-   آدرس واریز
-========================= */
+/* ==========================================
+   آدرس
+========================================== */
 
 function updateDepositAddress(){
 
-  const coin =
-    document.getElementById(
-      "fromCoin"
-    ).value;
+    const coin =
+        document.getElementById(
+            "fromCoin"
+        ).value;
 
-  document.getElementById(
-    "depositAddress"
-  ).textContent =
-    wallets[coin] ||
-    "آدرس موجود نیست";
+
+    document.getElementById(
+        "depositAddress"
+    ).textContent =
+        wallets[coin] ||
+        "آدرس موجود نیست";
 
 }
 
 
-document.getElementById(
-  "fromCoin"
-).addEventListener(
-  "change",
-  updateDepositAddress
-);
+/* ==========================================
+   کپی
+========================================== */
+
+async function copyAddress(){
+
+    const address =
+        document.getElementById(
+            "depositAddress"
+        ).textContent;
 
 
-/* =========================
-   کپی آدرس
-========================= */
+    try{
 
-async function copyDeposit(){
+        await navigator.clipboard.writeText(
+            address
+        );
 
-  const address =
-    document.getElementById(
-      "depositAddress"
-    ).textContent;
+        alert(
+            "آدرس کپی شد"
+        );
 
-  if(
-    !address ||
-    address.includes("انتخاب")
-  ){
+    }catch(e){
 
-    alert("ابتدا ارز را انتخاب کنید");
-    return;
+        const textarea =
+            document.createElement(
+                "textarea"
+            );
 
-  }
+        textarea.value =
+            address;
 
-  try{
+        document.body.appendChild(
+            textarea
+        );
 
-    await navigator.clipboard.writeText(
-      address
-    );
+        textarea.select();
 
-    alert("آدرس کپی شد");
+        document.execCommand(
+            "copy"
+        );
 
-  }catch(e){
+        textarea.remove();
 
-    const temp =
-      document.createElement("textarea");
+        alert(
+            "آدرس کپی شد"
+        );
 
-    temp.value = address;
-
-    document.body.appendChild(temp);
-
-    temp.select();
-
-    document.execCommand("copy");
-
-    temp.remove();
-
-    alert("آدرس کپی شد");
-
-  }
+    }
 
 }
 
 
-/* =========================
-   ثبت تراکنش
-========================= */
+/* ==========================================
+   ثبت درخواست
+========================================== */
 
 function submitExchange(){
 
-  const from =
-    document.getElementById(
-      "fromCoin"
-    ).value;
+    const from =
+        document.getElementById(
+            "fromCoin"
+        ).value;
 
-  const to =
-    document.getElementById(
-      "toCoin"
-    ).value;
 
-  const amount =
-    Number(
-      document.getElementById(
-        "amount"
-      ).value
+    const to =
+        document.getElementById(
+            "toCoin"
+        ).value;
+
+
+    const amount =
+        Number(
+            document.getElementById(
+                "amount"
+            ).value
+        );
+
+
+    const receive =
+        document.getElementById(
+            "receive"
+        ).value;
+
+
+    const wallet =
+        document.getElementById(
+            "receiveWallet"
+        ).value.trim();
+
+
+    if(
+        !Number.isFinite(amount) ||
+        amount <= 0
+    ){
+
+        alert(
+            "مقدار ارسال را وارد کنید"
+        );
+
+        return;
+
+    }
+
+
+    if(!receive){
+
+        alert(
+            "قیمت هنوز دریافت نشده است"
+        );
+
+        return;
+
+    }
+
+
+    if(!wallet){
+
+        alert(
+            "آدرس کیف پول دریافت‌کننده را وارد کنید"
+        );
+
+        return;
+
+    }
+
+
+    const id =
+        "EX" +
+        Date.now()
+        .toString()
+        .slice(-10);
+
+
+    const item = {
+
+        id:id,
+
+        from:from,
+
+        to:to,
+
+        amount:amount,
+
+        receive:receive,
+
+        usd:
+            formatPrice(
+                amount *
+                prices[from]
+            ),
+
+        wallet:wallet,
+
+        time:
+            new Date()
+            .toLocaleString(
+                "fa-IR"
+            ),
+
+        status:
+            "در حال بررسی"
+
+    };
+
+
+    const list =
+        JSON.parse(
+            localStorage.getItem(
+                "exchangeTransactions"
+            ) ||
+            "[]"
+        );
+
+
+    list.unshift(item);
+
+
+    localStorage.setItem(
+        "exchangeTransactions",
+        JSON.stringify(list)
     );
 
-  const receive =
+
+    renderTransactions();
+
+
     document.getElementById(
-      "receive"
-    ).value;
-
-  const wallet =
-    document.getElementById(
-      "receiveWallet"
-    ).value.trim();
+        "trackInput"
+    ).value = id;
 
 
-  if(!amount || amount <= 0){
-
-    alert("مقدار ارسال را وارد کنید");
-    return;
-
-  }
-
-  if(!receive){
-
-    alert("قیمت آنلاین هنوز دریافت نشده");
-    return;
-
-  }
-
-  if(!wallet){
-
-    alert("آدرس کیف پول دریافت‌کننده را وارد کنید");
-    return;
-
-  }
-
-
-  const id =
-    "EX" +
-    Date.now()
-      .toString()
-      .slice(-10);
-
-
-  const item = {
-
-    id,
-
-    from,
-
-    to,
-
-    amount,
-
-    receive,
-
-    usd:
-      formatPrice(
-        amount * prices[from]
-      ),
-
-    wallet,
-
-    time:
-      new Date().toLocaleString(
-        "fa-IR"
-      ),
-
-    status:
-      "در حال بررسی"
-
-  };
-
-
-  const list =
-    JSON.parse(
-      localStorage.getItem(
-        "exchangeTransactions"
-      ) || "[]"
+    alert(
+        "درخواست ثبت شد\n\nکد پیگیری: " +
+        id
     );
-
-
-  list.unshift(item);
-
-
-  localStorage.setItem(
-    "exchangeTransactions",
-    JSON.stringify(list)
-  );
-
-
-  document.getElementById(
-    "trackInput"
-  ).value = id;
-
-
-  renderTransactions();
-
-
-  alert(
-    "درخواست ثبت شد\nکد پیگیری: " +
-    id
-  );
 
 }
 
 
-/* =========================
+/* ==========================================
    تراکنش‌ها
-========================= */
+========================================== */
 
 function renderTransactions(){
 
-  const body =
-    document.getElementById(
-      "transactionsBody"
-    );
-
-  const list =
-    JSON.parse(
-      localStorage.getItem(
-        "exchangeTransactions"
-      ) || "[]"
-    );
+    const body =
+        document.getElementById(
+            "transactionsBody"
+        );
 
 
-  body.innerHTML = "";
+    const list =
+        JSON.parse(
+            localStorage.getItem(
+                "exchangeTransactions"
+            ) ||
+            "[]"
+        );
 
 
-  list.forEach(item => {
-
-    const tr =
-      document.createElement("tr");
+    body.innerHTML = "";
 
 
-    const statusClass =
-      item.status === "انجام شد"
-      ? "done"
-      : "pending";
+    list.forEach(item => {
+
+        const tr =
+            document.createElement(
+                "tr"
+            );
 
 
-    tr.innerHTML = `
-
-      <td dir="ltr">
-        ${item.id}
-      </td>
-
-      <td>
-        ${item.from}
-      </td>
-
-      <td>
-        ${item.to}
-      </td>
-
-      <td dir="ltr">
-        ${item.amount}
-      </td>
-
-      <td dir="ltr">
-        ${item.receive}
-      </td>
-
-      <td dir="ltr">
-        ${item.usd}
-      </td>
-
-      <td dir="ltr">
-        ${item.wallet}
-      </td>
-
-      <td>
-        ${item.time}
-      </td>
-
-      <td class="${statusClass}">
-        ${item.status}
-      </td>
-
-    `;
+        const cls =
+            item.status ===
+            "انجام شد"
+            ? "done"
+            : "pending";
 
 
-    body.appendChild(tr);
+        tr.innerHTML = `
 
-  });
+            <td dir="ltr">
+                ${item.id}
+            </td>
+
+            <td>
+                ${item.from}
+            </td>
+
+            <td>
+                ${item.to}
+            </td>
+
+            <td dir="ltr">
+                ${item.amount}
+            </td>
+
+            <td dir="ltr">
+                ${item.receive}
+            </td>
+
+            <td dir="ltr">
+                ${item.usd}
+            </td>
+
+            <td dir="ltr">
+                ${item.wallet}
+            </td>
+
+            <td>
+                ${item.time}
+            </td>
+
+            <td class="${cls}">
+                ${item.status}
+            </td>
+
+        `;
+
+
+        body.appendChild(tr);
+
+    });
 
 }
 
 
-/* =========================
+/* ==========================================
    پیگیری
-========================= */
+========================================== */
 
 function trackTransaction(){
 
-  const id =
-    document.getElementById(
-      "trackInput"
-    ).value.trim();
+    const id =
+        document.getElementById(
+            "trackInput"
+        ).value.trim();
 
 
-  const result =
-    document.getElementById(
-      "trackResult"
-    );
+    const result =
+        document.getElementById(
+            "trackResult"
+        );
 
 
-  if(!id){
-
-    alert("کد پیگیری را وارد کنید");
-    return;
-
-  }
+    result.style.display =
+        "block";
 
 
-  const list =
-    JSON.parse(
-      localStorage.getItem(
-        "exchangeTransactions"
-      ) || "[]"
-    );
+    const list =
+        JSON.parse(
+            localStorage.getItem(
+                "exchangeTransactions"
+            ) ||
+            "[]"
+        );
 
 
-  const item =
-    list.find(
-      x => x.id === id
-    );
+    const item =
+        list.find(
+            x =>
+            x.id === id
+        );
 
 
-  result.style.display =
-    "block";
+    if(!item){
+
+        result.innerHTML =
+            "<b>تراکنش پیدا نشد.</b>";
+
+        return;
+
+    }
 
 
-  if(!item){
+    result.innerHTML = `
 
-    result.innerHTML =
-      "<b>تراکنشی با این کد پیدا نشد.</b>";
+        <b>کد پیگیری:</b>
+        ${item.id}
 
-    return;
+        <br>
 
-  }
+        <b>ارسال:</b>
+        ${item.amount} ${item.from}
 
+        <br>
 
-  result.innerHTML = `
+        <b>دریافت:</b>
+        ${item.receive} ${item.to}
 
-    <div>
-      <b>کد پیگیری:</b>
-      ${item.id}
-    </div>
+        <br>
 
-    <br>
+        <b>ارزش:</b>
+        ${item.usd} USDT
 
-    <div>
-      <b>ارسال:</b>
-      ${item.amount} ${item.from}
-    </div>
+        <br>
 
-    <br>
+        <b>کیف پول:</b>
+        <span dir="ltr">
+            ${item.wallet}
+        </span>
 
-    <div>
-      <b>دریافت:</b>
-      ${item.receive} ${item.to}
-    </div>
+        <br>
 
-    <br>
+        <b>وضعیت:</b>
+        ${item.status}
 
-    <div>
-      <b>ارزش:</b>
-      ${item.usd} USDT
-    </div>
-
-    <br>
-
-    <div>
-      <b>وضعیت:</b>
-      ${item.status}
-    </div>
-
-  `;
+    `;
 
 }
 
 
-/* =========================
-   تغییر رنگ
-========================= */
+/* ==========================================
+   تم
+========================================== */
 
 function setTheme(theme){
 
-  if(theme === "yellow"){
+    if(theme === "yellow"){
 
-    document.body.style.background =
-      "linear-gradient(135deg,#fff700,#ffb300)";
+        document.body.style.background =
+            "linear-gradient(135deg,#fff700,#ffae00)";
 
-  }
+    }
 
-  if(theme === "blue"){
+    if(theme === "blue"){
 
-    document.body.style.background =
-      "linear-gradient(135deg,#60a5fa,#2563eb)";
+        document.body.style.background =
+            "linear-gradient(135deg,#60a5fa,#2563eb)";
 
-  }
+    }
 
-  if(theme === "purple"){
+    if(theme === "purple"){
 
-    document.body.style.background =
-      "linear-gradient(135deg,#c084fc,#7e22ce)";
+        document.body.style.background =
+            "linear-gradient(135deg,#c084fc,#7e22ce)";
 
-  }
+    }
 
-  if(theme === "orange"){
+    if(theme === "orange"){
 
-    document.body.style.background =
-      "linear-gradient(135deg,#fb923c,#ea580c)";
+        document.body.style.background =
+            "linear-gradient(135deg,#fb923c,#ea580c)";
 
-  }
+    }
 
 }
 
 
-/* =========================
+/* ==========================================
+   رویدادها
+========================================== */
+
+document.getElementById(
+    "fromCoin"
+).addEventListener(
+    "change",
+    function(){
+
+        updateDepositAddress();
+        calculate();
+
+    }
+);
+
+
+document.getElementById(
+    "toCoin"
+).addEventListener(
+    "change",
+    calculate
+);
+
+
+document.getElementById(
+    "amount"
+).addEventListener(
+    "input",
+    calculate
+);
+
+
+/* ==========================================
    شروع سایت
-========================= */
+========================================== */
 
 updateDepositAddress();
+
+renderMarket();
 
 renderTransactions();
 
@@ -1532,12 +2050,13 @@ updatePrices();
 
 
 /*
-  بروزرسانی قیمت هر 20 ثانیه
+   هر 20 ثانیه دوباره از
+   CoinGecko و LBank درخواست می‌شود.
 */
 
 setInterval(
-  updatePrices,
-  20000
+    updatePrices,
+    20000
 );
 
 </script>

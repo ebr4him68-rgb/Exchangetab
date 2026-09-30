@@ -9404,6 +9404,69 @@ document.addEventListener(
     }
 }
 </style>
+<!-- دکمه ثابت تبادل آسان -->
+<style>
+  .easy-exchange-fixed {
+    position: fixed;
+    left: 50%;
+    bottom: 18px;
+    transform: translateX(-50%);
+    z-index: 9999;
+
+    padding: 15px 42px;
+    border: 2px solid #00eaff;
+    border-radius: 50px;
+
+    background: linear-gradient(135deg, #00c853, #00b0ff);
+    color: #ffffff;
+
+    font-size: 20px;
+    font-weight: 800;
+    text-decoration: none;
+    text-align: center;
+
+    box-shadow:
+      0 0 12px rgba(0, 234, 255, 0.8),
+      0 0 25px rgba(0, 200, 83, 0.6);
+
+    animation: easyExchangeBlink 1.5s infinite;
+    transition: transform 0.2s ease;
+  }
+
+  .easy-exchange-fixed:hover {
+    transform: translateX(-50%) scale(1.05);
+  }
+
+  @keyframes easyExchangeBlink {
+    0%, 100% {
+      opacity: 1;
+      box-shadow:
+        0 0 12px rgba(0, 234, 255, 0.8),
+        0 0 25px rgba(0, 200, 83, 0.6);
+    }
+
+    50% {
+      opacity: 0.65;
+      box-shadow:
+        0 0 25px rgba(0, 234, 255, 1),
+        0 0 45px rgba(0, 200, 83, 0.9);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .easy-exchange-fixed {
+      bottom: 14px;
+      padding: 13px 30px;
+      font-size: 18px;
+    }
+  }
+</style>
+
+<a href="#exchange" class="easy-exchange-fixed">
+  ⚡ تبادل آسان
+</a>
+```
+
 </body>
 </html>
 </body>

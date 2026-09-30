@@ -1,240 +1,367 @@
-<!-- =========================
-     ثبت معامله + آدرس دریافت
-========================= -->
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exchange | مبادله ارز</title>
 
 <style>
-.trade-box{
-  max-width:520px;
-  margin:25px auto;
-  padding:25px;
-  border-radius:18px;
-  background:#111827;
-  color:white;
-  box-shadow:0 10px 35px rgba(0,0,0,.35);
-  font-family:Arial,sans-serif;
+*{
+  box-sizing:border-box;
 }
 
-.trade-box h2{
+body{
+  margin:0;
+  font-family:Tahoma,Arial,sans-serif;
+  color:#fff;
+  min-height:100vh;
+  background:
+    radial-gradient(circle at 20% 20%,rgba(0,200,255,.15),transparent 30%),
+    radial-gradient(circle at 80% 80%,rgba(140,0,255,.15),transparent 30%),
+    linear-gradient(135deg,#050816,#0b1022,#050816);
+}
+
+.container{
+  width:100%;
+  max-width:600px;
+  margin:auto;
+  padding:25px 15px 50px;
+}
+
+.logo{
   text-align:center;
-  margin-bottom:20px;
+  font-size:30px;
+  font-weight:bold;
+  margin:15px 0 5px;
 }
 
-.trade-box label{
+.subtitle{
+  text-align:center;
+  color:#aeb8d0;
+  margin-bottom:25px;
+}
+
+.exchange-box{
+  background:rgba(15,23,42,.92);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:24px;
+  padding:22px;
+  box-shadow:0 20px 60px rgba(0,0,0,.45);
+  backdrop-filter:blur(12px);
+}
+
+h2{
+  text-align:center;
+  margin:0 0 25px;
+}
+
+label{
   display:block;
-  margin:12px 0 7px;
+  margin:15px 0 8px;
   font-weight:bold;
 }
 
-.trade-box select,
-.trade-box input{
+select,
+input{
   width:100%;
-  box-sizing:border-box;
-  padding:13px;
-  border-radius:10px;
-  border:1px solid #374151;
-  background:#1f2937;
-  color:white;
-  outline:none;
+  padding:15px;
+  border-radius:13px;
+  border:1px solid #334155;
+  background:#111827;
+  color:#fff;
   font-size:15px;
+  outline:none;
 }
 
-.trade-box select:focus,
-.trade-box input:focus{
-  border-color:#f59e0b;
+select:focus,
+input:focus{
+  border-color:#38bdf8;
 }
 
-.receive-title{
-  margin-top:18px;
+.amount-box{
+  margin-top:5px;
+}
+
+.address-title{
+  margin-top:22px;
   padding:12px;
+  border-radius:12px;
   background:#172033;
-  border-radius:10px;
-  color:#fbbf24;
+  color:#facc15;
   text-align:center;
 }
 
-.address-row{
-  display:flex;
-  gap:8px;
-}
-
-.address-row input{
-  flex:1;
-}
-
-.copy-btn{
-  width:90px;
+button{
   border:0;
-  border-radius:10px;
-  background:#374151;
-  color:white;
   cursor:pointer;
+  font-family:inherit;
 }
 
-.trade-btn{
+.main-btn{
   width:100%;
-  margin-top:20px;
-  padding:15px;
-  border:0;
-  border-radius:12px;
-  background:#f59e0b;
+  padding:16px;
+  margin-top:22px;
+  border-radius:14px;
+  background:linear-gradient(90deg,#f59e0b,#facc15);
   color:#111827;
   font-size:17px;
   font-weight:bold;
-  cursor:pointer;
 }
 
-.trade-btn:hover{
-  background:#fbbf24;
+.main-btn:hover{
+  filter:brightness(1.08);
+}
+
+.swap{
+  display:block;
+  margin:10px auto;
+  width:44px;
+  height:44px;
+  border-radius:50%;
+  background:#1e293b;
+  color:#38bdf8;
+  font-size:22px;
 }
 
 .message{
-  margin-top:15px;
-  padding:12px;
-  border-radius:10px;
   display:none;
+  margin-top:15px;
+  padding:13px;
+  border-radius:12px;
   text-align:center;
-}
-
-.success{
-  display:block;
-  background:#064e3b;
-  color:#a7f3d0;
 }
 
 .error{
   display:block;
-  background:#7f1d1d;
+  background:#450a0a;
   color:#fecaca;
 }
 
-.trade-result{
+.success{
+  display:block;
+  background:#052e16;
+  color:#bbf7d0;
+}
+
+.deposit-box{
   display:none;
-  margin-top:20px;
-  padding:15px;
+  margin-top:25px;
+  padding:20px;
+  border-radius:18px;
+  background:#0b1220;
+  border:1px solid #334155;
+}
+
+.deposit-box h3{
+  margin-top:0;
+  text-align:center;
+  color:#facc15;
+}
+
+.info{
+  color:#94a3b8;
+  font-size:13px;
+  line-height:1.8;
+}
+
+.address-display{
+  margin-top:12px;
+  padding:14px;
+  background:#020617;
+  border:1px solid #334155;
   border-radius:12px;
-  background:#0f172a;
-  border:1px solid #374151;
-}
-
-.trade-result div{
-  margin:8px 0;
+  direction:ltr;
+  text-align:left;
   word-break:break-all;
+  color:#67e8f9;
+  font-size:14px;
 }
 
-.public-address{
-  color:#fbbf24;
+.copy-btn{
+  width:100%;
+  padding:13px;
+  margin-top:10px;
+  border-radius:11px;
+  background:#1e40af;
+  color:white;
+  font-weight:bold;
+}
+
+.copy-btn:hover{
+  background:#2563eb;
+}
+
+.trade-info{
+  margin-top:18px;
+  padding:14px;
+  border-radius:12px;
+  background:#111827;
+  line-height:2;
+}
+
+.trade-info span{
+  color:#facc15;
+}
+
+.warning{
+  margin-top:15px;
+  padding:12px;
+  border-radius:10px;
+  background:#3f2a00;
+  color:#fde68a;
+  font-size:13px;
+  line-height:1.8;
+}
+
+@media(max-width:480px){
+  .exchange-box{
+    padding:17px;
+  }
 }
 </style>
+</head>
 
+<body>
 
-<div class="trade-box">
+<div class="container">
 
-  <h2>🔄 ثبت معامله</h2>
+  <div class="logo">🔄 EXCHANGE</div>
 
-  <label>ارزی که می‌دهید</label>
-
-  <select id="giveCoin">
-    <option value="DOGE">DOGE</option>
-    <option value="BTC">BTC</option>
-    <option value="BCH">BCH</option>
-    <option value="LTC">LTC</option>
-    <option value="USDT">USDT</option>
-    <option value="ETH">ETH</option>
-  </select>
-
-
-  <label>ارزی که می‌خواهید دریافت کنید</label>
-
-  <select id="receiveCoin">
-    <option value="BTC">BTC</option>
-    <option value="DOGE">DOGE</option>
-    <option value="BCH">BCH</option>
-    <option value="LTC">LTC</option>
-    <option value="USDT">USDT</option>
-    <option value="ETH">ETH</option>
-  </select>
-
-
-  <label>مقدار ارز</label>
-
-  <input
-    type="number"
-    id="amount"
-    placeholder="مثلاً 100"
-    min="0"
-    step="any"
-  >
-
-
-  <div class="receive-title">
-    📥 آدرس کیف پول برای دریافت ارز
+  <div class="subtitle">
+    مبادله مستقیم ارز دیجیتال با ارز دیجیتال
   </div>
 
+  <div class="exchange-box">
 
-  <label id="addressLabel">
-    آدرس کیف پول BTC
-  </label>
+    <h2>ثبت معامله</h2>
 
-  <div class="address-row">
+    <!-- ارز پرداختی -->
+    <label>ارزی که می‌دهید</label>
+
+    <select id="giveCoin">
+      <option value="BTC">Bitcoin (BTC)</option>
+      <option value="DOGE">Dogecoin (DOGE)</option>
+      <option value="BCH">Bitcoin Cash (BCH)</option>
+      <option value="LTC">Litecoin (LTC)</option>
+      <option value="USDT">Tether (USDT - BEP20)</option>
+      <option value="BNB">BNB</option>
+    </select>
+
+
+    <!-- دکمه جابه‌جایی -->
+    <button class="swap" onclick="swapCoins()">⇅</button>
+
+
+    <!-- ارز دریافتی -->
+    <label>ارزی که می‌خواهید دریافت کنید</label>
+
+    <select id="receiveCoin">
+      <option value="BTC">Bitcoin (BTC)</option>
+      <option value="DOGE">Dogecoin (DOGE)</option>
+      <option value="BCH">Bitcoin Cash (BCH)</option>
+      <option value="LTC">Litecoin (LTC)</option>
+      <option value="USDT">Tether (USDT - BEP20)</option>
+      <option value="BNB">BNB</option>
+    </select>
+
+
+    <!-- مقدار -->
+    <label>مقدار ارز</label>
 
     <input
-      type="text"
-      id="receiveAddress"
-      placeholder="آدرس کیف پول خود را وارد کنید"
-      autocomplete="off"
+      id="amount"
+      type="number"
+      min="0"
+      step="any"
+      placeholder="مثلاً 100"
     >
 
+
+    <!-- آدرس دریافت کاربر -->
+    <div class="address-title">
+      📥 آدرس کیف پول شما برای دریافت
+    </div>
+
+    <label id="receiveAddressLabel">
+      آدرس BTC خود را وارد کنید
+    </label>
+
+    <input
+      id="receiveAddress"
+      type="text"
+      dir="ltr"
+      autocomplete="off"
+      placeholder="آدرس کیف پول خود را وارد کنید"
+    >
+
+
     <button
-      type="button"
-      class="copy-btn"
-      onclick="pasteAddress()">
-      Paste
+      class="main-btn"
+      onclick="createTrade()">
+      ثبت معامله
     </button>
 
-  </div>
+
+    <div id="message" class="message"></div>
 
 
-  <button
-    type="button"
-    class="trade-btn"
-    onclick="createTrade()">
+    <!-- نتیجه معامله -->
+    <div id="depositBox" class="deposit-box">
 
-    ثبت معامله
+      <h3>✅ معامله ثبت شد</h3>
 
-  </button>
+      <div class="trade-info">
+
+        <div>
+          شماره معامله:
+          <span id="tradeId"></span>
+        </div>
+
+        <div>
+          شما می‌دهید:
+          <span id="tradeGive"></span>
+        </div>
+
+        <div>
+          شما دریافت می‌کنید:
+          <span id="tradeReceive"></span>
+        </div>
+
+        <div>
+          آدرس دریافت شما:
+          <span id="userReceiveAddress"
+                style="direction:ltr;display:block;word-break:break-all;">
+          </span>
+        </div>
+
+      </div>
 
 
-  <div id="message" class="message"></div>
+      <h3 style="margin-top:25px;">
+        📤 آدرس واریز صرافی
+      </h3>
+
+      <div class="info">
+        لطفاً ارز پرداختی خود را به آدرس زیر ارسال کنید:
+      </div>
+
+      <div id="depositAddress"
+           class="address-display">
+      </div>
+
+      <button
+        class="copy-btn"
+        onclick="copyDepositAddress()">
+        📋 کپی آدرس واریز
+      </button>
 
 
-  <div id="tradeResult" class="trade-result">
+      <div class="warning">
+        ⚠️ فقط ارز و شبکه مشخص‌شده را به این آدرس ارسال کنید.
+        ارسال ارز یا شبکه اشتباه ممکن است باعث از دست رفتن دارایی شود.
+      </div>
 
-    <div>
-      <strong>شماره معامله:</strong>
-      <span id="tradeId"></span>
-    </div>
-
-    <div>
-      <strong>پرداختی:</strong>
-      <span id="resultGive"></span>
-    </div>
-
-    <div>
-      <strong>دریافتی:</strong>
-      <span id="resultReceive"></span>
-    </div>
-
-    <div>
-      <strong>آدرس دریافت:</strong><br>
-      <span
-        id="resultAddress"
-        class="public-address">
-      </span>
-    </div>
-
-    <div>
-      <strong>وضعیت:</strong>
-      <span>⏳ در انتظار پرداخت</span>
     </div>
 
   </div>
@@ -244,90 +371,146 @@
 
 <script>
 
-const receiveCoin = document.getElementById("receiveCoin");
+/* =========================================
+   آدرس‌های صرافی
+========================================= */
 
-const addressLabel = document.getElementById("addressLabel");
+const exchangeAddresses = {
 
-const receiveAddress = document.getElementById("receiveAddress");
+  BTC:
+    "1Q99GpYnEU9yELNLjiJUWopNT1HatRYQrV",
+
+  DOGE:
+    "DA9b1AqJqgsdFNuJNjzRo2g5wFj1rEeQLk",
+
+  BCH:
+    "bitcoincash:qrj64uh0xlah2wzksudq3g5eeg2ewdyg6urq5kywku",
+
+  LTC:
+    "LZeRDFWbPLpuqeAw7m5i5YcYiu32KRAM6c",
+
+  USDT:
+    "0x3765C083F36B7D874d3a6249436a84C9e9bDAbA6",
+
+  BNB:
+    "0x3765C083F36B7D874d3a6249436a84C9e9bDAbA6"
+
+};
 
 
-// تغییر نام ارز کنار قسمت آدرس
-receiveCoin.addEventListener("change", function(){
+/* =========================================
+   نام ارزها
+========================================= */
 
-  addressLabel.textContent =
-    "آدرس کیف پول " + this.value;
+const coinNames = {
 
-  receiveAddress.placeholder =
-    "آدرس کیف پول " + this.value + " را وارد کنید";
+  BTC:"Bitcoin (BTC)",
 
-});
+  DOGE:"Dogecoin (DOGE)",
+
+  BCH:"Bitcoin Cash (BCH)",
+
+  LTC:"Litecoin (LTC)",
+
+  USDT:"Tether (USDT - BEP20)",
+
+  BNB:"BNB"
+
+};
 
 
-// Paste
-async function pasteAddress(){
+/* =========================================
+   تغییر متن آدرس
+========================================= */
 
-  try{
+document
+.getElementById("receiveCoin")
+.addEventListener("change", updateAddressLabel);
 
-    const text =
-      await navigator.clipboard.readText();
 
-    receiveAddress.value = text.trim();
+function updateAddressLabel(){
 
-  }catch(e){
+  const coin =
+    document.getElementById("receiveCoin").value;
 
-    showMessage(
-      "امکان Paste خودکار وجود ندارد؛ آدرس را دستی وارد کنید.",
-      "error"
-    );
+  document
+  .getElementById("receiveAddressLabel")
+  .textContent =
+    "آدرس " + coin + " خود را وارد کنید";
 
-  }
+  document
+  .getElementById("receiveAddress")
+  .placeholder =
+    "آدرس کیف پول " + coin + " خود را وارد کنید";
 
 }
 
 
-// بررسی ساده فرمت آدرس
-function checkAddress(address, coin){
+/* =========================================
+   جابه‌جایی ارزها
+========================================= */
 
-  address = address.trim();
+function swapCoins(){
+
+  const give =
+    document.getElementById("giveCoin");
+
+  const receive =
+    document.getElementById("receiveCoin");
+
+  const temp = give.value;
+
+  give.value = receive.value;
+
+  receive.value = temp;
+
+  updateAddressLabel();
+
+}
+
+
+/* =========================================
+   بررسی اولیه آدرس
+========================================= */
+
+function validateAddress(address,coin){
 
   if(!address){
     return false;
   }
 
-  // BTC
+  address = address.trim();
+
+
   if(coin === "BTC"){
 
-    return /^(bc1|[13])[a-zA-HJ-NP-Z0-9]{25,90}$/i.test(address);
+    return /^(1|3|bc1)[a-zA-Z0-9]{20,100}$/.test(address);
 
   }
 
 
-  // DOGE
   if(coin === "DOGE"){
 
-    return /^D[a-zA-Z0-9]{25,34}$/.test(address);
+    return /^D[a-zA-Z0-9]{20,40}$/.test(address);
 
   }
 
 
-  // BCH
   if(coin === "BCH"){
 
-    return /^(bitcoincash:)?(q|p)[a-z0-9]{40,60}$/i.test(address);
+    return /^(bitcoincash:)?[qp][a-z0-9]{20,100}$/i.test(address);
 
   }
 
 
-  // LTC
   if(coin === "LTC"){
 
-    return /^(ltc1|[LM3])[a-zA-Z0-9]{20,90}$/i.test(address);
+    return /^(L|M|3|ltc1)[a-zA-Z0-9]{20,100}$/i.test(address);
 
   }
 
 
-  // ETH / USDT ERC20
-  if(coin === "ETH" || coin === "USDT"){
+  if(coin === "USDT" || coin === "BNB"){
 
     return /^0x[a-fA-F0-9]{40}$/.test(address);
 
@@ -339,7 +522,10 @@ function checkAddress(address, coin){
 }
 
 
-// ثبت معامله
+/* =========================================
+   ثبت معامله
+========================================= */
+
 function createTrade(){
 
   const give =
@@ -351,15 +537,16 @@ function createTrade(){
   const amount =
     document.getElementById("amount").value.trim();
 
-  const address =
-    receiveAddress.value.trim();
+  const userAddress =
+    document.getElementById("receiveAddress").value.trim();
 
 
-  // جلوگیری از یکسان بودن ارزها
+  /* ارزها نباید یکسان باشند */
+
   if(give === receive){
 
     showMessage(
-      "ارز پرداختی و دریافتی نمی‌توانند یکسان باشند.",
+      "ارز پرداختی و دریافتی باید متفاوت باشند.",
       "error"
     );
 
@@ -367,7 +554,8 @@ function createTrade(){
   }
 
 
-  // مقدار
+  /* مقدار */
+
   if(!amount || Number(amount) <= 0){
 
     showMessage(
@@ -379,107 +567,173 @@ function createTrade(){
   }
 
 
-  // آدرس
-  if(!address){
+  /* آدرس کاربر */
+
+  if(!userAddress){
 
     showMessage(
-      "لطفاً آدرس کیف پول دریافت‌کننده را وارد کنید.",
+      "ابتدا آدرس کیف پول خود را برای دریافت وارد کنید.",
       "error"
     );
-
-    receiveAddress.focus();
 
     return;
   }
 
 
-  // اعتبارسنجی آدرس
-  if(!checkAddress(address, receive)){
+  /* بررسی آدرس */
+
+  if(!validateAddress(userAddress,receive)){
 
     showMessage(
-      "فرمت آدرس کیف پول با ارز انتخاب‌شده مطابقت ندارد.",
+      "فرمت آدرس واردشده با ارز دریافتی مطابقت ندارد.",
       "error"
     );
-
-    receiveAddress.focus();
 
     return;
   }
 
 
-  // شماره معامله
+  /* ساخت شماره معامله */
+
   const tradeId =
-    "TR-" +
+    "EX-" +
     Date.now().toString().slice(-10);
 
 
-  // نمایش معامله
-  document.getElementById("tradeId").textContent =
-    tradeId;
+  /* نمایش اطلاعات */
 
-  document.getElementById("resultGive").textContent =
+  document.getElementById("tradeId")
+    .textContent = tradeId;
+
+  document.getElementById("tradeGive")
+    .textContent =
     amount + " " + give;
 
-  document.getElementById("resultReceive").textContent =
-    receive;
+  document.getElementById("tradeReceive")
+    .textContent =
+    coinNames[receive];
 
-  document.getElementById("resultAddress").textContent =
-    address;
+  document.getElementById("userReceiveAddress")
+    .textContent =
+    userAddress;
 
 
-  document.getElementById("tradeResult").style.display =
-    "block";
+  /* آدرس صرافی برای واریز ارز پرداختی */
+
+  document.getElementById("depositAddress")
+    .textContent =
+    exchangeAddresses[give];
+
+
+  document.getElementById("depositBox")
+    .style.display = "block";
 
 
   showMessage(
-    "✅ معامله با موفقیت ثبت شد.",
+    "معامله با موفقیت ثبت شد. آدرس واریز صرافی نمایش داده شد.",
     "success"
   );
 
 
-  // ذخیره موقت معامله در مرورگر
+  /* ذخیره معامله در مرورگر */
+
   const trade = {
 
-    id: tradeId,
+    id:tradeId,
 
-    giveCoin: give,
+    giveCoin:give,
 
-    receiveCoin: receive,
+    receiveCoin:receive,
 
-    amount: amount,
+    amount:amount,
 
-    receiveAddress: address,
+    userReceiveAddress:userAddress,
 
-    status: "pending",
+    exchangeDepositAddress:
+      exchangeAddresses[give],
 
-    createdAt: new Date().toISOString()
+    status:"در انتظار واریز",
+
+    createdAt:
+      new Date().toISOString()
 
   };
 
 
-  localStorage.setItem(
-    "trade_" + tradeId,
-    JSON.stringify(trade)
-  );
-
-
-  // ذخیره در لیست معاملات
   let trades =
     JSON.parse(
-      localStorage.getItem("trades") || "[]"
+      localStorage.getItem("exchangeTrades") || "[]"
     );
+
 
   trades.push(trade);
 
+
   localStorage.setItem(
-    "trades",
+    "exchangeTrades",
     JSON.stringify(trades)
   );
+
+
+  /* رفتن به قسمت آدرس واریز */
+
+  document.getElementById("depositBox")
+    .scrollIntoView({
+      behavior:"smooth",
+      block:"start"
+    });
 
 }
 
 
-// پیام
+/* =========================================
+   کپی آدرس صرافی
+========================================= */
+
+async function copyDepositAddress(){
+
+  const address =
+    document.getElementById("depositAddress")
+    .textContent;
+
+  try{
+
+    await navigator.clipboard.writeText(address);
+
+    showMessage(
+      "✅ آدرس واریز کپی شد.",
+      "success"
+    );
+
+  }catch(error){
+
+    const temp =
+      document.createElement("textarea");
+
+    temp.value = address;
+
+    document.body.appendChild(temp);
+
+    temp.select();
+
+    document.execCommand("copy");
+
+    temp.remove();
+
+    showMessage(
+      "✅ آدرس واریز کپی شد.",
+      "success"
+    );
+
+  }
+
+}
+
+
+/* =========================================
+   پیام
+========================================= */
+
 function showMessage(text,type){
 
   const message =
@@ -492,4 +746,13 @@ function showMessage(text,type){
 
 }
 
+
+/* اجرای اولیه */
+
+updateAddressLabel();
+
 </script>
+
+</body>
+</html>
+```

@@ -9851,6 +9851,66 @@ document.addEventListener(
 
 })();
 </script>
+``
+<style>
+/* دکمه تبادل آسان - پایین و ثابت */
+.easy-exchange-fixed,
+.easy-exchange-button,
+.exchange-easy-button {
+  position: fixed !important;
+  left: 50% !important;
+  bottom: 18px !important;
+  top: auto !important;
+  right: auto !important;
+  transform: translateX(-50%) !important;
+
+  z-index: 99999 !important;
+
+  background: linear-gradient(135deg, #ffd600, #ffb300) !important;
+  color: #111 !important;
+
+  padding: 14px 38px !important;
+  border-radius: 50px !important;
+  border: 2px solid #fff !important;
+
+  font-size: 19px !important;
+  font-weight: 900 !important;
+  white-space: nowrap !important;
+
+  box-shadow:
+    0 0 12px rgba(255, 214, 0, .8),
+    0 0 28px rgba(255, 179, 0, .55) !important;
+
+  animation: easyExchangeGlow 1.5s infinite !important;
+}
+
+@keyframes easyExchangeGlow {
+  0%, 100% {
+    opacity: 1;
+    box-shadow:
+      0 0 12px rgba(255, 214, 0, .8),
+      0 0 28px rgba(255, 179, 0, .55);
+  }
+
+  50% {
+    opacity: .72;
+    box-shadow:
+      0 0 25px rgba(255, 214, 0, 1),
+      0 0 45px rgba(255, 179, 0, .9);
+  }
+}
+
+/* موبایل */
+@media (max-width: 600px) {
+  .easy-exchange-fixed,
+  .easy-exchange-button,
+  .exchange-easy-button {
+    bottom: 12px !important;
+    padding: 12px 28px !important;
+    font-size: 17px !important;
+  }
+}
+</style>
 ```
 
 </body>

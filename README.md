@@ -7803,6 +7803,1540 @@ updateBell();
 
 })();
 </script>
+<!-- =========================================================
+     نسخه نهایی «تبادل آسان»
+     این کد را آخر کد سایت و قبل از </body> قرار بده
+========================================================= -->
+
+<style>
+/* حذف دکمه/پنجره قدیمی */
+#easyTradeBtn,
+#easyTradeModal,
+#tradeModal,
+.easyTradeOld,
+.tradeOld {
+  display:none !important;
+}
+
+/* دکمه جدید تبادل آسان - ثابت وسط صفحه */
+#NEW_EASY_EXCHANGE_BUTTON{
+  width:175px;
+  height:175px;
+  border-radius:50%;
+  border:6px solid #fff6a0;
+  background:linear-gradient(145deg,#fff900,#ffb000);
+  color:#171200;
+  font-size:21px;
+  font-weight:900;
+  cursor:pointer;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  gap:7px;
+  margin:35px auto;
+  box-shadow:
+    0 0 15px #ffd000,
+    0 0 35px #ffd000,
+    0 0 70px rgba(255,200,0,.7);
+  animation:NEW_EASY_BLINK 1.15s infinite;
+}
+
+#NEW_EASY_BUTTON_ICON{
+  font-size:42px;
+}
+
+@keyframes NEW_EASY_BLINK{
+  0%,100%{
+    transform:scale(1);
+    box-shadow:0 0 15px #ffd000,0 0 35px #ffd000;
+  }
+  50%{
+    transform:scale(1.08);
+    box-shadow:
+      0 0 25px #fff700,
+      0 0 60px #ffb900,
+      0 0 100px rgba(255,180,0,.7);
+  }
+}
+
+/* زمینه پنجره */
+#NEW_EASY_MODAL{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:999999;
+  background:rgba(0,0,0,.88);
+  overflow-y:auto;
+  padding:15px;
+}
+
+/* پنجره اصلی */
+#NEW_EASY_BOX{
+  width:100%;
+  max-width:650px;
+  margin:20px auto;
+  background:linear-gradient(145deg,#122119,#060d08);
+  border:2px solid #ffd000;
+  border-radius:25px;
+  padding:20px;
+  box-shadow:0 0 50px rgba(255,208,0,.3);
+  color:#fff;
+}
+
+/* هدر */
+#NEW_EASY_HEADER{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid #405027;
+  padding-bottom:15px;
+  margin-bottom:18px;
+}
+
+#NEW_EASY_HEADER h2{
+  margin:0;
+  color:#ffd000;
+  font-size:22px;
+}
+
+#NEW_EASY_CLOSE{
+  width:44px;
+  height:44px;
+  border:0;
+  border-radius:50%;
+  background:#a80000;
+  color:#fff;
+  font-size:25px;
+  cursor:pointer;
+}
+
+/* مراحل */
+.NEW_EASY_STEPS{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  margin-bottom:20px;
+}
+
+.NEW_EASY_STEP_CIRCLE{
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  background:#273229;
+  color:#aaa;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:bold;
+}
+
+.NEW_EASY_STEP_CIRCLE.active{
+  background:#ffd000;
+  color:#111;
+  box-shadow:0 0 17px #ffd000;
+}
+
+/* صفحات */
+.NEW_EASY_PAGE{
+  display:none;
+}
+
+.NEW_EASY_PAGE.active{
+  display:block;
+}
+
+/* عنوان */
+.NEW_EASY_PAGE h3{
+  color:#ffd000;
+}
+
+/* برچسب */
+.NEW_EASY_LABEL{
+  display:block;
+  color:#ffe36b;
+  font-weight:bold;
+  margin:13px 0 7px;
+}
+
+/* انتخاب ارز */
+.NEW_EASY_SELECT{
+  width:100%;
+  padding:15px;
+  border-radius:14px;
+  border:1px solid #53622e;
+  background:#0b150e;
+  color:#fff;
+  font-size:16px;
+  outline:none;
+}
+
+.NEW_EASY_SELECT:focus{
+  border-color:#ffd000;
+}
+
+/* جفت ارز */
+#NEW_EASY_PAIR_BOX{
+  margin-top:18px;
+  padding:16px;
+  border:1px solid #59662f;
+  border-radius:17px;
+  background:#09130c;
+  text-align:center;
+}
+
+.NEW_EASY_PAIR_TITLE{
+  color:#aaa;
+  font-size:13px;
+  margin-bottom:12px;
+}
+
+#NEW_EASY_PAIR{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.NEW_EASY_COIN{
+  min-width:105px;
+  padding:11px 14px;
+  border-radius:13px;
+  background:#182519;
+  border:1px solid #68783a;
+  color:#ffd000;
+  font-weight:bold;
+}
+
+.NEW_EASY_ARROW{
+  color:#ffd000;
+  font-size:25px;
+}
+
+/* مقدار */
+.NEW_EASY_INPUT{
+  width:100%;
+  padding:15px;
+  border-radius:14px;
+  border:1px solid #53622e;
+  background:#0b150e;
+  color:#fff;
+  font-size:16px;
+  outline:none;
+  direction:ltr;
+  text-align:left;
+}
+
+.NEW_EASY_INPUT:focus{
+  border-color:#ffd000;
+}
+
+/* نتیجه */
+#NEW_EASY_RESULT{
+  margin-top:17px;
+  border-radius:17px;
+  background:#09140d;
+  border:1px solid #ffd000;
+  padding:16px;
+}
+
+.NEW_EASY_RESULT_ROW{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  align-items:center;
+  padding:11px;
+  margin:6px 0;
+  border-radius:11px;
+  background:#101c13;
+}
+
+.NEW_EASY_RESULT_LABEL{
+  color:#aaa;
+}
+
+.NEW_EASY_RESULT_VALUE{
+  color:#fff;
+  font-weight:bold;
+  direction:ltr;
+}
+
+.NEW_EASY_RECEIVE{
+  color:#00ff88 !important;
+  font-size:20px;
+}
+
+/* کیف پول */
+.NEW_EASY_WALLET{
+  margin-top:17px;
+  padding:15px;
+  background:#09130c;
+  border:1px solid #4e5e2b;
+  border-radius:16px;
+}
+
+.NEW_EASY_WALLET_TITLE{
+  color:#ffd000;
+  font-weight:bold;
+  margin-bottom:9px;
+}
+
+.NEW_EASY_ADDRESS{
+  direction:ltr;
+  text-align:left;
+  word-break:break-all;
+  padding:12px;
+  border-radius:10px;
+  background:#030604;
+  color:#ddd;
+  font-size:13px;
+  line-height:1.7;
+}
+
+.NEW_EASY_COPY{
+  width:100%;
+  margin-top:9px;
+  padding:11px;
+  border:0;
+  border-radius:11px;
+  background:#ffd000;
+  color:#111;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+/* هشدار */
+.NEW_EASY_NOTICE{
+  margin-top:15px;
+  padding:13px;
+  border-radius:13px;
+  background:#151d0f;
+  border:1px solid #46542a;
+  color:#ddd;
+  line-height:1.9;
+}
+
+/* دکمه‌ها */
+.NEW_EASY_BUTTONS{
+  display:flex;
+  gap:10px;
+  margin-top:20px;
+}
+
+.NEW_EASY_MAIN,
+.NEW_EASY_BACK{
+  flex:1;
+  padding:15px;
+  border-radius:14px;
+  cursor:pointer;
+  font-weight:900;
+}
+
+.NEW_EASY_MAIN{
+  border:0;
+  background:linear-gradient(90deg,#ffe000,#ffad00);
+  color:#111;
+}
+
+.NEW_EASY_BACK{
+  border:1px solid #5b6934;
+  background:#172118;
+  color:#fff;
+}
+
+/* موبایل */
+@media(max-width:500px){
+
+  #NEW_EASY_EXCHANGE_BUTTON{
+    width:155px;
+    height:155px;
+    font-size:19px;
+  }
+
+  #NEW_EASY_BOX{
+    margin:5px auto;
+    padding:15px;
+  }
+
+}
+</style>
+
+
+<!-- =========================================================
+     دکمه جدید
+========================================================= -->
+
+<div id="NEW_EASY_BUTTON_AREA">
+  <button id="NEW_EASY_EXCHANGE_BUTTON" onclick="NEW_EASY_OPEN()">
+    <span id="NEW_EASY_BUTTON_ICON">⇄</span>
+    <span>تبادل آسان</span>
+  </button>
+</div>
+
+
+<!-- =========================================================
+     پنجره جدید تبادل آسان
+========================================================= -->
+
+<div id="NEW_EASY_MODAL">
+
+  <div id="NEW_EASY_BOX">
+
+    <div id="NEW_EASY_HEADER">
+      <h2>🔄 تبادل آسان</h2>
+      <button id="NEW_EASY_CLOSE" onclick="NEW_EASY_CLOSE()">×</button>
+    </div>
+
+
+    <!-- مراحل -->
+
+    <div class="NEW_EASY_STEPS">
+
+      <div
+        class="NEW_EASY_STEP_CIRCLE active"
+        id="NEW_EASY_C1">
+        1
+      </div>
+
+      <div
+        class="NEW_EASY_STEP_CIRCLE"
+        id="NEW_EASY_C2">
+        2
+      </div>
+
+      <div
+        class="NEW_EASY_STEP_CIRCLE"
+        id="NEW_EASY_C3">
+        3
+      </div>
+
+      <div
+        class="NEW_EASY_STEP_CIRCLE"
+        id="NEW_EASY_C4">
+        4
+      </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         مرحله ۱
+    ====================================================== -->
+
+    <div
+      class="NEW_EASY_PAGE active"
+      id="NEW_EASY_PAGE1">
+
+      <h3>مرحله ۱ — انتخاب جفت ارز</h3>
+
+      <label class="NEW_EASY_LABEL">
+        ارز ارسالی
+      </label>
+
+      <select
+        id="NEW_EASY_FROM"
+        class="NEW_EASY_SELECT"
+        onchange="NEW_EASY_UPDATE()">
+
+        <option value="BTC">
+          Bitcoin (BTC)
+        </option>
+
+        <option value="BCH">
+          Bitcoin Cash (BCH)
+        </option>
+
+        <option value="DOGE">
+          Dogecoin (DOGE)
+        </option>
+
+        <option value="USDT">
+          Tether (USDT BEP-20)
+        </option>
+
+        <option value="LTC">
+          Litecoin (LTC)
+        </option>
+
+        <option value="DGB">
+          DigiByte (DGB)
+        </option>
+
+        <option value="TRX">
+          TRON (TRX)
+        </option>
+
+      </select>
+
+
+      <div style="
+        text-align:center;
+        color:#ffd000;
+        font-size:30px;
+        padding:9px;
+      ">
+        ↓
+      </div>
+
+
+      <label class="NEW_EASY_LABEL">
+        ارز دریافتی
+      </label>
+
+      <select
+        id="NEW_EASY_TO"
+        class="NEW_EASY_SELECT"
+        onchange="NEW_EASY_UPDATE()">
+
+        <option value="BCH">
+          Bitcoin Cash (BCH)
+        </option>
+
+        <option value="BTC">
+          Bitcoin (BTC)
+        </option>
+
+        <option value="DOGE">
+          Dogecoin (DOGE)
+        </option>
+
+        <option value="USDT">
+          Tether (USDT BEP-20)
+        </option>
+
+        <option value="LTC">
+          Litecoin (LTC)
+        </option>
+
+        <option value="DGB">
+          DigiByte (DGB)
+        </option>
+
+        <option value="TRX">
+          TRON (TRX)
+        </option>
+
+      </select>
+
+
+      <!-- جفت ارز واقعی انتخاب‌شده -->
+
+      <div id="NEW_EASY_PAIR_BOX">
+
+        <div class="NEW_EASY_PAIR_TITLE">
+          جفت ارز انتخاب‌شده
+        </div>
+
+        <div id="NEW_EASY_PAIR">
+
+          <div
+            class="NEW_EASY_COIN"
+            id="NEW_EASY_PAIR_FROM">
+            BTC
+          </div>
+
+          <div class="NEW_EASY_ARROW">
+            ⇄
+          </div>
+
+          <div
+            class="NEW_EASY_COIN"
+            id="NEW_EASY_PAIR_TO">
+            BCH
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="NEW_EASY_BUTTONS">
+
+        <button
+          class="NEW_EASY_MAIN"
+          onclick="NEW_EASY_NEXT(2)">
+          ادامه ←
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         مرحله ۲
+    ====================================================== -->
+
+    <div
+      class="NEW_EASY_PAGE"
+      id="NEW_EASY_PAGE2">
+
+      <h3>مرحله ۲ — مقدار تبادل</h3>
+
+
+      <div class="NEW_EASY_NOTICE">
+
+        <div>
+          ارز ارسالی:
+          <strong id="NEW_EASY_SEND_NAME">
+            BTC
+          </strong>
+        </div>
+
+        <div>
+          ارز دریافتی:
+          <strong id="NEW_EASY_GET_NAME">
+            BCH
+          </strong>
+        </div>
+
+      </div>
+
+
+      <label class="NEW_EASY_LABEL">
+        مقدار ارز ارسالی
+      </label>
+
+      <input
+        id="NEW_EASY_AMOUNT"
+        class="NEW_EASY_INPUT"
+        type="number"
+        min="0"
+        step="any"
+        placeholder="مثلاً 0.01"
+        oninput="NEW_EASY_CALCULATE()">
+
+
+      <!-- نتیجه واقعی -->
+      <div id="NEW_EASY_RESULT">
+
+        <div class="NEW_EASY_RESULT_ROW">
+
+          <span class="NEW_EASY_RESULT_LABEL">
+            ارسال
+          </span>
+
+          <span
+            class="NEW_EASY_RESULT_VALUE"
+            id="NEW_EASY_SEND_RESULT">
+            0 BTC
+          </span>
+
+        </div>
+
+
+        <div
+          style="
+            text-align:center;
+            color:#ffd000;
+            font-size:25px;
+          ">
+          ↓
+        </div>
+
+
+        <div class="NEW_EASY_RESULT_ROW">
+
+          <span class="NEW_EASY_RESULT_LABEL">
+            دریافت
+          </span>
+
+          <span
+            class="NEW_EASY_RESULT_VALUE NEW_EASY_RECEIVE"
+            id="NEW_EASY_GET_RESULT">
+            0 BCH
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="NEW_EASY_NOTICE">
+        ارز دریافتی بر اساس همان ارز انتخاب‌شده در مرحله اول نمایش داده می‌شود؛
+        دلار به‌عنوان ارز دریافتی نمایش داده نمی‌شود.
+      </div>
+
+
+      <div class="NEW_EASY_BUTTONS">
+
+        <button
+          class="NEW_EASY_BACK"
+          onclick="NEW_EASY_NEXT(1)">
+          → برگشت
+        </button>
+
+        <button
+          class="NEW_EASY_MAIN"
+          onclick="NEW_EASY_GO3()">
+          ادامه ←
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         مرحله ۳
+    ====================================================== -->
+
+    <div
+      class="NEW_EASY_PAGE"
+      id="NEW_EASY_PAGE3">
+
+      <h3>مرحله ۳ — آدرس کیف پول دریافت</h3>
+
+
+      <div class="NEW_EASY_NOTICE">
+
+        شما در حال تبدیل:
+
+        <strong id="NEW_EASY_CONFIRM_PAIR">
+          BTC → BCH
+        </strong>
+
+      </div>
+
+
+      <label class="NEW_EASY_LABEL">
+        آدرس کیف پول برای دریافت ارز
+      </label>
+
+      <input
+        id="NEW_EASY_USER_WALLET"
+        class="NEW_EASY_INPUT"
+        type="text"
+        placeholder="آدرس کیف پول خود را وارد کنید">
+
+
+      <div class="NEW_EASY_BUTTONS">
+
+        <button
+          class="NEW_EASY_BACK"
+          onclick="NEW_EASY_NEXT(2)">
+          → برگشت
+        </button>
+
+        <button
+          class="NEW_EASY_MAIN"
+          onclick="NEW_EASY_GO4()">
+          ادامه ←
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         مرحله ۴
+    ====================================================== -->
+
+    <div
+      class="NEW_EASY_PAGE"
+      id="NEW_EASY_PAGE4">
+
+      <h3>مرحله ۴ — تأیید تبادل</h3>
+
+
+      <div class="NEW_EASY_NOTICE">
+
+        <div>
+          ارز ارسالی:
+          <strong id="NEW_EASY_FINAL_FROM"></strong>
+        </div>
+
+        <div>
+          مقدار ارسالی:
+          <strong id="NEW_EASY_FINAL_AMOUNT"></strong>
+        </div>
+
+        <div>
+          ارز دریافتی:
+          <strong id="NEW_EASY_FINAL_TO"></strong>
+        </div>
+
+        <div>
+          مقدار تقریبی دریافتی:
+          <strong id="NEW_EASY_FINAL_RECEIVE"></strong>
+        </div>
+
+        <br>
+
+        <div>
+          آدرس دریافت شما:
+        </div>
+
+        <div
+          class="NEW_EASY_ADDRESS"
+          id="NEW_EASY_FINAL_USER_WALLET">
+        </div>
+
+      </div>
+
+
+      <div class="NEW_EASY_WALLET">
+
+        <div class="NEW_EASY_WALLET_TITLE">
+          🏦 آدرس سایت برای ارسال ارز
+        </div>
+
+        <div
+          class="NEW_EASY_ADDRESS"
+          id="NEW_EASY_SITE_WALLET">
+        </div>
+
+        <button
+          class="NEW_EASY_COPY"
+          onclick="NEW_EASY_COPY_SITE()">
+          📋 کپی آدرس
+        </button>
+
+      </div>
+
+
+      <div class="NEW_EASY_BUTTONS">
+
+        <button
+          class="NEW_EASY_BACK"
+          onclick="NEW_EASY_NEXT(3)">
+          → برگشت
+        </button>
+
+        <button
+          class="NEW_EASY_MAIN"
+          onclick="NEW_EASY_REGISTER()">
+          ✅ ثبت تبادل
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<script>
+/* =========================================================
+   اطلاعات اصلی
+========================================================= */
+
+const NEW_EASY_WALLETS = {
+
+  BTC:
+  "1Q99GpYnEU9yELNLjiJUWopNT1HatRYQrV",
+
+  BCH:
+  "bitcoincash:qrj64uh0xlah2wzksudq3g5eeg2ewdyg6urq5kywku",
+
+  DOGE:
+  "DA9b1AqJqgsdFNuJNjzRo2g5wFj1rEeQLk",
+
+  USDT:
+  "0x3765C083F36B7D874d3a6249436a84C9e9bDAbA6",
+
+  LTC:
+  "LZeRDFWbPLpuqeAw7m5i5YcYiu32KRAM6c",
+
+  DGB:
+  "DEgjWtMywVrSMJp9URfZEEZvmDfbySryc8",
+
+  TRX:
+  "TRb33idZSi7svRyBTRsEKq8BfL54ADYMh3"
+
+};
+
+
+/* نام ارزها */
+
+const NEW_EASY_NAMES = {
+
+  BTC:"Bitcoin (BTC)",
+  BCH:"Bitcoin Cash (BCH)",
+  DOGE:"Dogecoin (DOGE)",
+  USDT:"Tether (USDT BEP-20)",
+  LTC:"Litecoin (LTC)",
+  DGB:"DigiByte (DGB)",
+  TRX:"TRON (TRX)"
+
+};
+
+
+/* نرخ‌ها برای محاسبه داخلی */
+
+const NEW_EASY_RATES = {
+
+  BTC:110000,
+  BCH:500,
+  DOGE:0.25,
+  USDT:1,
+  LTC:100,
+  DGB:0.01,
+  TRX:0.35
+
+};
+
+
+/* =========================================================
+   باز کردن
+========================================================= */
+
+function NEW_EASY_OPEN(){
+
+  document.getElementById(
+    "NEW_EASY_MODAL"
+  ).style.display="block";
+
+  NEW_EASY_NEXT(1);
+
+  NEW_EASY_UPDATE();
+
+}
+
+
+/* =========================================================
+   بستن
+========================================================= */
+
+function NEW_EASY_CLOSE(){
+
+  document.getElementById(
+    "NEW_EASY_MODAL"
+  ).style.display="none";
+
+}
+
+
+/* =========================================================
+   تغییر مرحله
+========================================================= */
+
+function NEW_EASY_NEXT(step){
+
+  document.querySelectorAll(
+    ".NEW_EASY_PAGE"
+  ).forEach(function(page){
+
+    page.classList.remove("active");
+
+  });
+
+
+  document.getElementById(
+    "NEW_EASY_PAGE"+step
+  ).classList.add("active");
+
+
+  for(let i=1;i<=4;i++){
+
+    document.getElementById(
+      "NEW_EASY_C"+i
+    ).classList.remove("active");
+
+  }
+
+
+  document.getElementById(
+    "NEW_EASY_C"+step
+  ).classList.add("active");
+
+
+  if(step===2){
+
+    NEW_EASY_UPDATE();
+    NEW_EASY_CALCULATE();
+
+  }
+
+}
+
+
+/* =========================================================
+   تغییر جفت ارز
+========================================================= */
+
+function NEW_EASY_UPDATE(){
+
+  const from=
+    document.getElementById(
+      "NEW_EASY_FROM"
+    ).value;
+
+  const to=
+    document.getElementById(
+      "NEW_EASY_TO"
+    ).value;
+
+
+  /* نمایش جفت ارز */
+
+  document.getElementById(
+    "NEW_EASY_PAIR_FROM"
+  ).textContent=from;
+
+
+  document.getElementById(
+    "NEW_EASY_PAIR_TO"
+  ).textContent=to;
+
+
+  /* نمایش در مرحله دوم */
+
+  document.getElementById(
+    "NEW_EASY_SEND_NAME"
+  ).textContent=
+    NEW_EASY_NAMES[from];
+
+
+  document.getElementById(
+    "NEW_EASY_GET_NAME"
+  ).textContent=
+    NEW_EASY_NAMES[to];
+
+
+  NEW_EASY_CALCULATE();
+
+}
+
+
+/* =========================================================
+   محاسبه
+========================================================= */
+
+function NEW_EASY_CALCULATE(){
+
+  const from=
+    document.getElementById(
+      "NEW_EASY_FROM"
+    ).value;
+
+  const to=
+    document.getElementById(
+      "NEW_EASY_TO"
+    ).value;
+
+  const input=
+    document.getElementById(
+      "NEW_EASY_AMOUNT"
+    );
+
+  const amount=
+    parseFloat(input.value)||0;
+
+
+  let receive=0;
+
+
+  if(
+    amount>0 &&
+    NEW_EASY_RATES[from] &&
+    NEW_EASY_RATES[to]
+  ){
+
+    receive=
+      (amount*NEW_EASY_RATES[from]) /
+      NEW_EASY_RATES[to];
+
+  }
+
+
+  /* مهم:
+     هیچ USD / USDT اجباری در اینجا نیست.
+     ارز خروجی دقیقاً همان to است.
+  */
+
+  document.getElementById(
+    "NEW_EASY_SEND_RESULT"
+  ).textContent=
+    formatNEW(amount)+" "+from;
+
+
+  document.getElementById(
+    "NEW_EASY_GET_RESULT"
+  ).textContent=
+    formatNEW(receive)+" "+to;
+
+
+  document.getElementById(
+    "NEW_EASY_PAIR_FROM"
+  ).textContent=from;
+
+
+  document.getElementById(
+    "NEW_EASY_PAIR_TO"
+  ).textContent=to;
+
+}
+
+
+/* =========================================================
+   مرحله سوم
+========================================================= */
+
+function NEW_EASY_GO3(){
+
+  const from=
+    document.getElementById(
+      "NEW_EASY_FROM"
+    ).value;
+
+  const to=
+    document.getElementById(
+      "NEW_EASY_TO"
+    ).value;
+
+  const amount=
+    parseFloat(
+      document.getElementById(
+        "NEW_EASY_AMOUNT"
+      ).value
+    )||0;
+
+
+  if(from===to){
+
+    alert(
+      "ارز ارسالی و دریافتی نباید یکسان باشد."
+    );
+
+    return;
+
+  }
+
+
+  if(amount<=0){
+
+    alert(
+      "لطفاً مقدار ارز ارسالی را وارد کنید."
+    );
+
+    return;
+
+  }
+
+
+  document.getElementById(
+    "NEW_EASY_CONFIRM_PAIR"
+  ).textContent=
+    from+" → "+to;
+
+
+  NEW_EASY_NEXT(3);
+
+}
+
+
+/* =========================================================
+   مرحله چهار
+========================================================= */
+
+function NEW_EASY_GO4(){
+
+  const wallet=
+    document.getElementById(
+      "NEW_EASY_USER_WALLET"
+    ).value.trim();
+
+
+  if(wallet.length<8){
+
+    alert(
+      "لطفاً آدرس کیف پول دریافت را وارد کنید."
+    );
+
+    return;
+
+  }
+
+
+  const from=
+    document.getElementById(
+      "NEW_EASY_FROM"
+    ).value;
+
+  const to=
+    document.getElementById(
+      "NEW_EASY_TO"
+    ).value;
+
+  const amount=
+    parseFloat(
+      document.getElementById(
+        "NEW_EASY_AMOUNT"
+      ).value
+    )||0;
+
+
+  let receive=
+    (amount*NEW_EASY_RATES[from]) /
+    NEW_EASY_RATES[to];
+
+
+  document.getElementById(
+    "NEW_EASY_FINAL_FROM"
+  ).textContent=
+    NEW_EASY_NAMES[from];
+
+
+  document.getElementById(
+    "NEW_EASY_FINAL_AMOUNT"
+  ).textContent=
+    formatNEW(amount)+" "+from;
+
+
+  document.getElementById(
+    "NEW_EASY_FINAL_TO"
+  ).textContent=
+    NEW_EASY_NAMES[to];
+
+
+  document.getElementById(
+    "NEW_EASY_FINAL_RECEIVE"
+  ).textContent=
+    formatNEW(receive)+" "+to;
+
+
+  document.getElementById(
+    "NEW_EASY_FINAL_USER_WALLET"
+  ).textContent=wallet;
+
+
+  /*
+    آدرس سایت بر اساس ارز ارسالی
+    انتخاب می‌شود.
+  */
+
+  document.getElementById(
+    "NEW_EASY_SITE_WALLET"
+  ).textContent=
+    NEW_EASY_WALLETS[from];
+
+
+  NEW_EASY_NEXT(4);
+
+}
+
+
+/* =========================================================
+   ثبت تراکنش
+========================================================= */
+
+function NEW_EASY_REGISTER(){
+
+  const from=
+    document.getElementById(
+      "NEW_EASY_FROM"
+    ).value;
+
+  const to=
+    document.getElementById(
+      "NEW_EASY_TO"
+    ).value;
+
+  const amount=
+    parseFloat(
+      document.getElementById(
+        "NEW_EASY_AMOUNT"
+      ).value
+    )||0;
+
+  const wallet=
+    document.getElementById(
+      "NEW_EASY_USER_WALLET"
+    ).value.trim();
+
+
+  const receive=
+    (amount*NEW_EASY_RATES[from]) /
+    NEW_EASY_RATES[to];
+
+
+  const id=
+    "EX-"+Date.now();
+
+
+  const transaction={
+
+    id:id,
+
+    from:from,
+
+    fromName:
+      NEW_EASY_NAMES[from],
+
+    to:to,
+
+    toName:
+      NEW_EASY_NAMES[to],
+
+    amount:amount,
+
+    receive:
+      formatNEW(receive),
+
+    userWallet:wallet,
+
+    siteWallet:
+      NEW_EASY_WALLETS[from],
+
+    pair:
+      from+" → "+to,
+
+    status:
+      "در انتظار بررسی",
+
+    createdAt:
+      new Date().toLocaleString("fa-IR")
+
+  };
+
+
+  /*
+    ذخیره برای پنل مدیر
+  */
+
+  let list=[];
+
+  try{
+
+    list=JSON.parse(
+      localStorage.getItem(
+        "easyTradeTransactions"
+      )||"[]"
+    );
+
+  }catch(e){
+
+    list=[];
+
+  }
+
+
+  list.unshift(transaction);
+
+
+  localStorage.setItem(
+    "easyTradeTransactions",
+    JSON.stringify(list)
+  );
+
+
+  alert(
+    "تبادل با موفقیت ثبت شد ✅\n\n"+
+    "شماره تراکنش:\n"+
+    id+"\n\n"+
+    "جفت ارز:\n"+
+    from+" → "+to
+  );
+
+
+  NEW_EASY_CLOSE();
+
+
+  /* پاک کردن فرم */
+
+  document.getElementById(
+    "NEW_EASY_AMOUNT"
+  ).value="";
+
+
+  document.getElementById(
+    "NEW_EASY_USER_WALLET"
+  ).value="";
+
+
+  NEW_EASY_NEXT(1);
+
+}
+
+
+/* =========================================================
+   کپی آدرس
+========================================================= */
+
+function NEW_EASY_COPY_SITE(){
+
+  const address=
+    document.getElementById(
+      "NEW_EASY_SITE_WALLET"
+    ).textContent;
+
+
+  if(navigator.clipboard){
+
+    navigator.clipboard.writeText(address)
+      .then(function(){
+
+        alert("آدرس کپی شد ✅");
+
+      })
+      .catch(function(){
+
+        NEW_EASY_OLD_COPY(address);
+
+      });
+
+  }else{
+
+    NEW_EASY_OLD_COPY(address);
+
+  }
+
+}
+
+
+function NEW_EASY_OLD_COPY(text){
+
+  const area=
+    document.createElement("textarea");
+
+  area.value=text;
+
+  document.body.appendChild(area);
+
+  area.select();
+
+  document.execCommand("copy");
+
+  area.remove();
+
+  alert("آدرس کپی شد ✅");
+
+}
+
+
+/* =========================================================
+   فرمت عدد
+========================================================= */
+
+function formatNEW(value){
+
+  if(!value || value===0){
+
+    return "0";
+
+  }
+
+
+  if(value>=1){
+
+    return value
+      .toFixed(8)
+      .replace(/\.?0+$/,"");
+
+  }
+
+
+  return value
+    .toFixed(12)
+    .replace(/\.?0+$/,"");
+
+}
+
+
+/* =========================================================
+   جلوگیری از نمایش HTML ناخواسته
+========================================================= */
+
+function NEW_EASY_ESCAPE(value){
+
+  return String(value)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+
+}
+
+
+/* =========================================================
+   جلوگیری از نمایش دکمه قبلی
+========================================================= */
+
+(function(){
+
+  function removeOldExchange(){
+
+    const oldIds=[
+      "easyTradeBtn",
+      "tradeModal",
+      "easyTradeModal"
+    ];
+
+
+    oldIds.forEach(function(id){
+
+      const el=document.getElementById(id);
+
+      if(el){
+
+        el.style.display="none";
+
+      }
+
+    });
+
+
+    /*
+      اگر دکمه قدیمی متن «معامله آسان» داشته باشد،
+      آن را هم پنهان می‌کنیم.
+    */
+
+    document
+      .querySelectorAll("button")
+      .forEach(function(btn){
+
+        const text=
+          (btn.textContent||"").trim();
+
+        if(
+          text.includes("معامله آسان") &&
+          !text.includes("تبادل آسان")
+        ){
+
+          btn.style.display="none";
+
+        }
+
+      });
+
+  }
+
+
+  removeOldExchange();
+
+  setTimeout(
+    removeOldExchange,
+    300
+  );
+
+  setTimeout(
+    removeOldExchange,
+    1000
+  );
+
+})();
+
+
+/* =========================================================
+   شروع
+========================================================= */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  function(){
+
+    NEW_EASY_UPDATE();
+
+  }
+);
+
+</script>
 </body>
 </html>
 </body>

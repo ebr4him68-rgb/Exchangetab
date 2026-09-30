@@ -9912,6 +9912,62 @@ document.addEventListener(
 }
 </style>
 ```
+```
+<style>
+/* فقط جای دکمه «تبادل آسان» را تغییر می‌دهد */
+.easy-exchange-moved {
+  position: fixed !important;
+  left: 50% !important;
+  right: auto !important;
+  top: auto !important;
+  bottom: 15px !important;
+  transform: translateX(-50%) !important;
+  z-index: 999999 !important;
+}
+
+/* موبایل */
+@media (max-width: 600px) {
+  .easy-exchange-moved {
+    bottom: 10px !important;
+  }
+}
+</style>
+
+<script>
+(function () {
+  function moveEasyExchangeButton() {
+    const elements = document.querySelectorAll(
+      'button, a, div, span'
+    );
+
+    elements.forEach(function (el) {
+      const text = (el.textContent || '').trim();
+
+      /* فقط عنصری که خودش متن «تبادل آسان» دارد */
+      if (
+        text === 'تبادل آسان' ||
+        text === '⚡ تبادل آسان' ||
+        text === '🔄 تبادل آسان'
+      ) {
+        el.classList.add('easy-exchange-moved');
+      }
+    });
+  }
+
+  moveEasyExchangeButton();
+
+  /* اگر سایت دکمه را بعداً ایجاد کند */
+  const observer = new MutationObserver(function () {
+    moveEasyExchangeButton();
+  });
+
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+})();
+</script>
+```
 
 </body>
 </html>

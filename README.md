@@ -1,398 +1,376 @@
-Exchange tab
 
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>صرافی آنلاین</title>
 
 <style>
-:root{
-  --main:#00c853;
-  --main2:#00a844;
-  --bg:#07130d;
-  --card:#0d2116;
-  --text:#fff;
-  --muted:#9bb0a2;
-  --border:#183b26;
-  --danger:#ff5252;
-  --warning:#ffb300;
-}
-
 *{box-sizing:border-box}
-
 body{
-  margin:0;
-  font-family:Tahoma,Arial,sans-serif;
-  background:
-    radial-gradient(circle at top,#12351e 0,#07130d 45%,#030805 100%);
-  color:var(--text);
-  min-height:100vh;
+    margin:0;
+    font-family:Tahoma,Arial,sans-serif;
+    background:linear-gradient(135deg,#ffd600,#ffb300);
+    color:#111;
+    min-height:100vh;
 }
-
 header{
-  position:sticky;
-  top:0;
-  z-index:50;
-  background:rgba(4,12,7,.92);
-  backdrop-filter:blur(12px);
-  border-bottom:1px solid var(--border);
-  padding:15px;
+    background:rgba(255,255,255,.95);
+    padding:18px;
+    text-align:center;
+    box-shadow:0 4px 20px #0002;
+    position:sticky;
+    top:0;
+    z-index:10;
 }
-
-.header{
-  max-width:1100px;
-  margin:auto;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:15px;
-}
-
-.logo{
-  font-size:22px;
-  font-weight:bold;
-  color:var(--main);
-}
-
-.logo span{
-  color:white;
-}
-
-.settings{
-  background:#10261a;
-  border:1px solid var(--border);
-  color:white;
-  padding:10px 14px;
-  border-radius:12px;
-  cursor:pointer;
-}
+header h1{margin:0;font-size:27px}
+header p{margin:8px 0 0;color:#555}
 
 .container{
-  width:min(1100px,94%);
-  margin:25px auto 60px;
+    width:min(1200px,94%);
+    margin:25px auto;
 }
 
-.hero{
-  text-align:center;
-  padding:25px 10px;
+.live-status{
+    background:#111;
+    color:#fff;
+    padding:13px 18px;
+    border-radius:14px;
+    margin-bottom:18px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:10px;
+}
+.live-dot{
+    width:10px;
+    height:10px;
+    display:inline-block;
+    border-radius:50%;
+    background:#20e070;
+    box-shadow:0 0 10px #20e070;
+    margin-left:7px;
+}
+#lastUpdate{color:#ddd;font-size:13px}
+
+.card{
+    background:rgba(255,255,255,.96);
+    border-radius:20px;
+    padding:22px;
+    margin-bottom:22px;
+    box-shadow:0 8px 30px #0002;
 }
 
-.hero h1{
-  margin:0 0 10px;
-  font-size:30px;
-}
-
-.hero p{
-  color:var(--muted);
-  margin:0;
-}
-
-.section-title{
-  margin:28px 0 14px;
-  font-size:20px;
+.card h2{
+    margin-top:0;
+    text-align:center;
 }
 
 .market-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:14px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:14px;
 }
 
 .market{
-  background:linear-gradient(145deg,#10271a,#09170e);
-  border:1px solid var(--border);
-  border-radius:18px;
-  padding:18px;
-  box-shadow:0 8px 30px rgba(0,0,0,.2);
+    background:#fff;
+    border:2px solid #eee;
+    border-radius:16px;
+    padding:17px;
+    position:relative;
+}
+.market .coin{
+    font-size:21px;
+    font-weight:bold;
+}
+.market .price{
+    font-size:19px;
+    margin-top:10px;
+    font-weight:bold;
+}
+.market .toman{
+    color:#555;
+    margin-top:7px;
+    font-size:14px;
+}
+.source{
+    margin-top:10px;
+    font-size:12px;
+    color:#777;
+}
+.online{
+    color:#0a9b43;
+    font-size:12px;
+}
+.offline{
+    color:#d00;
+    font-size:12px;
 }
 
-.market-top{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+.source-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+    margin-top:15px;
+}
+.source-box{
+    background:#f7f7f7;
+    border-radius:12px;
+    padding:12px;
+    text-align:center;
+    border:1px solid #ddd;
+}
+.source-box strong{
+    display:block;
+    margin-bottom:7px;
+}
+.source-price{
+    font-weight:bold;
+    font-size:14px;
+}
+.source-status{
+    font-size:11px;
+    margin-top:5px;
 }
 
-.coin{
-  font-size:18px;
-  font-weight:bold;
+.exchange-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
 }
 
-.live{
-  display:flex;
-  align-items:center;
-  gap:6px;
-  color:#64ff91;
-  font-size:11px;
+.select-box{
+    background:#fafafa;
+    border:3px solid #ddd;
+    border-radius:18px;
+    padding:18px;
 }
 
-.dot{
-  width:8px;
-  height:8px;
-  border-radius:50%;
-  background:#00e676;
-  box-shadow:0 0 10px #00e676;
-  animation:blink 1.2s infinite;
+.select-box h3{
+    margin-top:0;
 }
 
-@keyframes blink{
-  50%{opacity:.25}
+select,input{
+    width:100%;
+    padding:16px;
+    border-radius:13px;
+    border:2px solid #ccc;
+    font-size:17px;
+    outline:none;
+    background:white;
 }
 
-.price{
-  margin-top:16px;
-  font-size:20px;
-  font-weight:bold;
+select:focus,input:focus{
+    border-color:#ffb000;
 }
 
-.usdt,.toman{
-  margin-top:7px;
-  color:var(--muted);
-  font-size:13px;
+.toggle{
+    width:100%;
+    margin-top:12px;
+    padding:13px;
+    border:0;
+    border-radius:12px;
+    cursor:pointer;
+    font-weight:bold;
+    background:#111;
+    color:white;
 }
 
-.card{
-  background:rgba(10,29,17,.94);
-  border:1px solid var(--border);
-  border-radius:20px;
-  padding:20px;
-  margin-top:20px;
-  box-shadow:0 10px 35px rgba(0,0,0,.25);
+.toggle.active{
+    background:#159447;
 }
 
-.form-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:14px;
+.amount-box{
+    margin-top:20px;
 }
 
-.field{
-  margin-bottom:14px;
+.rate-box{
+    background:#111;
+    color:#fff;
+    padding:18px;
+    border-radius:16px;
+    margin-top:20px;
+    text-align:center;
 }
 
-label{
-  display:block;
-  margin-bottom:7px;
-  font-size:13px;
-  color:#b9c9bf;
-}
-
-input,select{
-  width:100%;
-  background:#06100a;
-  color:white;
-  border:1px solid #244a31;
-  border-radius:12px;
-  padding:13px;
-  outline:none;
-}
-
-input:focus,select:focus{
-  border-color:var(--main);
-}
-
-button{
-  border:0;
-  cursor:pointer;
-  font-family:inherit;
-}
-
-.primary{
-  width:100%;
-  padding:14px;
-  border-radius:13px;
-  color:#001c0a;
-  font-weight:bold;
-  background:linear-gradient(135deg,var(--main),#72ff9b);
-  margin-top:5px;
+.rate-box .big{
+    font-size:21px;
+    font-weight:bold;
+    margin-top:8px;
 }
 
 .result{
-  display:none;
-  margin-top:15px;
-  background:#07170d;
-  border:1px solid #205f34;
-  border-radius:15px;
-  padding:15px;
+    margin-top:20px;
+    background:#fff8d9;
+    border:2px solid #ffd000;
+    border-radius:16px;
+    padding:17px;
 }
 
 .result-row{
-  display:flex;
-  justify-content:space-between;
-  gap:15px;
-  padding:7px 0;
-  border-bottom:1px solid #14311e;
+    display:flex;
+    justify-content:space-between;
+    padding:10px 0;
+    border-bottom:1px solid #ddd;
+    gap:10px;
 }
 
-.result-row:last-child{
-  border-bottom:0;
+.result-row:last-child{border-bottom:0}
+
+.submit{
+    width:100%;
+    padding:18px;
+    margin-top:18px;
+    border:0;
+    border-radius:15px;
+    background:#111;
+    color:#fff;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
 }
 
-.wallet-box{
-  background:#06100a;
-  border:1px dashed #2d633c;
-  padding:14px;
-  border-radius:13px;
-  word-break:break-all;
-  line-height:1.8;
+.submit:hover{background:#222}
+
+.wallet-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:14px;
+}
+
+.wallet{
+    border:2px solid #eee;
+    border-radius:15px;
+    padding:15px;
+    background:#fafafa;
+}
+
+.wallet-title{
+    font-weight:bold;
+    margin-bottom:8px;
+}
+
+.wallet-address{
+    word-break:break-all;
+    background:#fff;
+    border:1px solid #ddd;
+    padding:11px;
+    border-radius:10px;
+    font-size:13px;
 }
 
 .copy{
-  background:#163c24;
-  color:white;
-  padding:8px 12px;
-  border-radius:9px;
-  margin-top:8px;
+    width:100%;
+    padding:11px;
+    margin-top:9px;
+    border:0;
+    border-radius:10px;
+    background:#ffbd00;
+    cursor:pointer;
+    font-weight:bold;
 }
 
 .track{
-  display:flex;
-  gap:10px;
+    display:flex;
+    gap:10px;
 }
 
-.track input{
-  flex:1;
-}
+.track input{flex:1}
 
 .track button{
-  background:var(--main);
-  color:#001c0a;
-  padding:0 20px;
-  border-radius:12px;
-  font-weight:bold;
-}
-
-/* transactions */
-
-.transactions{
-  margin-top:35px;
+    width:150px;
+    border:0;
+    border-radius:12px;
+    background:#111;
+    color:white;
+    font-weight:bold;
 }
 
 .transaction{
-  background:linear-gradient(145deg,#0c2014,#07140c);
-  border:1px solid var(--border);
-  border-radius:17px;
-  padding:16px;
-  margin-bottom:12px;
-}
-
-.tx-top{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-  margin-bottom:12px;
-}
-
-.tx-code{
-  font-weight:bold;
-  color:var(--main);
+    background:#fafafa;
+    border:2px solid #eee;
+    padding:15px;
+    border-radius:15px;
+    margin-top:12px;
 }
 
 .status{
-  padding:6px 10px;
-  border-radius:30px;
-  font-size:11px;
+    display:inline-block;
+    padding:6px 10px;
+    border-radius:8px;
+    font-size:12px;
+    font-weight:bold;
 }
 
 .pending{
-  background:rgba(255,179,0,.13);
-  color:#ffc107;
-  border:1px solid rgba(255,179,0,.35);
+    background:#fff0a8;
+    color:#765900;
 }
 
 .done{
-  background:rgba(0,230,118,.12);
-  color:#00e676;
-  border:1px solid rgba(0,230,118,.35);
+    background:#bdf5d1;
+    color:#087331;
 }
 
-.tx-info{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:8px;
-  color:#b9c9bf;
-  font-size:13px;
-}
-
-.address{
-  word-break:break-all;
-  color:#fff;
-}
-
-.empty{
-  text-align:center;
-  padding:25px;
-  color:#7f9687;
-}
-
-.modal{
-  display:none;
-  position:fixed;
-  inset:0;
-  z-index:100;
-  background:rgba(0,0,0,.72);
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-}
-
-.modal-box{
-  width:min(430px,100%);
-  background:#0a1b10;
-  border:1px solid var(--border);
-  border-radius:20px;
-  padding:20px;
-}
-
-.theme-list{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-  margin-top:15px;
+.settings{
+    text-align:center;
 }
 
 .theme-btn{
-  padding:13px;
-  border-radius:12px;
-  color:white;
-  background:#14251a;
-  border:1px solid #284c33;
+    border:0;
+    padding:12px 18px;
+    border-radius:10px;
+    margin:5px;
+    cursor:pointer;
+    font-weight:bold;
 }
 
-.close{
-  background:#222;
-  color:white;
-  padding:10px;
-  border-radius:10px;
-  width:100%;
-  margin-top:15px;
+.yellow{background:#ffd000}
+.blue{background:#56a8ff}
+.purple{background:#b77aff}
+.orange{background:#ff8b32}
+
+.note{
+    background:#fff8d9;
+    border-right:5px solid #ffb000;
+    padding:14px;
+    border-radius:10px;
+    line-height:1.8;
 }
 
-.notice{
-  margin-top:12px;
-  color:#8ea796;
-  font-size:12px;
-  line-height:1.8;
+footer{
+    text-align:center;
+    padding:25px;
+    color:#333;
 }
 
-@media(max-width:650px){
-  .form-grid,
-  .tx-info{
-    grid-template-columns:1fr;
-  }
+@media(max-width:800px){
+    .market-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+    .exchange-grid{
+        grid-template-columns:1fr;
+    }
+    .wallet-grid{
+        grid-template-columns:1fr;
+    }
+    .source-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
 
-  .track{
-    flex-direction:column;
-  }
-
-  .track button{
-    padding:13px;
-  }
-
-  .hero h1{
-    font-size:25px;
-  }
+@media(max-width:500px){
+    .market-grid{
+        grid-template-columns:1fr;
+    }
+    .track{
+        flex-direction:column;
+    }
+    .track button{
+        width:100%;
+        padding:15px;
+    }
 }
 </style>
 </head>
@@ -400,805 +378,1774 @@ button{
 <body>
 
 <header>
-  <div class="header">
-    <div class="logo">صرافی <span>آنلاین</span></div>
-    <button class="settings" onclick="openSettings()">⚙ تنظیمات</button>
-  </div>
+    <h1>💱 صرافی آنلاین</h1>
+    <p>قیمت لحظه‌ای ارزهای دیجیتال</p>
 </header>
 
 <div class="container">
 
-<section class="hero">
-  <h1>تبادل سریع ارزهای دیجیتال</h1>
-  <p>تبدیل ارز، ثبت درخواست و پیگیری تراکنش</p>
-</section>
-
-<h2 class="section-title">قیمت لحظه‌ای</h2>
-
-<div class="market-grid">
-
-  <div class="market">
-    <div class="market-top">
-      <div class="coin">₿ BTC</div>
-      <div class="live"><span class="dot"></span> آنلاین</div>
-    </div>
-    <div class="price" id="btcPrice">در حال دریافت...</div>
-    <div class="usdt" id="btcUsdt">USDT: --</div>
-    <div class="toman" id="btcToman">تومان: --</div>
-  </div>
-
-  <div class="market">
-    <div class="market-top">
-      <div class="coin">Ð DOGE</div>
-      <div class="live"><span class="dot"></span> آنلاین</div>
-    </div>
-    <div class="price" id="dogePrice">در حال دریافت...</div>
-    <div class="usdt" id="dogeUsdt">USDT: --</div>
-    <div class="toman" id="dogeToman">تومان: --</div>
-  </div>
-
-  <div class="market">
-    <div class="market-top">
-      <div class="coin">Ł LTC</div>
-      <div class="live"><span class="dot"></span> آنلاین</div>
-    </div>
-    <div class="price" id="ltcPrice">در حال دریافت...</div>
-    <div class="usdt" id="ltcUsdt">USDT: --</div>
-    <div class="toman" id="ltcToman">تومان: --</div>
-  </div>
-
-  <div class="market">
-    <div class="market-top">
-      <div class="coin">₮ USDT</div>
-      <div class="live"><span class="dot"></span> آنلاین</div>
-    </div>
-    <div class="price" id="usdtPrice">1 USDT</div>
-    <div class="usdt">USDT: 1</div>
-    <div class="toman" id="usdtToman">تومان: --</div>
-  </div>
-
-</div>
-
-<h2 class="section-title">تبادل ارز</h2>
-
-<div class="card">
-
-  <div class="form-grid">
-
-    <div class="field">
-      <label>ارزی که می‌فرستید</label>
-      <select id="fromCoin" onchange="calculate()">
-        <option value="BTC">BTC</option>
-        <option value="DOGE">DOGE</option>
-        <option value="LTC">LTC</option>
-        <option value="USDT">USDT</option>
-        <option value="TRX">TRX</option>
-        <option value="BCH">BCH</option>
-      </select>
+    <div class="live-status">
+        <div>
+            <span class="live-dot"></span>
+            قیمت‌ها آنلاین هستند
+        </div>
+        <div id="lastUpdate">در حال دریافت قیمت...</div>
     </div>
 
-    <div class="field">
-      <label>ارزی که دریافت می‌کنید</label>
-      <select id="toCoin" onchange="calculate()">
-        <option value="DOGE">DOGE</option>
-        <option value="BTC">BTC</option>
-        <option value="LTC">LTC</option>
-        <option value="USDT">USDT</option>
-        <option value="TRX">TRX</option>
-        <option value="BCH">BCH</option>
-      </select>
-    </div>
+    <!-- بازار -->
+    <section class="card">
+        <h2>📊 قیمت آنلاین ارزها</h2>
 
-  </div>
+        <div id="marketGrid" class="market-grid"></div>
 
-  <div class="field">
-    <label>مقدار ارز</label>
-    <input id="amount" type="number" step="any" placeholder="مثلاً 100" oninput="calculate()">
-  </div>
+        <div class="source-grid">
 
-  <div class="result" id="result">
-    <div class="result-row">
-      <span>مقدار دریافتی</span>
-      <strong id="receiveAmount">--</strong>
-    </div>
-
-    <div class="result-row">
-      <span>ارزش دلاری</span>
-      <strong id="receiveUsdt">-- USDT</strong>
-    </div>
-
-    <div class="result-row">
-      <span>ارزش تومانی</span>
-      <strong id="receiveToman">-- تومان</strong>
-    </div>
-  </div>
-
-  <div class="field" style="margin-top:15px">
-    <label>آدرس کیف پول دریافت‌کننده شما</label>
-    <input id="userAddress" placeholder="آدرس کیف پول خود را وارد کنید">
-  </div>
-
-  <button class="primary" onclick="submitTransaction()">
-    ثبت درخواست تبادل
-  </button>
-
-</div>
-
-<h2 class="section-title">آدرس‌های واریز صرافی</h2>
-
-<div class="card">
-
-  <div class="field">
-    <label>ارز انتخابی برای واریز</label>
-
-    <select id="depositCoin" onchange="showDepositAddress()">
-      <option value="BTC">BTC</option>
-      <option value="BCH">BCH</option>
-      <option value="TRX">TRX</option>
-      <option value="LTC">LTC</option>
-      <option value="DOGE">DOGE</option>
-      <option value="USDT">USDT BEP20</option>
-    </select>
-  </div>
-
-  <div class="wallet-box">
-    <div id="depositAddress"></div>
-    <button class="copy" onclick="copyDeposit()">کپی آدرس</button>
-  </div>
-
-  <div class="notice">
-    پس از ارسال ارز، درخواست خود را ثبت کنید تا تراکنش در پنل پایین سایت نمایش داده شود.
-  </div>
-
-</div>
-
-<h2 class="section-title">پیگیری تراکنش</h2>
-
-<div class="card">
-
-  <div class="track">
-    <input id="trackingInput" placeholder="کد پیگیری را وارد کنید">
-    <button onclick="trackTransaction()">پیگیری</button>
-  </div>
-
-  <div id="trackResult" class="result"></div>
-
-</div>
-
-<!-- پنل عمومی تراکنش‌ها -->
-
-<section class="transactions">
-
-  <h2 class="section-title">
-    تراکنش‌های صرافی
-  </h2>
-
-  <div id="transactionList">
-    <div class="empty">
-      هنوز تراکنشی ثبت نشده است.
-    </div>
-  </div>
-
-</section>
-
-</div>
-
-<!-- تنظیمات -->
-
-<div class="modal" id="settingsModal">
-
-  <div class="modal-box">
-
-    <h3>تنظیمات سایت</h3>
-
-    <p style="color:#9bb0a2;font-size:13px">
-      انتخاب رنگ سایت
-    </p>
-
-    <div class="theme-list">
-
-      <button class="theme-btn" onclick="setTheme('green')">
-        🟢 سبز
-      </button>
-
-      <button class="theme-btn" onclick="setTheme('blue')">
-        🔵 آبی
-      </button>
-
-      <button class="theme-btn" onclick="setTheme('purple')">
-        🟣 بنفش
-      </button>
-
-      <button class="theme-btn" onclick="setTheme('orange')">
-        🟠 نارنجی
-      </button>
-
-    </div>
-
-    <button class="close" onclick="closeSettings()">بستن</button>
-
-  </div>
-
-</div>
-
-<script>
-
-/* =========================
-   آدرس‌های صرافی
-========================= */
-
-const wallets = {
-
-  BTC:
-  "1Q99GpYnEU9yELNLjiJUWopNT1HatRYQrV",
-
-  BCH:
-  "bitcoincash:qrj64uh0xlah2wzksudq3g5eeg2ewdyg6urq5kywku",
-
-  TRX:
-  "TRb33idZSi7svRyBTRsEKq8BfL54ADYMh3",
-
-  LTC:
-  "LZeRDFWbPLpuqeAw7m5i5YcYiu32KRAM6c",
-
-  DOGE:
-  "DA9b1AqJqgsdFNuJNjzRo2g5wFj1rEeQLk",
-
-  USDT:
-  "0x3765C083F36B7D874d3a6249436a84C9e9bDAbA6"
-
-};
-
-
-/* =========================
-   قیمت‌ها
-   این مقادیر موقت هستند.
-   برای قیمت زنده بیت برگ باید
-   API واقعی آن سرویس وصل شود.
-========================= */
-
-let prices = {
-
-  BTC: 110000,
-  DOGE: 0.25,
-  LTC: 100,
-  USDT: 1,
-  TRX: 0.34,
-  BCH: 500
-
-};
-
-let tomanUSDT = 100000;
-
-
-/* =========================
-   نمایش آدرس واریز
-========================= */
-
-function showDepositAddress(){
-
-  const coin =
-    document.getElementById("depositCoin").value;
-
-  document.getElementById("depositAddress").innerText =
-    wallets[coin];
-
-}
-
-showDepositAddress();
-
-
-function copyDeposit(){
-
-  const text =
-    document.getElementById("depositAddress").innerText;
-
-  navigator.clipboard.writeText(text);
-
-  alert("آدرس کپی شد");
-
-}
-
-
-/* =========================
-   محاسبه تبدیل
-========================= */
-
-function calculate(){
-
-  const amount =
-    parseFloat(document.getElementById("amount").value);
-
-  const from =
-    document.getElementById("fromCoin").value;
-
-  const to =
-    document.getElementById("toCoin").value;
-
-  const result =
-    document.getElementById("result");
-
-  if(!amount || amount <= 0){
-
-    result.style.display = "none";
-
-    return;
-  }
-
-  const usdValue =
-    amount * prices[from];
-
-  const receive =
-    usdValue / prices[to];
-
-  const toman =
-    usdValue * tomanUSDT;
-
-  result.style.display = "block";
-
-  document.getElementById("receiveAmount").innerText =
-    receive.toLocaleString(undefined,{
-      maximumFractionDigits:8
-    }) + " " + to;
-
-  document.getElementById("receiveUsdt").innerText =
-    usdValue.toLocaleString(undefined,{
-      maximumFractionDigits:2
-    }) + " USDT";
-
-  document.getElementById("receiveToman").innerText =
-    toman.toLocaleString() + " تومان";
-
-}
-
-
-/* =========================
-   کد پیگیری
-========================= */
-
-function generateTracking(){
-
-  const random =
-    Math.random().toString(36)
-    .substring(2,8)
-    .toUpperCase();
-
-  return "EX-" +
-    Date.now().toString().slice(-6) +
-    "-" +
-    random;
-
-}
-
-
-/* =========================
-   ثبت تراکنش
-========================= */
-
-function submitTransaction(){
-
-  const amount =
-    parseFloat(document.getElementById("amount").value);
-
-  const from =
-    document.getElementById("fromCoin").value;
-
-  const to =
-    document.getElementById("toCoin").value;
-
-  const address =
-    document.getElementById("userAddress").value.trim();
-
-  if(!amount || amount <= 0){
-
-    alert("مقدار ارز را وارد کنید");
-
-    return;
-  }
-
-  if(!address){
-
-    alert("آدرس دریافت‌کننده را وارد کنید");
-
-    return;
-  }
-
-  if(from === to){
-
-    alert("ارز مبدا و مقصد نباید یکسان باشند");
-
-    return;
-  }
-
-  const usd =
-    amount * prices[from];
-
-  const receive =
-    usd / prices[to];
-
-  const tx = {
-
-    id:generateTracking(),
-
-    from:from,
-
-    to:to,
-
-    amount:amount,
-
-    receive:receive,
-
-    usdt:usd,
-
-    toman:usd * tomanUSDT,
-
-    address:address,
-
-    status:"در حال بررسی",
-
-    time:new Date().toLocaleString("fa-IR")
-
-  };
-
-
-  /*
-     ثبت محلی برای نمایش فوری.
-     
-     توجه:
-     localStorage فقط در همین مرورگر ذخیره می‌کند.
-     برای نمایش مشترک بین تمام کاربران،
-     باید API ذخیره‌سازی مشترک وصل شود.
-  */
-
-  const list =
-    JSON.parse(
-      localStorage.getItem("exchangeTransactions") || "[]"
-    );
-
-  list.unshift(tx);
-
-  localStorage.setItem(
-    "exchangeTransactions",
-    JSON.stringify(list)
-  );
-
-  renderTransactions();
-
-  alert(
-    "درخواست شما ثبت شد.\n\n" +
-    "کد پیگیری:\n" +
-    tx.id
-  );
-
-  document.getElementById("trackingInput").value =
-    tx.id;
-
-}
-
-
-/* =========================
-   نمایش تراکنش‌ها
-========================= */
-
-function renderTransactions(){
-
-  const list =
-    JSON.parse(
-      localStorage.getItem("exchangeTransactions") || "[]"
-    );
-
-  const box =
-    document.getElementById("transactionList");
-
-  if(!list.length){
-
-    box.innerHTML =
-      '<div class="empty">هنوز تراکنشی ثبت نشده است.</div>';
-
-    return;
-  }
-
-  box.innerHTML =
-    list.map(tx => {
-
-      const statusClass =
-        tx.status === "انجام شد"
-        ? "done"
-        : "pending";
-
-      return `
-
-        <div class="transaction">
-
-          <div class="tx-top">
-
-            <div class="tx-code">
-              ${tx.id}
+            <div class="source-box">
+                <strong>Binance</strong>
+                <div id="binanceStatus" class="source-status">در حال اتصال...</div>
             </div>
 
-            <div class="status ${statusClass}">
-              ${tx.status}
+            <div class="source-box">
+                <strong>LBank</strong>
+                <div id="lbankStatus" class="source-status">در حال اتصال...</div>
             </div>
 
-          </div>
-
-          <div class="tx-info">
-
-            <div>
-              نوع:
-              <strong>
-                تبادل
-              </strong>
+            <div class="source-box">
+                <strong>Bitbarg</strong>
+                <div id="bitbargStatus" class="source-status">API نیاز دارد</div>
             </div>
 
-            <div>
-              ارز:
-              <strong>
-                ${tx.from} → ${tx.to}
-              </strong>
+            <div class="source-box">
+                <strong>Tabdeal</strong>
+                <div id="tabdealStatus" class="source-status">API نیاز دارد</div>
             </div>
 
-            <div>
-              مقدار:
-              <strong>
-                ${Number(tx.amount).toLocaleString()}
-                ${tx.from}
-              </strong>
+        </div>
+    </section>
+
+
+    <!-- تبدیل -->
+    <section class="card">
+
+        <h2>🔄 تبدیل ارز</h2>
+
+        <div class="exchange-grid">
+
+            <div class="select-box">
+                <h3>ارزی که ارسال می‌کنید</h3>
+
+                <select id="sendCoin"></select>
+
+                <button id="sendToggle"
+                        class="toggle active"
+                        onclick="toggleSend()">
+                    فعال است
+                </button>
             </div>
 
-            <div>
-              دریافتی:
-              <strong>
-                ${Number(tx.receive).toLocaleString(undefined,{
-                  maximumFractionDigits:8
-                })}
-                ${tx.to}
-              </strong>
+            <div class="select-box">
+                <h3>ارزی که دریافت می‌کنید</h3>
+
+                <select id="receiveCoin"></select>
+
+                <button id="receiveToggle"
+                        class="toggle active"
+                        onclick="toggleReceive()">
+                    فعال است
+                </button>
             </div>
-
-            <div>
-              ارزش:
-              <strong>
-                ${Number(tx.usdt).toLocaleString(undefined,{
-                  maximumFractionDigits:2
-                })}
-                USDT
-              </strong>
-            </div>
-
-            <div>
-              زمان:
-              ${tx.time}
-            </div>
-
-          </div>
-
-          <div style="margin-top:12px">
-
-            <div style="font-size:12px;color:#899f90">
-              آدرس دریافت‌کننده
-            </div>
-
-            <div class="address">
-              ${tx.address}
-            </div>
-
-          </div>
 
         </div>
 
-      `;
+        <div class="amount-box">
+            <label>مقدار ارز ارسالی</label>
+            <input
+                id="amount"
+                type="number"
+                step="any"
+                placeholder="مثلاً 0.01"
+                oninput="calculate()">
+        </div>
 
-    }).join("");
+        <div class="rate-box">
 
-}
+            <div>نرخ لحظه‌ای تبدیل</div>
 
+            <div id="exchangeRate" class="big">
+                در انتظار قیمت...
+            </div>
 
-/* =========================
-   پیگیری
-========================= */
+            <div id="rateSource" style="margin-top:8px;color:#bbb">
+                منابع قیمت: Binance + LBank
+            </div>
 
-function trackTransaction(){
+        </div>
 
-  const code =
-    document.getElementById("trackingInput")
-    .value
-    .trim()
-    .toUpperCase();
+        <div class="result">
 
-  const list =
-    JSON.parse(
-      localStorage.getItem("exchangeTransactions") || "[]"
-    );
+            <div class="result-row">
+                <span>مقدار دریافتی</span>
+                <strong id="receiveAmount">0</strong>
+            </div>
 
-  const tx =
-    list.find(x => x.id === code);
+            <div class="result-row">
+                <span>ارزش ارسالی به USDT</span>
+                <strong id="sendUSDT">0 USDT</strong>
+            </div>
 
-  const box =
-    document.getElementById("trackResult");
+            <div class="result-row">
+                <span>ارزش دریافتی به USDT</span>
+                <strong id="receiveUSDT">0 USDT</strong>
+            </div>
 
-  box.style.display = "block";
+            <div class="result-row">
+                <span>ارزش ارسالی به تومان</span>
+                <strong id="sendToman">0 تومان</strong>
+            </div>
 
-  if(!tx){
+            <div class="result-row">
+                <span>ارزش دریافتی به تومان</span>
+                <strong id="receiveToman">0 تومان</strong>
+            </div>
 
-    box.innerHTML =
-      "❌ تراکنشی با این کد پیدا نشد.";
+        </div>
 
-    return;
-  }
+        <div style="margin-top:20px">
+            <label>آدرس کیف پول دریافت‌کننده</label>
+            <input
+                id="recipient"
+                type="text"
+                placeholder="آدرس کیف پول خود را وارد کنید">
+        </div>
 
-  box.innerHTML = `
+        <button class="submit" onclick="submitTransaction()">
+            ثبت درخواست تبدیل
+        </button>
 
-    <div class="result-row">
-      <span>کد پیگیری</span>
-      <strong>${tx.id}</strong>
-    </div>
+    </section>
 
-    <div class="result-row">
-      <span>وضعیت</span>
-      <strong>${tx.status}</strong>
-    </div>
 
-    <div class="result-row">
-      <span>تبادل</span>
-      <strong>${tx.from} → ${tx.to}</strong>
-    </div>
+    <!-- آدرس‌ها -->
+    <section class="card">
 
-    <div class="result-row">
-      <span>مقدار دریافتی</span>
-      <strong>
-        ${Number(tx.receive).toLocaleString(undefined,{
-          maximumFractionDigits:8
-        })} ${tx.to}
-      </strong>
-    </div>
+        <h2>💰 آدرس‌های واریز</h2>
 
-  `;
+        <div class="wallet-grid" id="walletGrid"></div>
 
-}
+    </section>
 
 
-/* =========================
-   تنظیمات رنگ
-========================= */
+    <!-- پیگیری -->
+    <section class="card">
 
-function openSettings(){
+        <h2>🔎 پیگیری تراکنش</h2>
 
-  document.getElementById("settingsModal")
-    .style.display = "flex";
+        <div class="track">
 
-}
+            <input
+                id="trackingInput"
+                placeholder="کد پیگیری را وارد کنید">
 
-function closeSettings(){
+            <button onclick="trackTransaction()">
+                پیگیری
+            </button>
 
-  document.getElementById("settingsModal")
-    .style.display = "none";
+        </div>
 
-}
+        <div id="trackResult"></div>
 
-function setTheme(theme){
+    </section>
 
-  const root =
-    document.documentElement;
 
-  if(theme === "green"){
+    <!-- تراکنش‌ها -->
+    <section class="card">
 
-    root.style.setProperty("--main","#00c853");
-    root.style.setProperty("--main2","#00a844");
+        <h2>📋 تراکنش‌های اخیر</h2>
 
-  }
+        <div id="transactions"></div>
 
-  if(theme === "blue"){
+    </section>
 
-    root.style.setProperty("--main","#2196f3");
-    root.style.setProperty("--main2","#1976d2");
 
-  }
+    <!-- تنظیمات -->
+    <section class="card settings">
 
-  if(theme === "purple"){
+        <h2>🎨 تنظیمات ظاهر</h2>
 
-    root.style.setProperty("--main","#9c27b0");
-    root.style.setProperty("--main2","#7b1fa2");
+        <button class="theme-btn yellow"
+                onclick="setTheme('yellow')">
+            زرد
+        </button>
 
-  }
+        <button class="theme-btn blue"
+                onclick="setTheme('blue')">
+            آبی
+        </button>
 
-  if(theme === "orange"){
+        <button class="theme-btn purple"
+                onclick="setTheme('purple')">
+            بنفش
+        </button>
 
-    root.style.setProperty("--main","#ff9800");
-    root.style.setProperty("--main2","#f57c00");
+        <button class="theme-btn orange"
+                onclick="setTheme('orange')">
+            نارنجی
+        </button>
 
-  }
+    </section>
 
-  localStorage.setItem("siteTheme",theme);
+</div>
 
-}
+<footer>
+    صرافی آنلاین © 2026
+</footer>
 
 
-/* =========================
-   بارگذاری رنگ ذخیره شده
-========================= */
+<script>
 
-const savedTheme =
-  localStorage.getItem("siteTheme");
+/* =========================================================
+   تنظیمات
+========================================================= */
 
-if(savedTheme){
-
-  setTheme(savedTheme);
-
-}
-
-
-/* =========================
-   قیمت‌های نمایشی
-========================= */
-
-function updatePrices(){
-
-  document.getElementById("btcPrice").innerText =
-    "$" + prices.BTC.toLocaleString();
-
-  document.getElementById("dogePrice").innerText =
-    "$" + prices.DOGE;
-
-  document.getElementById("ltcPrice").innerText =
-    "$" + prices.LTC;
-
-  document.getElementById("btcUsdt").innerText =
-    "USDT: " + prices.BTC.toLocaleString();
-
-  document.getElementById("dogeUsdt").innerText =
-    "USDT: " + prices.DOGE;
-
-  document.getElementById("ltcUsdt").innerText =
-    "USDT: " + prices.LTC;
-
-  document.getElementById("btcToman").innerText =
-    "تومان: " +
-    (prices.BTC * tomanUSDT).toLocaleString();
-
-  document.getElementById("dogeToman").innerText =
-    "تومان: " +
-    (prices.DOGE * tomanUSDT).toLocaleString();
-
-  document.getElementById("ltcToman").innerText =
-    "تومان: " +
-    (prices.LTC * tomanUSDT).toLocaleString();
-
-  document.getElementById("usdtToman").innerText =
-    "تومان: " +
-    tomanUSDT.toLocaleString();
-
-}
-
-updatePrices();
-
-renderTransactions();
+const REFRESH_SECONDS = 20;
 
 
 /*
-=====================================================
-محل اتصال API واقعی قیمت بیت برگ
-=====================================================
+  Binance:
+  API عمومی قیمت بازار
+*/
+const BINANCE_API =
+    "https://data-api.binance.vision/api/v3/ticker/price";
 
-وقتی endpoint رسمی API بیت برگ مشخص شد،
-فقط همین تابع باید به API وصل شود:
 
-async function getBitbargPrices(){
+/*
+  LBank:
+  API عمومی بازار
+*/
+const LBANK_API =
+    "https://api.lbkex.com/v2/ticker/24hr.do";
 
-   const response =
-      await fetch("BITBARG_API_URL");
 
-   const data =
-      await response.json();
+/*
+  مهم:
+  برای Bitbarg و Tabdeal عمداً URL ساختگی قرار نداده‌ایم.
 
-   // قیمت‌های BTC / DOGE / LTC / ...
-   // از پاسخ بیت برگ خوانده می‌شوند.
+  وقتی API رسمی آنها مشخص شد فقط این دو مقدار را تغییر می‌دهیم.
+*/
+const BITBARG_API_URL = "";
+
+const TABDEAL_API_URL = "";
+
+
+/* =========================================================
+   کیف پول‌ها
+========================================================= */
+
+const wallets = {
+
+    BTC:
+        "1Q99GpYnEU9yELNLjiJUWopNT1HatRYQrV",
+
+    BCH:
+        "bitcoincash:qrj64uh0xlah2wzksudq3g5eeg2ewdyg6urq5kywku",
+
+    TRX:
+        "TRb33idZSi7svRyBTRsEKq8BfL54ADYMh3",
+
+    LTC:
+        "LZeRDFWbPLpuqeAw7m5i5YcYiu32KRAM6c",
+
+    DOGE:
+        "DA9b1AqJqgsdFNuJNjzRo2g5wFj1rEeQLk",
+
+    USDT:
+        "0x3765C083F36B7D874d3a6249436a84C9e9bDAbA6"
+
+};
+
+
+/* =========================================================
+   اطلاعات ارزها
+========================================================= */
+
+const coins = {
+
+    BTC:{
+        name:"Bitcoin",
+        icon:"₿"
+    },
+
+    BCH:{
+        name:"Bitcoin Cash",
+        icon:"₿"
+    },
+
+    TRX:{
+        name:"TRON",
+        icon:"TRX"
+    },
+
+    LTC:{
+        name:"Litecoin",
+        icon:"Ł"
+    },
+
+    DOGE:{
+        name:"Dogecoin",
+        icon:"Ð"
+    },
+
+    USDT:{
+        name:"Tether",
+        icon:"₮"
+    }
+
+};
+
+
+/* =========================================================
+   قیمت‌ها
+========================================================= */
+
+let prices = {
+    BTC:null,
+    BCH:null,
+    TRX:null,
+    LTC:null,
+    DOGE:null,
+    USDT:1
+};
+
+
+/*
+  قیمت هر منبع جداگانه نگهداری می‌شود
+*/
+let sourcePrices = {
+
+    Binance:{},
+    LBank:{},
+    Bitbarg:{},
+    Tabdeal:{}
+
+};
+
+
+let tomanUSDT = null;
+
+let sendActive = true;
+let receiveActive = true;
+
+
+/* =========================================================
+   ساخت لیست‌ها
+========================================================= */
+
+function buildLists(){
+
+    const send =
+        document.getElementById("sendCoin");
+
+    const receive =
+        document.getElementById("receiveCoin");
+
+    send.innerHTML = "";
+    receive.innerHTML = "";
+
+    Object.keys(coins).forEach(symbol => {
+
+        const a =
+            document.createElement("option");
+
+        a.value = symbol;
+        a.textContent =
+            `${coins[symbol].icon} ${symbol} - ${coins[symbol].name}`;
+
+        send.appendChild(a);
+
+
+        const b =
+            document.createElement("option");
+
+        b.value = symbol;
+        b.textContent =
+            `${coins[symbol].icon} ${symbol} - ${coins[symbol].name}`;
+
+        receive.appendChild(b);
+
+    });
+
+    send.value = "BTC";
+    receive.value = "DOGE";
+
+    send.addEventListener("change",calculate);
+    receive.addEventListener("change",calculate);
+}
+
+
+/* =========================================================
+   نمایش بازار
+========================================================= */
+
+function renderMarkets(){
+
+    const grid =
+        document.getElementById("marketGrid");
+
+    grid.innerHTML = "";
+
+    Object.keys(coins).forEach(symbol => {
+
+        const price = prices[symbol];
+
+        let priceText =
+            price !== null
+            ? formatUSD(price)
+            : "در انتظار قیمت";
+
+        let tomanText =
+            price !== null && tomanUSDT
+            ? formatToman(price * tomanUSDT)
+            : "در انتظار نرخ تومان";
+
+
+        const div =
+            document.createElement("div");
+
+        div.className = "market";
+
+        div.innerHTML = `
+
+            <div class="coin">
+                ${coins[symbol].icon}
+                ${symbol}
+            </div>
+
+            <div class="price">
+                ${priceText} USDT
+            </div>
+
+            <div class="toman">
+                ${tomanText}
+            </div>
+
+            <div class="source">
+                قیمت تجمیعی از منابع آنلاین
+            </div>
+
+        `;
+
+        grid.appendChild(div);
+
+    });
 
 }
 
-=====================================================
+
+/* =========================================================
+   Binance
+========================================================= */
+
+async function getBinancePrices(){
+
+    const symbols = [
+        "BTCUSDT",
+        "BCHUSDT",
+        "TRXUSDT",
+        "LTCUSDT",
+        "DOGEUSDT"
+    ];
+
+    try{
+
+        const url =
+            BINANCE_API +
+            "?symbols=" +
+            encodeURIComponent(
+                JSON.stringify(symbols)
+            );
+
+        const response =
+            await fetch(url,{
+                cache:"no-store"
+            });
+
+        if(!response.ok)
+            throw new Error("Binance error");
+
+        const data =
+            await response.json();
+
+
+        sourcePrices.Binance = {};
+
+        data.forEach(item => {
+
+            const symbol =
+                item.symbol.replace("USDT","");
+
+            sourcePrices.Binance[symbol] =
+                Number(item.price);
+
+        });
+
+
+        document.getElementById(
+            "binanceStatus"
+        ).innerHTML =
+            '<span class="online">● آنلاین</span>';
+
+        return true;
+
+    }catch(error){
+
+        console.error(
+            "Binance:",
+            error
+        );
+
+        document.getElementById(
+            "binanceStatus"
+        ).innerHTML =
+            '<span class="offline">● خطا</span>';
+
+        return false;
+    }
+
+}
+
+
+/* =========================================================
+   LBank
+========================================================= */
+
+async function getLBankPrices(){
+
+    const symbols = [
+        "btc_usdt",
+        "bch_usdt",
+        "trx_usdt",
+        "ltc_usdt",
+        "doge_usdt"
+    ];
+
+    try{
+
+        const requests =
+            symbols.map(symbol =>
+
+                fetch(
+                    LBANK_API +
+                    "?symbol=" +
+                    symbol,
+                    {
+                        cache:"no-store"
+                    }
+                )
+                .then(r => r.json())
+
+            );
+
+
+        const results =
+            await Promise.all(requests);
+
+
+        sourcePrices.LBank = {};
+
+
+        results.forEach((data,index) => {
+
+            let item = null;
+
+            if(Array.isArray(data))
+                item = data[0];
+
+            else if(data.data)
+                item =
+                    Array.isArray(data.data)
+                    ? data.data[0]
+                    : data.data;
+
+
+            if(!item)
+                return;
+
+
+            const latest =
+                item?.ticker?.latest ??
+                item?.latest ??
+                item?.price;
+
+
+            if(latest){
+
+                const symbol =
+                    symbols[index]
+                    .split("_")[0]
+                    .toUpperCase();
+
+                sourcePrices.LBank[symbol] =
+                    Number(latest);
+
+            }
+
+        });
+
+
+        document.getElementById(
+            "lbankStatus"
+        ).innerHTML =
+            '<span class="online">● آنلاین</span>';
+
+        return true;
+
+    }catch(error){
+
+        console.error(
+            "LBank:",
+            error
+        );
+
+        document.getElementById(
+            "lbankStatus"
+        ).innerHTML =
+            '<span class="offline">● خطا</span>';
+
+        return false;
+    }
+
+}
+
+
+/* =========================================================
+   Bitbarg
+========================================================= */
+
+async function getBitbargPrices(){
+
+    /*
+      تا زمانی که API رسمی عمومی Bitbarg
+      مشخص نباشد، این قسمت قیمت جعلی تولید نمی‌کند.
+    */
+
+    if(!BITBARG_API_URL){
+
+        document.getElementById(
+            "bitbargStatus"
+        ).innerHTML =
+            '<span class="offline">API رسمی وارد نشده</span>';
+
+        return false;
+    }
+
+
+    try{
+
+        const response =
+            await fetch(
+                BITBARG_API_URL,
+                {
+                    cache:"no-store"
+                }
+            );
+
+        if(!response.ok)
+            throw new Error("Bitbarg error");
+
+        const data =
+            await response.json();
+
+
+        /*
+          این قسمت را مطابق JSON واقعی API
+          Bitbarg تنظیم می‌کنیم.
+        */
+
+        console.log(
+            "Bitbarg data:",
+            data
+        );
+
+
+        document.getElementById(
+            "bitbargStatus"
+        ).innerHTML =
+            '<span class="online">● آنلاین</span>';
+
+        return true;
+
+    }catch(error){
+
+        console.error(
+            "Bitbarg:",
+            error
+        );
+
+        document.getElementById(
+            "bitbargStatus"
+        ).innerHTML =
+            '<span class="offline">● خطا</span>';
+
+        return false;
+
+    }
+
+}
+
+
+/* =========================================================
+   Tabdeal
+========================================================= */
+
+async function getTabdealPrices(){
+
+    if(!TABDEAL_API_URL){
+
+        document.getElementById(
+            "tabdealStatus"
+        ).innerHTML =
+            '<span class="offline">API رسمی وارد نشده</span>';
+
+        return false;
+    }
+
+
+    try{
+
+        const response =
+            await fetch(
+                TABDEAL_API_URL,
+                {
+                    cache:"no-store"
+                }
+            );
+
+        if(!response.ok)
+            throw new Error("Tabdeal error");
+
+
+        const data =
+            await response.json();
+
+
+        console.log(
+            "Tabdeal data:",
+            data
+        );
+
+
+        document.getElementById(
+            "tabdealStatus"
+        ).innerHTML =
+            '<span class="online">● آنلاین</span>';
+
+        return true;
+
+
+    }catch(error){
+
+        console.error(
+            "Tabdeal:",
+            error
+        );
+
+        document.getElementById(
+            "tabdealStatus"
+        ).innerHTML =
+            '<span class="offline">● خطا</span>';
+
+        return false;
+
+    }
+
+}
+
+
+/* =========================================================
+   محاسبه قیمت نهایی
+========================================================= */
+
+function calculateAveragePrice(symbol){
+
+    const values = [];
+
+    if(
+        sourcePrices.Binance[symbol] &&
+        isFinite(sourcePrices.Binance[symbol])
+    ){
+        values.push(
+            sourcePrices.Binance[symbol]
+        );
+    }
+
+
+    if(
+        sourcePrices.LBank[symbol] &&
+        isFinite(sourcePrices.LBank[symbol])
+    ){
+        values.push(
+            sourcePrices.LBank[symbol]
+        );
+    }
+
+
+    if(
+        sourcePrices.Bitbarg[symbol] &&
+        isFinite(sourcePrices.Bitbarg[symbol])
+    ){
+        values.push(
+            sourcePrices.Bitbarg[symbol]
+        );
+    }
+
+
+    if(
+        sourcePrices.Tabdeal[symbol] &&
+        isFinite(sourcePrices.Tabdeal[symbol])
+    ){
+        values.push(
+            sourcePrices.Tabdeal[symbol]
+        );
+    }
+
+
+    if(!values.length)
+        return null;
+
+
+    const total =
+        values.reduce(
+            (a,b) => a+b,
+            0
+        );
+
+
+    return total / values.length;
+}
+
+
+/* =========================================================
+   بروزرسانی قیمت‌ها
+========================================================= */
+
+async function updateOnlinePrices(){
+
+    document.getElementById(
+        "lastUpdate"
+    ).textContent =
+        "در حال بروزرسانی قیمت‌ها...";
+
+
+    /*
+      منابع را همزمان دریافت می‌کنیم
+    */
+
+    await Promise.allSettled([
+
+        getBinancePrices(),
+
+        getLBankPrices(),
+
+        getBitbargPrices(),
+
+        getTabdealPrices()
+
+    ]);
+
+
+    /*
+      میانگین قیمت منابعی که واقعا
+      جواب داده‌اند
+    */
+
+    Object.keys(coins).forEach(symbol => {
+
+        if(symbol === "USDT"){
+
+            prices.USDT = 1;
+            return;
+
+        }
+
+
+        const average =
+            calculateAveragePrice(symbol);
+
+
+        if(average !== null)
+            prices[symbol] = average;
+
+    });
+
+
+    /*
+      نرخ USDT به تومان
+      اگر API تومان جداگانه نداشته باشیم،
+      فعلاً قیمت تومان در انتظار API می‌ماند.
+    */
+
+    renderMarkets();
+
+    calculate();
+
+
+    const now =
+        new Date();
+
+
+    document.getElementById(
+        "lastUpdate"
+    ).textContent =
+        "آخرین بروزرسانی: " +
+        now.toLocaleTimeString("fa-IR") +
+        " | بروزرسانی بعدی: " +
+        REFRESH_SECONDS +
+        " ثانیه";
+
+
+}
+
+
+/* =========================================================
+   نرخ تبدیل
+========================================================= */
+
+function updateRate(){
+
+    const send =
+        document.getElementById("sendCoin").value;
+
+    const receive =
+        document.getElementById("receiveCoin").value;
+
+
+    const sendPrice =
+        prices[send];
+
+    const receivePrice =
+        prices[receive];
+
+
+    if(
+        sendPrice === null ||
+        receivePrice === null
+    ){
+
+        document.getElementById(
+            "exchangeRate"
+        ).textContent =
+            "در انتظار قیمت آنلاین...";
+
+        return null;
+    }
+
+
+    if(receivePrice === 0)
+        return null;
+
+
+    const rate =
+        sendPrice / receivePrice;
+
+
+    document.getElementById(
+        "exchangeRate"
+    ).textContent =
+        `1 ${send} = ${formatCoin(rate)} ${receive}`;
+
+
+    return rate;
+}
+
+
+/* =========================================================
+   محاسبه کامل
+========================================================= */
+
+function calculate(){
+
+    const rate =
+        updateRate();
+
+
+    const amount =
+        Number(
+            document.getElementById(
+                "amount"
+            ).value
+        ) || 0;
+
+
+    const send =
+        document.getElementById(
+            "sendCoin"
+        ).value;
+
+
+    const receive =
+        document.getElementById(
+            "receiveCoin"
+        ).value;
+
+
+    if(
+        !rate ||
+        prices[send] === null ||
+        prices[receive] === null
+    ){
+
+        document.getElementById(
+            "receiveAmount"
+        ).textContent = "0";
+
+        document.getElementById(
+            "sendUSDT"
+        ).textContent = "0 USDT";
+
+        document.getElementById(
+            "receiveUSDT"
+        ).textContent = "0 USDT";
+
+        document.getElementById(
+            "sendToman"
+        ).textContent = "0 تومان";
+
+        document.getElementById(
+            "receiveToman"
+        ).textContent = "0 تومان";
+
+        return;
+    }
+
+
+    const received =
+        amount * rate;
+
+
+    const sendValue =
+        amount * prices[send];
+
+
+    const receiveValue =
+        received * prices[receive];
+
+
+    document.getElementById(
+        "receiveAmount"
+    ).textContent =
+        formatCoin(received) +
+        " " +
+        receive;
+
+
+    document.getElementById(
+        "sendUSDT"
+    ).textContent =
+        formatUSD(sendValue) +
+        " USDT";
+
+
+    document.getElementById(
+        "receiveUSDT"
+    ).textContent =
+        formatUSD(receiveValue) +
+        " USDT";
+
+
+    if(tomanUSDT){
+
+        document.getElementById(
+            "sendToman"
+        ).textContent =
+            formatToman(
+                sendValue * tomanUSDT
+            );
+
+
+        document.getElementById(
+            "receiveToman"
+        ).textContent =
+            formatToman(
+                receiveValue * tomanUSDT
+            );
+
+    }else{
+
+        document.getElementById(
+            "sendToman"
+        ).textContent =
+            "نرخ تومان وارد نشده";
+
+
+        document.getElementById(
+            "receiveToman"
+        ).textContent =
+            "نرخ تومان وارد نشده";
+
+    }
+
+}
+
+
+/* =========================================================
+   فعال / غیرفعال
+========================================================= */
+
+function toggleSend(){
+
+    sendActive =
+        !sendActive;
+
+
+    const btn =
+        document.getElementById(
+            "sendToggle"
+        );
+
+
+    if(sendActive){
+
+        btn.textContent =
+            "فعال است";
+
+        btn.classList.add("active");
+
+    }else{
+
+        btn.textContent =
+            "غیرفعال است";
+
+        btn.classList.remove("active");
+
+    }
+
+}
+
+
+function toggleReceive(){
+
+    receiveActive =
+        !receiveActive;
+
+
+    const btn =
+        document.getElementById(
+            "receiveToggle"
+        );
+
+
+    if(receiveActive){
+
+        btn.textContent =
+            "فعال است";
+
+        btn.classList.add("active");
+
+    }else{
+
+        btn.textContent =
+            "غیرفعال است";
+
+        btn.classList.remove("active");
+
+    }
+
+}
+
+
+/* =========================================================
+   کیف پول‌ها
+========================================================= */
+
+function renderWallets(){
+
+    const grid =
+        document.getElementById(
+            "walletGrid"
+        );
+
+
+    grid.innerHTML = "";
+
+
+    Object.keys(wallets).forEach(symbol => {
+
+        const div =
+            document.createElement("div");
+
+        div.className =
+            "wallet";
+
+
+        div.innerHTML = `
+
+            <div class="wallet-title">
+                ${coins[symbol].icon}
+                ${symbol}
+            </div>
+
+            <div
+                id="wallet-${symbol}"
+                class="wallet-address">
+                ${wallets[symbol]}
+            </div>
+
+            <button
+                class="copy"
+                onclick="copyWallet('${symbol}')">
+                کپی آدرس
+            </button>
+
+        `;
+
+
+        grid.appendChild(div);
+
+    });
+
+}
+
+
+function copyWallet(symbol){
+
+    navigator.clipboard
+        .writeText(
+            wallets[symbol]
+        )
+        .then(() => {
+
+            alert(
+                "آدرس " +
+                symbol +
+                " کپی شد"
+            );
+
+        });
+
+}
+
+
+/* =========================================================
+   ثبت تراکنش
+========================================================= */
+
+function submitTransaction(){
+
+    if(!sendActive || !receiveActive){
+
+        alert(
+            "ارسال یا دریافت غیرفعال است."
+        );
+
+        return;
+    }
+
+
+    const send =
+        document.getElementById(
+            "sendCoin"
+        ).value;
+
+
+    const receive =
+        document.getElementById(
+            "receiveCoin"
+        ).value;
+
+
+    const amount =
+        Number(
+            document.getElementById(
+                "amount"
+            ).value
+        );
+
+
+    const recipient =
+        document.getElementById(
+            "recipient"
+        ).value.trim();
+
+
+    if(!amount || amount <= 0){
+
+        alert(
+            "مقدار ارز را وارد کنید."
+        );
+
+        return;
+    }
+
+
+    if(!recipient){
+
+        alert(
+            "آدرس کیف پول دریافت‌کننده را وارد کنید."
+        );
+
+        return;
+    }
+
+
+    const rate =
+        updateRate();
+
+
+    if(!rate){
+
+        alert(
+            "قیمت آنلاین هنوز دریافت نشده است."
+        );
+
+        return;
+    }
+
+
+    const received =
+        amount * rate;
+
+
+    const valueUSDT =
+        amount * prices[send];
+
+
+    const tracking =
+        "EX" +
+        Date.now()
+        .toString()
+        .slice(-8);
+
+
+    const transaction = {
+
+        tracking,
+
+        send,
+
+        receive,
+
+        amount,
+
+        received,
+
+        valueUSDT,
+
+        recipient,
+
+        time:
+            new Date().toLocaleString(
+                "fa-IR"
+            ),
+
+        status:
+            "در حال بررسی"
+
+    };
+
+
+    /*
+      این بخش فقط روی همین مرورگر ذخیره می‌شود.
+      برای نمایش مشترک بین همه کاربران،
+      بعداً باید backend/shared storage متصل شود.
+    */
+
+    const list =
+        JSON.parse(
+            localStorage.getItem(
+                "transactions"
+            ) || "[]"
+        );
+
+
+    list.unshift(transaction);
+
+
+    localStorage.setItem(
+        "transactions",
+        JSON.stringify(
+            list.slice(0,50)
+        )
+    );
+
+
+    renderTransactions();
+
+
+    alert(
+        "درخواست ثبت شد.\n\nکد پیگیری: " +
+        tracking
+    );
+
+}
+
+
+/* =========================================================
+   نمایش تراکنش‌ها
+========================================================= */
+
+function renderTransactions(){
+
+    const box =
+        document.getElementById(
+            "transactions"
+        );
+
+
+    const list =
+        JSON.parse(
+            localStorage.getItem(
+                "transactions"
+            ) || "[]"
+        );
+
+
+    if(!list.length){
+
+        box.innerHTML =
+            "<p>هنوز تراکنشی ثبت نشده است.</p>";
+
+        return;
+    }
+
+
+    box.innerHTML = "";
+
+
+    list.forEach(tx => {
+
+        const div =
+            document.createElement("div");
+
+        div.className =
+            "transaction";
+
+
+        const statusClass =
+            tx.status === "انجام شد"
+            ? "done"
+            : "pending";
+
+
+        div.innerHTML = `
+
+            <div>
+                <strong>
+                    کد پیگیری:
+                </strong>
+                ${tx.tracking}
+            </div>
+
+            <div style="margin-top:7px">
+                ${tx.send}
+                →
+                ${tx.receive}
+            </div>
+
+            <div style="margin-top:7px">
+                مقدار ارسال:
+                ${formatCoin(tx.amount)}
+                ${tx.send}
+            </div>
+
+            <div style="margin-top:7px">
+                مقدار دریافت:
+                ${formatCoin(tx.received)}
+                ${tx.receive}
+            </div>
+
+            <div style="margin-top:7px">
+                ارزش:
+                ${formatUSD(tx.valueUSDT)}
+                USDT
+            </div>
+
+            <div style="margin-top:7px">
+                آدرس:
+                ${tx.recipient}
+            </div>
+
+            <div style="margin-top:7px">
+                زمان:
+                ${tx.time}
+            </div>
+
+            <div style="margin-top:9px">
+                <span class="status ${statusClass}">
+                    ${tx.status}
+                </span>
+            </div>
+
+        `;
+
+
+        box.appendChild(div);
+
+    });
+
+}
+
+
+/* =========================================================
+   پیگیری
+========================================================= */
+
+function trackTransaction(){
+
+    const code =
+        document.getElementById(
+            "trackingInput"
+        ).value.trim();
+
+
+    const result =
+        document.getElementById(
+            "trackResult"
+        );
+
+
+    if(!code){
+
+        result.innerHTML =
+            "<p>کد پیگیری را وارد کنید.</p>";
+
+        return;
+    }
+
+
+    const list =
+        JSON.parse(
+            localStorage.getItem(
+                "transactions"
+            ) || "[]"
+        );
+
+
+    const tx =
+        list.find(
+            x => x.tracking === code
+        );
+
+
+    if(!tx){
+
+        result.innerHTML =
+            `
+            <div class="note" style="margin-top:15px">
+                تراکنشی با این کد پیدا نشد.
+            </div>
+            `;
+
+        return;
+    }
+
+
+    result.innerHTML =
+        `
+
+        <div class="transaction">
+
+            <strong>
+                ${tx.send}
+                →
+                ${tx.receive}
+            </strong>
+
+            <div style="margin-top:10px">
+                مقدار:
+                ${formatCoin(tx.amount)}
+                ${tx.send}
+            </div>
+
+            <div style="margin-top:7px">
+                دریافت:
+                ${formatCoin(tx.received)}
+                ${tx.receive}
+            </div>
+
+            <div style="margin-top:7px">
+                وضعیت:
+                <span class="status ${
+                    tx.status === "انجام شد"
+                    ? "done"
+                    : "pending"
+                }">
+                    ${tx.status}
+                </span>
+            </div>
+
+        </div>
+
+        `;
+
+}
+
+
+/* =========================================================
+   قالب قیمت
+========================================================= */
+
+function formatUSD(value){
+
+    if(
+        value === null ||
+        value === undefined ||
+        !isFinite(value)
+    )
+        return "در انتظار";
+
+
+    if(value >= 1000)
+        return Number(value)
+            .toLocaleString(
+                "en-US",
+                {
+                    maximumFractionDigits:2
+                }
+            );
+
+
+    if(value >= 1)
+        return Number(value)
+            .toLocaleString(
+                "en-US",
+                {
+                    maximumFractionDigits:6
+                }
+            );
+
+
+    return Number(value)
+        .toLocaleString(
+            "en-US",
+            {
+                maximumFractionDigits:10
+            }
+        );
+
+}
+
+
+function formatCoin(value){
+
+    if(
+        value === null ||
+        value === undefined ||
+        !isFinite(value)
+    )
+        return "0";
+
+
+    return Number(value)
+        .toLocaleString(
+            "en-US",
+            {
+                maximumFractionDigits:12
+            }
+        );
+
+}
+
+
+function formatToman(value){
+
+    if(
+        value === null ||
+        value === undefined ||
+        !isFinite(value)
+    )
+        return "در انتظار";
+
+
+    return Number(value)
+        .toLocaleString(
+            "fa-IR",
+            {
+                maximumFractionDigits:0
+            }
+        ) +
+        " تومان";
+
+}
+
+
+/* =========================================================
+   تم‌ها
+========================================================= */
+
+function setTheme(theme){
+
+    if(theme === "yellow"){
+
+        document.body.style.background =
+            "linear-gradient(135deg,#ffd600,#ffb300)";
+
+    }
+
+    if(theme === "blue"){
+
+        document.body.style.background =
+            "linear-gradient(135deg,#5ab0ff,#2478d8)";
+
+    }
+
+    if(theme === "purple"){
+
+        document.body.style.background =
+            "linear-gradient(135deg,#c17cff,#7137d9)";
+
+    }
+
+    if(theme === "orange"){
+
+        document.body.style.background =
+            "linear-gradient(135deg,#ffad4a,#ff5d22)";
+
+    }
+
+    localStorage.setItem(
+        "theme",
+        theme
+    );
+
+}
+
+
+/* =========================================================
+   شروع سایت
+========================================================= */
+
+buildLists();
+
+renderWallets();
+
+renderTransactions();
+
+renderMarkets();
+
+
+const savedTheme =
+    localStorage.getItem("theme");
+
+
+if(savedTheme)
+    setTheme(savedTheme);
+
+
+/*
+  اولین دریافت قیمت
 */
 
+updateOnlinePrices();
+
+
+/*
+  بروزرسانی دقیقاً هر ۲۰ ثانیه
+*/
+
+setInterval(
+    updateOnlinePrices,
+    REFRESH_SECONDS * 1000
+);
 
 </script>
 

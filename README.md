@@ -9337,6 +9337,73 @@ document.addEventListener(
 );
 
 </script>
+<style>
+/* فقط استایل دکمه تبادل آسان */
+#NEW_EASY_EXCHANGE_BUTTON {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    right: auto !important;
+    bottom: auto !important;
+
+    transform: translate(-50%, -50%) !important;
+
+    width: 230px !important;
+    height: 230px !important;
+    min-width: 230px !important;
+    min-height: 230px !important;
+
+    border-radius: 50% !important;
+    border: 6px solid rgba(255,255,255,0.9) !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    font-size: 30px !important;
+    font-weight: 900 !important;
+    color: #111 !important;
+
+    cursor: pointer !important;
+    z-index: 999999 !important;
+
+    animation: easyExchangeGreenYellow 1.2s infinite alternate !important;
+
+    box-shadow:
+        0 0 20px rgba(255,215,0,0.9),
+        0 0 45px rgba(0,255,100,0.6),
+        0 15px 40px rgba(0,0,0,0.35) !important;
+}
+
+@keyframes easyExchangeGreenYellow {
+    0% {
+        background: #ffd900 !important;
+        box-shadow:
+            0 0 20px #ffd900,
+            0 0 45px rgba(255,217,0,0.8),
+            0 15px 40px rgba(0,0,0,0.35);
+    }
+
+    100% {
+        background: #00e676 !important;
+        box-shadow:
+            0 0 20px #00e676,
+            0 0 55px rgba(0,230,118,0.9),
+            0 15px 40px rgba(0,0,0,0.35);
+    }
+}
+
+/* موبایل */
+@media (max-width: 600px) {
+    #NEW_EASY_EXCHANGE_BUTTON {
+        width: 190px !important;
+        height: 190px !important;
+        min-width: 190px !important;
+        min-height: 190px !important;
+        font-size: 25px !important;
+    }
+}
+</style>
 </body>
 </html>
 </body>

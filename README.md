@@ -9911,60 +9911,65 @@ document.addEventListener(
   }
 }
 </style>
-```
-```
 <style>
-/* فقط جای دکمه «تبادل آسان» را تغییر می‌دهد */
-.easy-exchange-moved {
+/* فقط دکمه تبادل آسان */
+#easy-exchange-bottom-button {
   position: fixed !important;
+  top: auto !important;
+  bottom: 20px !important;
   left: 50% !important;
   right: auto !important;
-  top: auto !important;
-  bottom: 15px !important;
-  transform: translateX(-50%) !important;
-  z-index: 999999 !important;
-}
 
-/* موبایل */
-@media (max-width: 600px) {
-  .easy-exchange-moved {
-    bottom: 10px !important;
-  }
+  transform: translateX(-50%) !important;
+
+  width: auto !important;
+  height: auto !important;
+
+  margin: 0 !important;
+
+  z-index: 2147483647 !important;
 }
 </style>
 
 <script>
 (function () {
-  function moveEasyExchangeButton() {
-    const elements = document.querySelectorAll(
-      'button, a, div, span'
-    );
 
-    elements.forEach(function (el) {
-      const text = (el.textContent || '').trim();
+  function findAndMoveExchangeButton() {
 
-      /* فقط عنصری که خودش متن «تبادل آسان» دارد */
+    const all = document.querySelectorAll('button, a');
+
+    for (const el of all) {
+
+      const text = (el.innerText || el.textContent || '')
+        .replace(/\s+/g, ' ')
+        .trim();
+
       if (
         text === 'تبادل آسان' ||
         text === '⚡ تبادل آسان' ||
-        text === '🔄 تبادل آسان'
+        text === '🔄 تبادل آسان' ||
+        text.includes('تبادل آسان')
       ) {
-        el.classList.add('easy-exchange-moved');
+
+        /*
+         * فقط خود دکمه را انتخاب می‌کنیم.
+         * محتوای داخل آن، لینک‌ها و ۷ آدرس تغییر نمی‌کنند.
+         */
+        el.id = 'easy-exchange-bottom-button';
+
+        return;
       }
-    });
+    }
   }
 
-  moveEasyExchangeButton();
+  findAndMoveExchangeButton();
 
-  /* اگر سایت دکمه را بعداً ایجاد کند */
-  const observer = new MutationObserver(function () {
-    moveEasyExchangeButton();
-  });
+  window.addEventListener('load', findAndMoveExchangeButton);
 
-  observer.observe(document.body, {
-    childList: true,
-    subtree: true
-  });
+  setTimeout(findAndMoveExchangeButton, 500);
+  setTimeout(findAndMoveExchangeButton, 1500);
+  setTimeout(findAndMoveExchangeButton, 3000);
+
 })();
 </script>
 ```

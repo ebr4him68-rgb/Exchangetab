@@ -2966,5 +2966,899 @@ font-size:15px;
 
 </div>
 <!-- ====== END BANNER ====== -->
+<!-- =========================================================
+     🔔 سیستم کامل زنگوله و اعلان‌ها
+     محل قرار دادن: درست قبل از </body>
+========================================================= -->
+
+<div id="kbNotificationBell"
+     onclick="KB_toggleNotifications()"
+     aria-label="پیام‌ها">
+
+  <span class="kbBellIcon">🔔</span>
+  <span id="kbNotificationCount">0</span>
+
+</div>
+
+
+<!-- پنل پیام‌ها -->
+<div id="kbNotificationPanel">
+
+  <div class="kbNotificationHeader">
+
+    <div class="kbNotificationTitle">
+      🔔 پیام‌ها و تراکنش‌ها
+    </div>
+
+    <button onclick="KB_clearNotifications(event)">
+      پاک کردن
+    </button>
+
+  </div>
+
+
+  <div id="kbNotificationList">
+
+    <div class="kbEmptyNotifications">
+      پیام جدیدی وجود ندارد
+    </div>
+
+  </div>
+
+</div>
+
+
+<style>
+
+/* ===============================
+   🔔 زنگوله بالای سایت
+================================ */
+
+#kbNotificationBell {
+
+  position: fixed;
+
+  top: 15px;
+  right: 18px;
+
+  width: 58px;
+  height: 58px;
+
+  border-radius: 50%;
+
+  background:
+    linear-gradient(
+      145deg,
+      #fff3a0,
+      #ffd700,
+      #d99a00
+    );
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  z-index: 2147483647;
+
+  box-shadow:
+    0 0 8px #ffd700,
+    0 0 20px rgba(255,215,0,.75),
+    inset 0 2px 5px rgba(255,255,255,.8);
+
+  border: 2px solid #fff2a8;
+
+  animation:
+    kbBellGlow 1.7s infinite;
+
+  user-select: none;
+
+}
+
+
+/* آیکون زنگ */
+
+.kbBellIcon {
+
+  font-size: 31px;
+
+  line-height: 1;
+
+  display: block;
+
+  animation:
+    kbBellShake 2.5s infinite;
+
+}
+
+
+/* شماره پیام */
+
+#kbNotificationCount {
+
+  position: absolute;
+
+  top: -5px;
+  right: -5px;
+
+  min-width: 22px;
+  height: 22px;
+
+  padding: 0 5px;
+
+  background: #ff2020;
+
+  color: white;
+
+  border: 2px solid white;
+
+  border-radius: 50px;
+
+  font-size: 11px;
+
+  font-weight: bold;
+
+  display: none;
+
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+
+  box-shadow:
+    0 2px 8px rgba(0,0,0,.5);
+
+}
+
+
+/* درخشش زنگ */
+
+@keyframes kbBellGlow {
+
+  0% {
+    transform: scale(1);
+    box-shadow:
+      0 0 8px #ffd700,
+      0 0 15px rgba(255,215,0,.5);
+  }
+
+  50% {
+    transform: scale(1.08);
+    box-shadow:
+      0 0 15px #ffd700,
+      0 0 35px rgba(255,215,0,.95);
+  }
+
+  100% {
+    transform: scale(1);
+    box-shadow:
+      0 0 8px #ffd700,
+      0 0 15px rgba(255,215,0,.5);
+  }
+
+}
+
+
+/* تکان خوردن زنگ */
+
+@keyframes kbBellShake {
+
+  0%, 70%, 100% {
+    transform: rotate(0deg);
+  }
+
+  73% {
+    transform: rotate(-15deg);
+  }
+
+  76% {
+    transform: rotate(15deg);
+  }
+
+  79% {
+    transform: rotate(-12deg);
+  }
+
+  82% {
+    transform: rotate(12deg);
+  }
+
+  85% {
+    transform: rotate(0deg);
+  }
+
+}
+
+
+/* ===============================
+   📋 پنل اعلان‌ها
+================================ */
+
+#kbNotificationPanel {
+
+  position: fixed;
+
+  top: 85px;
+  right: 18px;
+
+  width: 350px;
+
+  max-width:
+    calc(100vw - 36px);
+
+  max-height: 520px;
+
+  background: #101010;
+
+  color: white;
+
+  border: 1px solid #d4af37;
+
+  border-radius: 16px;
+
+  overflow: hidden;
+
+  z-index: 2147483646;
+
+  display: none;
+
+  box-shadow:
+    0 15px 45px rgba(0,0,0,.75),
+    0 0 20px rgba(212,175,55,.25);
+
+  animation:
+    kbPanelOpen .2s ease;
+
+}
+
+
+@keyframes kbPanelOpen {
+
+  from {
+    opacity: 0;
+    transform:
+      translateY(-10px)
+      scale(.96);
+  }
+
+  to {
+    opacity: 1;
+    transform:
+      translateY(0)
+      scale(1);
+  }
+
+}
+
+
+/* ===============================
+   عنوان پنل
+================================ */
+
+.kbNotificationHeader {
+
+  background:
+    linear-gradient(
+      135deg,
+      #d4af37,
+      #9c7615
+    );
+
+  min-height: 55px;
+
+  padding: 10px 12px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 10px;
+
+  box-sizing: border-box;
+
+}
+
+
+.kbNotificationTitle {
+
+  font-weight: bold;
+
+  font-size: 15px;
+
+}
+
+
+.kbNotificationHeader button {
+
+  border: 1px solid white;
+
+  background: #111;
+
+  color: white;
+
+  padding: 6px 9px;
+
+  border-radius: 7px;
+
+  cursor: pointer;
+
+  font-size: 11px;
+
+}
+
+
+.kbNotificationHeader button:hover {
+
+  background: #333;
+
+}
+
+
+/* ===============================
+   لیست پیام‌ها
+================================ */
+
+#kbNotificationList {
+
+  max-height: 450px;
+
+  overflow-y: auto;
+
+}
+
+
+.kbNotificationItem {
+
+  padding: 14px;
+
+  border-bottom:
+    1px solid #292929;
+
+  background:
+    rgba(255,255,255,.02);
+
+  transition: .2s;
+
+}
+
+
+.kbNotificationItem:hover {
+
+  background:
+    rgba(255,215,0,.08);
+
+}
+
+
+.kbNotificationMessage {
+
+  font-size: 14px;
+
+  line-height: 1.8;
+
+  word-break: break-word;
+
+}
+
+
+.kbNotificationTime {
+
+  margin-top: 5px;
+
+  color: #999;
+
+  font-size: 10px;
+
+}
+
+
+/* پیام جدید */
+
+.kbNotificationItem.new {
+
+  border-right:
+    3px solid #ffd700;
+
+  background:
+    rgba(255,215,0,.06);
+
+}
+
+
+/* ===============================
+   وقتی پیام نداریم
+================================ */
+
+.kbEmptyNotifications {
+
+  padding: 35px 15px;
+
+  text-align: center;
+
+  color: #999;
+
+  font-size: 13px;
+
+}
+
+
+/* ===============================
+   موبایل
+================================ */
+
+@media (max-width:600px) {
+
+  #kbNotificationBell {
+
+    top: 10px;
+    right: 10px;
+
+    width: 52px;
+    height: 52px;
+
+  }
+
+  .kbBellIcon {
+
+    font-size: 27px;
+
+  }
+
+  #kbNotificationPanel {
+
+    top: 72px;
+    right: 10px;
+
+    width:
+      calc(100vw - 20px);
+
+  }
+
+}
+
+
+/* ===============================
+   اسکرول زیبا
+================================ */
+
+#kbNotificationList::-webkit-scrollbar {
+
+  width: 5px;
+
+}
+
+#kbNotificationList::-webkit-scrollbar-track {
+
+  background: #111;
+
+}
+
+#kbNotificationList::-webkit-scrollbar-thumb {
+
+  background: #b58b20;
+
+  border-radius: 10px;
+
+}
+
+</style>
+
+
+<script>
+
+/* =========================================================
+   🔔 سیستم اعلان KEYBAR
+========================================================= */
+
+
+/* دریافت پیام‌های قبلی */
+
+let KB_notifications = [];
+
+try {
+
+  KB_notifications =
+    JSON.parse(
+      localStorage.getItem(
+        "KEYBAR_notifications"
+      ) || "[]"
+    );
+
+  if (!Array.isArray(KB_notifications)) {
+
+    KB_notifications = [];
+
+  }
+
+} catch (error) {
+
+  KB_notifications = [];
+
+}
+
+
+/* =========================================================
+   ذخیره پیام‌ها
+========================================================= */
+
+function KB_saveNotifications() {
+
+  try {
+
+    localStorage.setItem(
+      "KEYBAR_notifications",
+      JSON.stringify(
+        KB_notifications
+      )
+    );
+
+  } catch (error) {
+
+    console.log(
+      "خطا در ذخیره اعلان‌ها",
+      error
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   نمایش تعداد پیام
+========================================================= */
+
+function KB_updateNotificationCount() {
+
+  const count =
+    document.getElementById(
+      "kbNotificationCount"
+    );
+
+  if (!count) return;
+
+
+  if (KB_notifications.length > 0) {
+
+    count.textContent =
+      KB_notifications.length > 99
+        ? "99+"
+        : KB_notifications.length;
+
+    count.style.display =
+      "flex";
+
+  } else {
+
+    count.style.display =
+      "none";
+
+  }
+
+}
+
+
+/* =========================================================
+   نمایش پیام‌ها
+========================================================= */
+
+function KB_renderNotifications() {
+
+  const list =
+    document.getElementById(
+      "kbNotificationList"
+    );
+
+  if (!list) return;
+
+
+  if (KB_notifications.length === 0) {
+
+    list.innerHTML = `
+      <div class="kbEmptyNotifications">
+        🔔 پیام جدیدی وجود ندارد
+      </div>
+    `;
+
+    KB_updateNotificationCount();
+
+    return;
+
+  }
+
+
+  list.innerHTML =
+    KB_notifications.map(
+      function(item) {
+
+        return `
+          <div class="kbNotificationItem new">
+
+            <div class="kbNotificationMessage">
+              ${KB_escapeHTML(item.message)}
+            </div>
+
+            <div class="kbNotificationTime">
+              ${KB_escapeHTML(item.time)}
+            </div>
+
+          </div>
+        `;
+
+      }
+    ).join("");
+
+
+  KB_updateNotificationCount();
+
+}
+
+
+/* =========================================================
+   جلوگیری از HTML خطرناک داخل پیام
+========================================================= */
+
+function KB_escapeHTML(text) {
+
+  const div =
+    document.createElement("div");
+
+  div.textContent =
+    String(text);
+
+  return div.innerHTML;
+
+}
+
+
+/* =========================================================
+   باز و بسته کردن پنل
+========================================================= */
+
+function KB_toggleNotifications() {
+
+  const panel =
+    document.getElementById(
+      "kbNotificationPanel"
+    );
+
+  if (!panel) return;
+
+
+  if (
+    panel.style.display === "block"
+  ) {
+
+    panel.style.display =
+      "none";
+
+  } else {
+
+    panel.style.display =
+      "block";
+
+  }
+
+}
+
+
+/* =========================================================
+   اضافه کردن پیام جدید
+========================================================= */
+
+function KB_addNotification(message) {
+
+  const now =
+    new Date();
+
+
+  let time;
+
+  try {
+
+    time =
+      now.toLocaleString(
+        "fa-IR",
+        {
+          dateStyle: "short",
+          timeStyle: "short"
+        }
+      );
+
+  } catch (error) {
+
+    time =
+      now.toLocaleString();
+
+  }
+
+
+  KB_notifications.unshift({
+
+    message:
+      String(message),
+
+    time:
+      time
+
+  });
+
+
+  /* فقط 50 پیام آخر */
+
+  KB_notifications =
+    KB_notifications.slice(
+      0,
+      50
+    );
+
+
+  KB_saveNotifications();
+
+  KB_renderNotifications();
+
+
+  /* =====================================================
+     🔔 تکان شدید زنگ هنگام پیام جدید
+  ===================================================== */
+
+  const bell =
+    document.getElementById(
+      "kbNotificationBell"
+    );
+
+
+  if (bell) {
+
+    bell.animate(
+
+      [
+        {
+          transform:
+            "rotate(0deg) scale(1)"
+        },
+
+        {
+          transform:
+            "rotate(-20deg) scale(1.15)"
+        },
+
+        {
+          transform:
+            "rotate(20deg) scale(1.15)"
+        },
+
+        {
+          transform:
+            "rotate(-15deg) scale(1.1)"
+        },
+
+        {
+          transform:
+            "rotate(15deg) scale(1.1)"
+        },
+
+        {
+          transform:
+            "rotate(0deg) scale(1)"
+        }
+
+      ],
+
+      {
+        duration: 800
+      }
+
+    );
+
+  }
+
+
+}
+
+
+/* =========================================================
+   پاک کردن پیام‌ها
+========================================================= */
+
+function KB_clearNotifications(event) {
+
+  if (event) {
+
+    event.stopPropagation();
+
+  }
+
+
+  KB_notifications = [];
+
+  KB_saveNotifications();
+
+  KB_renderNotifications();
+
+}
+
+
+/* =========================================================
+   کلیک بیرون پنل
+========================================================= */
+
+document.addEventListener(
+  "click",
+  function(event) {
+
+    const panel =
+      document.getElementById(
+        "kbNotificationPanel"
+      );
+
+    const bell =
+      document.getElementById(
+        "kbNotificationBell"
+      );
+
+
+    if (!panel || !bell) return;
+
+
+    if (
+      panel.style.display === "block" &&
+      !panel.contains(event.target) &&
+      !bell.contains(event.target)
+    ) {
+
+      panel.style.display =
+        "none";
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   پیام‌های نمونه
+   این قسمت اجرا نمی‌شود؛ فقط برای استفاده در کد سایت است.
+========================================================= */
+
+/*
+
+KB_addNotification(
+  "💰 واریز جدید 50 USDT ثبت شد"
+);
+
+
+KB_addNotification(
+  "📤 درخواست برداشت جدید ثبت شد"
+);
+
+
+KB_addNotification(
+  "⚠️ مشکل در تراکنش کاربر ایجاد شد"
+);
+
+
+KB_addNotification(
+  "🔄 تراکنش جدید در انتظار بررسی است"
+);
+
+*/
+
+
+/* =========================================================
+   شروع سیستم
+========================================================= */
+
+KB_renderNotifications();
+
+</script>
+
+<!-- =========================================================
+     پایان سیستم زنگوله
+========================================================= -->
 </body>
 </html>

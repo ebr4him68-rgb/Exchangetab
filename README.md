@@ -7381,7 +7381,428 @@ updateWallet();
 updateBell();
 
 </script>
+<!-- ================================
+ FIX تبادل آسان - نمایش صحیح ارز
+================================ -->
 
+<style>
+/* نمایش نتیجه واقعی تبادل */
+.easy-exchange-fix{
+  margin-top:15px;
+  padding:16px;
+  border-radius:15px;
+  background:#101a12;
+  border:1px solid #ffd000;
+  text-align:center;
+}
+
+.easy-exchange-fix .exchange-line{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin:8px 0;
+  padding:10px;
+  border-radius:10px;
+  background:#071008;
+}
+
+.easy-exchange-fix .coin-name{
+  color:#ffd000;
+  font-weight:bold;
+}
+
+.easy-exchange-fix .coin-value{
+  direction:ltr;
+  font-weight:bold;
+  color:#fff;
+  word-break:break-all;
+}
+
+.easy-exchange-fix .arrow{
+  color:#ffd000;
+  font-size:25px;
+}
+
+#fixReceiveAmount{
+  color:#00ff88;
+  font-size:21px;
+  font-weight:900;
+}
+
+#fixReceiveCoin{
+  color:#ffd000;
+  font-size:18px;
+  font-weight:900;
+}
+</style>
+
+<script>
+(function(){
+
+  /* ==========================================
+     نرخ‌ها فقط برای محاسبه داخلی هستند.
+     دلار به کاربر نمایش داده نمی‌شود.
+  ========================================== */
+
+  const FIX_RATES = {
+    BTC: 110000,
+    BCH: 500,
+    DOGE: 0.25,
+    USDT: 1,
+    LTC: 100,
+    DGB: 0.01,
+    TRX: 0.35
+  };
+
+  const FIX_NAMES = {
+    BTC: "Bitcoin (BTC)",
+    BCH: "Bitcoin Cash (BCH)",
+    DOGE: "Dogecoin (DOGE)",
+    USDT: "Tether (USDT BEP-20)",
+    LTC: "Litecoin (LTC)",
+    DGB: "DigiByte (DGB)",
+    TRX: "TRON (TRX)"
+  };
+
+  /*
+    پیدا کردن select های قبلی سایت
+  */
+  function getFrom(){
+    return document.getElementById("fromCoin");
+  }
+
+  function getTo(){
+    return document.getElementById("toCoin");
+  }
+
+  function getAmount(){
+    return document.getElementById("amount");
+  }
+
+  /*
+    نتیجه مرحله دوم را کاملاً با ارز واقعی
+    ارسال و دریافت بازسازی می‌کنیم.
+  */
+  function fixExchangeResult(){
+
+    const fromSelect=getFrom();
+    const toSelect=getTo();
+    const amountInput=getAmount();
+
+    if(!fromSelect || !toSelect || !amountInput){
+      return;
+    }
+
+    const from=fromSelect.value;
+    const to=toSelect.value;
+
+    const amount=parseFloat(amountInput.value)||0;
+
+    let receive=0;
+
+    if(amount>0 && FIX_RATES[from] && FIX_RATES[to]){
+
+      /*
+        تبدیل داخلی:
+        مقدار ارز ارسال × نرخ آن
+        سپس تقسیم بر نرخ ارز دریافت
+
+        دلار فقط واحد محاسبات داخلی است
+        و هیچ‌وقت به کاربر نمایش داده نمی‌شود.
+      */
+      receive=
+        (amount * FIX_RATES[from]) /
+        FIX_RATES[to];
+    }
+
+    const oldAmount=
+      document.getElementById("receiveAmount");
+
+    const oldCoin=
+      document.getElementById("receiveCoin");
+
+    /*
+      اگر عناصر قبلی وجود دارند،
+      نتیجه آنها را هم اصلاح می‌کنیم.
+    */
+    if(oldAmount){
+
+      oldAmount.textContent=
+        receive>0
+        ? formatCoinAmount(receive)
+        : "0";
+    }
+
+    if(oldCoin){
+
+      oldCoin.textContent=to;
+    }
+
+    /*
+      نتیجه بصری جدید
+    */
+    let result=
+      document.getElementById("easyExchangeFixResult");
+
+    if(!result){
+
+      result=
+        document.createElement("div");
+
+      result.id="easyExchangeFixResult";
+
+      result.className="easy-exchange-fix";
+
+      /*
+        بعد از amountResult قرار می‌گیرد
+      */
+      const amountResult=
+        document.querySelector(".amountResult");
+
+      if(amountResult){
+
+        amountResult.parentNode.insertBefore(
+          result,
+          amountResult.nextSibling
+        );
+
+      }else{
+
+        amountInput.parentNode.appendChild(result);
+
+      }
+    }
+
+    result.innerHTML=`
+
+      <div class="exchange-line">
+
+        <span class="coin-name">
+          ارز ارسالی
+        </span>
+
+        <span class="coin-value">
+          ${escapeFix(amount)} ${escapeFix(from)}
+        </span>
+
+      </div>
+
+      <div class="arrow">
+        ↓
+      </div>
+
+      <div class="exchange-line">
+
+        <span class="coin-name">
+          ارز دریافتی
+        </span>
+
+        <span class="coin-value">
+          <span id="fixReceiveAmount">
+            ${receive>0 ? formatCoinAmount(receive) : "0"}
+          </span>
+
+          <span id="fixReceiveCoin">
+            ${escapeFix(to)}
+          </span>
+        </span>
+
+      </div>
+
+      <div style="
+        margin-top:10px;
+        color:#aaa;
+        font-size:12px;
+      ">
+        ${escapeFix(FIX_NAMES[from])}
+        →
+        ${escapeFix(FIX_NAMES[to])}
+      </div>
+    `;
+  }
+
+
+  /*
+    تعداد اعشار مناسب
+  */
+  function formatCoinAmount(value){
+
+    if(value===0){
+      return "0";
+    }
+
+    if(value>=1){
+      return value.toFixed(8)
+        .replace(/\.?0+$/,"");
+    }
+
+    return value.toFixed(12)
+      .replace(/\.?0+$/,"");
+  }
+
+
+  /*
+    جلوگیری از ورود HTML
+  */
+  function escapeFix(value){
+
+    return String(value)
+      .replaceAll("&","&amp;")
+      .replaceAll("<","&lt;")
+      .replaceAll(">","&gt;")
+      .replaceAll('"',"&quot;")
+      .replaceAll("'","&#039;");
+  }
+
+
+  /*
+    وقتی ارز ارسالی تغییر کند
+  */
+  function fixFromChange(){
+
+    fixExchangeResult();
+
+    /*
+      آدرس کیف پول سایت نیز مطابق ارز
+      ارسالی قبلی تغییر می‌کند.
+    */
+
+    if(
+      typeof updateWallet==="function"
+    ){
+
+      updateWallet();
+
+    }
+  }
+
+
+  /*
+    وقتی ارز دریافتی تغییر کند
+  */
+  function fixToChange(){
+
+    fixExchangeResult();
+  }
+
+
+  /*
+    وقتی مقدار تغییر کند
+  */
+  function fixAmountChange(){
+
+    fixExchangeResult();
+  }
+
+
+  /*
+    اتصال به select های قبلی
+  */
+  function installFix(){
+
+    const from=getFrom();
+    const to=getTo();
+    const amount=getAmount();
+
+    if(!from || !to || !amount){
+
+      return;
+    }
+
+    /*
+      حذف listenerهای قبلی با clone
+      تا محاسبه قدیمی مزاحم نشود.
+    */
+
+    const newFrom=from.cloneNode(true);
+    from.parentNode.replaceChild(newFrom,from);
+
+    const newTo=to.cloneNode(true);
+    to.parentNode.replaceChild(newTo,to);
+
+    const newAmount=amount.cloneNode(true);
+    amount.parentNode.replaceChild(newAmount,amount);
+
+    newFrom.removeAttribute("onchange");
+    newTo.removeAttribute("onchange");
+    newAmount.removeAttribute("oninput");
+
+    newFrom.addEventListener(
+      "change",
+      fixFromChange
+    );
+
+    newTo.addEventListener(
+      "change",
+      fixToChange
+    );
+
+    newAmount.addEventListener(
+      "input",
+      fixAmountChange
+    );
+
+    /*
+      یک بار در شروع
+    */
+    fixExchangeResult();
+  }
+
+
+  /*
+    چون ممکن است کد قبلی دیرتر اجرا شود،
+    چند بار بررسی می‌کنیم.
+  */
+
+  function startFix(){
+
+    if(
+      getFrom() &&
+      getTo() &&
+      getAmount()
+    ){
+
+      installFix();
+
+    }else{
+
+      setTimeout(startFix,300);
+
+    }
+  }
+
+
+  /*
+    اگر مرحله دوم باز شد،
+    نتیجه را دوباره تازه می‌کنیم.
+  */
+
+  const oldShowStep=
+    window.showStep;
+
+  if(typeof oldShowStep==="function"){
+
+    window.showStep=function(step){
+
+      oldShowStep(step);
+
+      if(step===2){
+
+        setTimeout(
+          fixExchangeResult,
+          50
+        );
+
+      }
+    };
+  }
+
+
+  startFix();
+
+})();
+</script>
 </body>
 </html>
 </body>

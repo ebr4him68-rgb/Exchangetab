@@ -5940,5 +5940,1449 @@ const KBAdmin2 = {
 KBEasy.update();
 
 </script>
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تبادل آسان</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  font-family:Tahoma,Arial,sans-serif;
+}
+
+body{
+  margin:0;
+  background:#071008;
+  color:#fff;
+}
+
+/* =========================
+   دکمه ثابت وسط صفحه
+========================= */
+
+.easy-trade-area{
+  width:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:35px 10px;
+}
+
+#easyTradeBtn{
+  width:145px;
+  height:145px;
+  border-radius:50%;
+  border:5px solid #fff6a0;
+  background:linear-gradient(145deg,#fff700,#ffb300);
+  color:#151000;
+  font-size:19px;
+  font-weight:900;
+  cursor:pointer;
+  box-shadow:
+    0 0 15px #ffd000,
+    0 0 35px #ffd000,
+    0 0 70px rgba(255,210,0,.65);
+  animation:goldBlink 1.2s infinite;
+}
+
+@keyframes goldBlink{
+  0%,100%{
+    transform:scale(1);
+    box-shadow:
+      0 0 12px #ffd000,
+      0 0 30px #ffd000;
+  }
+
+  50%{
+    transform:scale(1.08);
+    box-shadow:
+      0 0 25px #fff000,
+      0 0 55px #ffbd00,
+      0 0 90px rgba(255,189,0,.8);
+  }
+}
+
+/* =========================
+   پنجره تبادل
+========================= */
+
+#tradeModal{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  background:rgba(0,0,0,.86);
+  overflow-y:auto;
+  padding:15px;
+}
+
+.tradeBox{
+  width:100%;
+  max-width:650px;
+  margin:20px auto;
+  background:linear-gradient(145deg,#112018,#071009);
+  border:2px solid #e8bd00;
+  border-radius:24px;
+  padding:20px;
+  box-shadow:0 0 45px rgba(255,210,0,.25);
+}
+
+.tradeHeader{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid #394723;
+  padding-bottom:15px;
+  margin-bottom:18px;
+}
+
+.tradeHeader h2{
+  margin:0;
+  color:#ffd900;
+}
+
+.closeBtn,
+.adminClose{
+  width:43px;
+  height:43px;
+  border:0;
+  border-radius:50%;
+  background:#a90000;
+  color:#fff;
+  font-size:23px;
+  cursor:pointer;
+}
+
+/* مراحل */
+
+.steps{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  margin-bottom:22px;
+}
+
+.stepCircle{
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  background:#283228;
+  color:#aaa;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-weight:bold;
+}
+
+.stepCircle.active{
+  background:#ffd000;
+  color:#111;
+  box-shadow:0 0 18px #ffd000;
+}
+
+.step{
+  display:none;
+}
+
+.step.active{
+  display:block;
+}
+
+label{
+  display:block;
+  margin:13px 0 7px;
+  color:#ffe36a;
+  font-weight:bold;
+}
+
+select,
+input{
+  width:100%;
+  padding:14px;
+  border-radius:13px;
+  border:1px solid #566238;
+  background:#0e1811;
+  color:#fff;
+  outline:none;
+  font-size:15px;
+}
+
+select:focus,
+input:focus{
+  border-color:#ffd000;
+}
+
+.exchangeArrow{
+  text-align:center;
+  color:#ffd000;
+  font-size:30px;
+  margin:7px;
+}
+
+.btnRow{
+  display:flex;
+  gap:10px;
+  margin-top:20px;
+}
+
+.mainBtn,
+.backBtn{
+  flex:1;
+  padding:15px;
+  border-radius:14px;
+  font-weight:900;
+  cursor:pointer;
+}
+
+.mainBtn{
+  border:0;
+  background:linear-gradient(90deg,#ffe000,#ffad00);
+  color:#111;
+}
+
+.backBtn{
+  border:1px solid #657249;
+  background:#172118;
+  color:#fff;
+}
+
+/* کیف پول */
+
+.walletCard{
+  margin-top:18px;
+  padding:15px;
+  border-radius:16px;
+  background:#0b160e;
+  border:1px solid #56642e;
+}
+
+.walletTitle{
+  color:#ffd000;
+  font-weight:bold;
+  margin-bottom:9px;
+}
+
+.walletAddress{
+  direction:ltr;
+  text-align:left;
+  word-break:break-all;
+  background:#040805;
+  border-radius:10px;
+  padding:12px;
+  color:#ddd;
+  font-size:13px;
+}
+
+.copyBtn{
+  width:100%;
+  margin-top:9px;
+  padding:11px;
+  border:0;
+  border-radius:11px;
+  background:#ffd000;
+  color:#111;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.amountResult{
+  margin-top:15px;
+  padding:16px;
+  border-radius:15px;
+  background:#111d13;
+  border:1px solid #46542a;
+  text-align:center;
+  line-height:2;
+}
+
+.amountResult strong{
+  color:#ffd000;
+  font-size:20px;
+}
+
+.notice{
+  margin-top:15px;
+  padding:13px;
+  border-radius:13px;
+  background:#151d0e;
+  border:1px solid #485523;
+  line-height:1.9;
+  color:#ddd;
+}
+
+/* =========================
+   پنل مدیر
+========================= */
+
+#adminPanel{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:10000;
+  background:#050805;
+  overflow-y:auto;
+  padding:18px;
+}
+
+.adminBox{
+  width:100%;
+  max-width:1000px;
+  margin:auto;
+}
+
+.adminHeader{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:20px;
+}
+
+.adminHeader h2{
+  color:#ffd000;
+}
+
+.transaction{
+  background:#101810;
+  border:1px solid #48562b;
+  border-radius:18px;
+  padding:16px;
+  margin-bottom:15px;
+}
+
+.transactionId{
+  color:#ffd000;
+  font-weight:bold;
+  font-size:17px;
+}
+
+.txLine{
+  margin-top:8px;
+  line-height:1.8;
+  word-break:break-word;
+}
+
+.status{
+  display:inline-block;
+  background:#5c4900;
+  color:#ffe36a;
+  padding:5px 9px;
+  border-radius:9px;
+}
+
+.adminActions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin-top:13px;
+}
+
+.adminActions button{
+  border:0;
+  border-radius:10px;
+  padding:9px 12px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+.pending{
+  background:#777000;
+  color:#fff;
+}
+
+.review{
+  background:#14649d;
+  color:#fff;
+}
+
+.approved{
+  background:#16833c;
+  color:#fff;
+}
+
+.rejected{
+  background:#a51d1d;
+  color:#fff;
+}
+
+.copyAdmin{
+  background:#ffd000;
+  color:#111;
+}
+
+/* دکمه مدیر */
+
+.adminButton{
+  position:fixed;
+  top:15px;
+  left:15px;
+  width:52px;
+  height:52px;
+  border-radius:50%;
+  border:2px solid #ffd000;
+  background:#111a12;
+  color:#ffd000;
+  font-size:23px;
+  cursor:pointer;
+  z-index:9998;
+}
+
+/* زنگوله */
+
+.bell{
+  position:fixed;
+  top:15px;
+  right:15px;
+  width:58px;
+  height:58px;
+  border-radius:50%;
+  background:linear-gradient(145deg,#fff000,#ffae00);
+  color:#111;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:28px;
+  cursor:pointer;
+  z-index:9998;
+  box-shadow:0 0 25px #ffc400;
+  animation:bellShake 1s infinite;
+}
+
+@keyframes bellShake{
+  0%,100%{transform:rotate(0deg)}
+  20%{transform:rotate(-12deg)}
+  40%{transform:rotate(12deg)}
+  60%{transform:rotate(-8deg)}
+  80%{transform:rotate(8deg)}
+}
+
+.bellCount{
+  position:absolute;
+  top:-3px;
+  right:-2px;
+  width:22px;
+  height:22px;
+  border-radius:50%;
+  background:red;
+  color:#fff;
+  font-size:11px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+#notificationBox{
+  display:none;
+  position:fixed;
+  right:15px;
+  top:85px;
+  width:300px;
+  max-width:calc(100% - 30px);
+  background:#101810;
+  border:1px solid #ffd000;
+  border-radius:16px;
+  padding:15px;
+  z-index:9997;
+  box-shadow:0 0 25px rgba(255,210,0,.3);
+}
+
+#notificationBox h3{
+  color:#ffd000;
+  margin-top:0;
+}
+
+@media(max-width:500px){
+
+  #easyTradeBtn{
+    width:125px;
+    height:125px;
+    font-size:17px;
+  }
+
+  .tradeBox{
+    margin:5px auto;
+    padding:15px;
+  }
+
+}
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+     دکمه ثابت وسط
+========================= -->
+
+<div class="easy-trade-area">
+  <button id="easyTradeBtn" onclick="openTrade()">
+    🔄<br>
+    تبادل آسان
+  </button>
+</div>
+
+<!-- دکمه زنگوله -->
+<div class="bell" onclick="toggleNotifications()">
+  🔔
+  <span class="bellCount" id="bellCount">0</span>
+</div>
+
+<!-- دکمه مدیر -->
+<button class="adminButton" onclick="openAdmin()">🔧</button>
+
+<!-- اعلان -->
+<div id="notificationBox">
+  <h3>🔔 پیام‌ها</h3>
+  <div id="notificationText">
+    هنوز تراکنشی ثبت نشده است.
+  </div>
+</div>
+
+<!-- =========================
+     پنجره تبادل
+========================= -->
+
+<div id="tradeModal">
+
+<div class="tradeBox">
+
+<div class="tradeHeader">
+  <h2>🔄 تبادل آسان</h2>
+  <button class="closeBtn" onclick="closeTrade()">×</button>
+</div>
+
+<div class="steps">
+  <div class="stepCircle active" id="circle1">1</div>
+  <div class="stepCircle" id="circle2">2</div>
+  <div class="stepCircle" id="circle3">3</div>
+  <div class="stepCircle" id="circle4">4</div>
+</div>
+
+<!-- مرحله ۱ -->
+
+<div class="step active" id="step1">
+
+<h3>مرحله ۱ — انتخاب ارز</h3>
+
+<label>ارزی که ارسال می‌کنید</label>
+
+<select id="fromCoin" onchange="updateWallet()">
+  <option value="BTC">Bitcoin (BTC)</option>
+  <option value="BCH">Bitcoin Cash (BCH)</option>
+  <option value="DOGE">Dogecoin (DOGE)</option>
+  <option value="USDT">Tether USDT — BEP-20</option>
+  <option value="LTC">Litecoin (LTC)</option>
+  <option value="DGB">DigiByte (DGB)</option>
+  <option value="TRX">TRON (TRX)</option>
+</select>
+
+<div class="exchangeArrow">⇅</div>
+
+<label>ارزی که دریافت می‌کنید</label>
+
+<select id="toCoin">
+  <option value="USDT">Tether USDT — BEP-20</option>
+  <option value="BTC">Bitcoin (BTC)</option>
+  <option value="BCH">Bitcoin Cash (BCH)</option>
+  <option value="DOGE">Dogecoin (DOGE)</option>
+  <option value="LTC">Litecoin (LTC)</option>
+  <option value="DGB">DigiByte (DGB)</option>
+  <option value="TRX">TRON (TRX)</option>
+</select>
+
+<div class="walletCard">
+
+<div class="walletTitle">
+آدرس سایت برای ارسال ارز:
+</div>
+
+<div class="walletAddress" id="siteWallet"></div>
+
+<button class="copyBtn" onclick="copySiteWallet()">
+📋 کپی آدرس
+</button>
+
+</div>
+
+<div class="btnRow">
+<button class="mainBtn" onclick="nextStep(2)">
+ادامه ←
+</button>
+</div>
+
+</div>
+
+<!-- مرحله ۲ -->
+
+<div class="step" id="step2">
+
+<h3>مرحله ۲ — مقدار معامله</h3>
+
+<label>مقدار ارز</label>
+
+<input
+  id="amount"
+  type="number"
+  min="0"
+  step="any"
+  placeholder="مقدار را وارد کنید"
+  oninput="calculateExchange()">
+
+<div class="amountResult">
+
+مقدار تقریبی دریافتی:
+
+<br>
+
+<strong id="receiveAmount">0</strong>
+
+<span id="receiveCoin">USDT</span>
+
+</div>
+
+<div class="notice">
+نرخ نمایش داده‌شده برای محاسبه اولیه است و مبلغ نهایی پس از بررسی تراکنش مشخص می‌شود.
+</div>
+
+<div class="btnRow">
+
+<button class="backBtn" onclick="nextStep(1)">
+→ برگشت
+</button>
+
+<button class="mainBtn" onclick="goStep3()">
+ادامه ←
+</button>
+
+</div>
+
+</div>
+
+<!-- مرحله ۳ -->
+
+<div class="step" id="step3">
+
+<h3>مرحله ۳ — آدرس کیف پول شما</h3>
+
+<label>
+آدرسی که می‌خواهید ارز دریافت کنید
+</label>
+
+<input
+  id="userWallet"
+  type="text"
+  dir="ltr"
+  placeholder="آدرس کیف پول خود را وارد کنید">
+
+<div class="notice">
+⚠️ شبکه آدرس دریافت را حتماً بررسی کنید.
+</div>
+
+<div class="btnRow">
+
+<button class="backBtn" onclick="nextStep(2)">
+→ برگشت
+</button>
+
+<button class="mainBtn" onclick="goStep4()">
+ادامه ←
+</button>
+
+</div>
+
+</div>
+
+<!-- مرحله ۴ -->
+
+<div class="step" id="step4">
+
+<h3>مرحله ۴ — تأیید معامله</h3>
+
+<div class="notice">
+
+<div>
+ارز ارسال:
+<strong id="confirmFrom"></strong>
+</div>
+
+<div>
+مقدار:
+<strong id="confirmAmount"></strong>
+</div>
+
+<div>
+ارز دریافت:
+<strong id="confirmTo"></strong>
+</div>
+
+<div>
+مقدار تقریبی دریافت:
+<strong id="confirmReceive"></strong>
+</div>
+
+<br>
+
+<div>
+آدرس کیف پول شما:
+</div>
+
+<div class="walletAddress" id="confirmWallet"></div>
+
+</div>
+
+<div class="walletCard">
+
+<div class="walletTitle">
+آدرس سایت برای ارسال ارز:
+</div>
+
+<div class="walletAddress" id="confirmSiteWallet"></div>
+
+<button class="copyBtn" onclick="copyConfirmWallet()">
+📋 کپی آدرس ارسال
+</button>
+
+</div>
+
+<div class="btnRow">
+
+<button class="backBtn" onclick="nextStep(3)">
+→ برگشت
+</button>
+
+<button class="mainBtn" onclick="registerTransaction()">
+✅ ثبت معامله
+</button>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+<!-- =========================
+     پنل مدیر
+========================= -->
+
+<div id="adminPanel">
+
+<div class="adminBox">
+
+<div class="adminHeader">
+
+<h2>🔧 تراکنش‌های مدیر</h2>
+
+<button class="adminClose" onclick="closeAdmin()">
+×
+</button>
+
+</div>
+
+<div id="adminTransactions"></div>
+
+</div>
+
+</div>
+
+<script>
+
+/* ==================================================
+   ۷ آدرس دقیق
+================================================== */
+
+const WALLETS = {
+
+  BTC:
+  "1Q99GpYnEU9yELNLjiJUWopNT1HatRYQrV",
+
+  BCH:
+  "bitcoincash:qrj64uh0xlah2wzksudq3g5eeg2ewdyg6urq5kywku",
+
+  DOGE:
+  "DA9b1AqJqgsdFNuJNjzRo2g5wFj1rEeQLk",
+
+  USDT:
+  "0x3765C083F36B7D874d3a6249436a84C9e9bDAbA6",
+
+  LTC:
+  "LZeRDFWbPLpuqeAw7m5i5YcYiu32KRAM6c",
+
+  DGB:
+  "DEgjWtMywVrSMJp9URfZEEZvmDfbySryc8",
+
+  TRX:
+  "TRb33idZSi7svRyBTRsEKq8BfL54ADYMh3"
+
+};
+
+/* نرخ‌های نمونه */
+
+const RATES = {
+
+  BTC:110000,
+  BCH:500,
+  DOGE:0.25,
+  USDT:1,
+  LTC:100,
+  DGB:0.01,
+  TRX:0.35
+
+};
+
+let currentStep=1;
+
+
+/* =========================
+   باز کردن
+========================= */
+
+function openTrade(){
+
+  document.getElementById("tradeModal").style.display="block";
+
+  showStep(1);
+
+  updateWallet();
+
+}
+
+
+/* =========================
+   بستن
+========================= */
+
+function closeTrade(){
+
+  document.getElementById("tradeModal").style.display="none";
+
+}
+
+
+/* =========================
+   مراحل
+========================= */
+
+function nextStep(step){
+
+  showStep(step);
+
+}
+
+function showStep(step){
+
+  currentStep=step;
+
+  document.querySelectorAll(".step").forEach(function(x){
+
+    x.classList.remove("active");
+
+  });
+
+  document.getElementById("step"+step)
+    .classList.add("active");
+
+  document.querySelectorAll(".stepCircle").forEach(function(x){
+
+    x.classList.remove("active");
+
+  });
+
+  document.getElementById("circle"+step)
+    .classList.add("active");
+
+}
+
+
+/* =========================
+   آدرس سایت
+========================= */
+
+function updateWallet(){
+
+  const coin=
+    document.getElementById("fromCoin").value;
+
+  document.getElementById("siteWallet").textContent=
+    WALLETS[coin];
+
+  calculateExchange();
+
+}
+
+
+/* =========================
+   محاسبه
+========================= */
+
+function calculateExchange(){
+
+  const from=
+    document.getElementById("fromCoin").value;
+
+  const to=
+    document.getElementById("toCoin").value;
+
+  const amount=
+    parseFloat(document.getElementById("amount").value)||0;
+
+  const usdValue=
+    amount*RATES[from];
+
+  const receive=
+    usdValue/RATES[to];
+
+  document.getElementById("receiveAmount")
+    .textContent=receive.toFixed(8);
+
+  document.getElementById("receiveCoin")
+    .textContent=to;
+
+}
+
+
+/* =========================
+   مرحله ۳
+========================= */
+
+function goStep3(){
+
+  const amount=
+    parseFloat(document.getElementById("amount").value)||0;
+
+  const from=
+    document.getElementById("fromCoin").value;
+
+  const to=
+    document.getElementById("toCoin").value;
+
+  if(from===to){
+
+    alert("ارز ارسال و دریافت نباید یکسان باشد.");
+
+    return;
+
+  }
+
+  if(amount<=0){
+
+    alert("لطفاً مقدار معامله را وارد کنید.");
+
+    return;
+
+  }
+
+  showStep(3);
+
+}
+
+
+/* =========================
+   مرحله ۴
+========================= */
+
+function goStep4(){
+
+  const wallet=
+    document.getElementById("userWallet")
+    .value.trim();
+
+  if(wallet.length<8){
+
+    alert("لطفاً آدرس کیف پول را وارد کنید.");
+
+    return;
+
+  }
+
+  const from=
+    document.getElementById("fromCoin").value;
+
+  const to=
+    document.getElementById("toCoin").value;
+
+  const amount=
+    parseFloat(document.getElementById("amount").value)||0;
+
+  calculateExchange();
+
+  document.getElementById("confirmFrom")
+    .textContent=from;
+
+  document.getElementById("confirmAmount")
+    .textContent=amount+" "+from;
+
+  document.getElementById("confirmTo")
+    .textContent=to;
+
+  document.getElementById("confirmReceive")
+    .textContent=
+    document.getElementById("receiveAmount").textContent+
+    " "+to;
+
+  document.getElementById("confirmWallet")
+    .textContent=wallet;
+
+  document.getElementById("confirmSiteWallet")
+    .textContent=WALLETS[from];
+
+  showStep(4);
+
+}
+
+
+/* =========================
+   کپی
+========================= */
+
+function copyText(text){
+
+  if(navigator.clipboard){
+
+    navigator.clipboard.writeText(text)
+      .then(function(){
+
+        alert("آدرس کپی شد ✅");
+
+      })
+      .catch(function(){
+
+        oldCopy(text);
+
+      });
+
+  }else{
+
+    oldCopy(text);
+
+  }
+
+}
+
+function oldCopy(text){
+
+  const area=
+    document.createElement("textarea");
+
+  area.value=text;
+
+  document.body.appendChild(area);
+
+  area.select();
+
+  document.execCommand("copy");
+
+  area.remove();
+
+  alert("آدرس کپی شد ✅");
+
+}
+
+function copySiteWallet(){
+
+  copyText(
+    document.getElementById("siteWallet").textContent
+  );
+
+}
+
+function copyConfirmWallet(){
+
+  copyText(
+    document.getElementById("confirmSiteWallet").textContent
+  );
+
+}
+
+
+/* =========================
+   ثبت تراکنش
+========================= */
+
+function registerTransaction(){
+
+  const from=
+    document.getElementById("fromCoin").value;
+
+  const to=
+    document.getElementById("toCoin").value;
+
+  const amount=
+    parseFloat(document.getElementById("amount").value)||0;
+
+  const userWallet=
+    document.getElementById("userWallet")
+    .value.trim();
+
+  const receive=
+    document.getElementById("receiveAmount").textContent;
+
+  const id=
+    "EX-"+Date.now();
+
+  const tx={
+
+    id:id,
+
+    from:from,
+
+    to:to,
+
+    amount:amount,
+
+    receive:receive,
+
+    userWallet:userWallet,
+
+    siteWallet:WALLETS[from],
+
+    status:"در انتظار بررسی",
+
+    createdAt:
+      new Date().toLocaleString("fa-IR")
+
+  };
+
+  const list=
+    JSON.parse(
+      localStorage.getItem(
+        "easyTradeTransactions"
+      ) || "[]"
+    );
+
+  list.unshift(tx);
+
+  localStorage.setItem(
+    "easyTradeTransactions",
+    JSON.stringify(list)
+  );
+
+  updateBell();
+
+  alert(
+    "تراکنش با موفقیت ثبت شد ✅\n\n"+
+    "شماره تراکنش:\n"+
+    id
+  );
+
+  closeTrade();
+
+  document.getElementById("amount").value="";
+
+  document.getElementById("userWallet").value="";
+
+  showStep(1);
+
+}
+
+
+/* =========================
+   مدیر
+========================= */
+
+function openAdmin(){
+
+  const password=
+    prompt("رمز ورود مدیر:");
+
+  if(password!=="123456"){
+
+    alert("رمز مدیر اشتباه است.");
+
+    return;
+
+  }
+
+  document.getElementById("adminPanel")
+    .style.display="block";
+
+  renderAdmin();
+
+}
+
+function closeAdmin(){
+
+  document.getElementById("adminPanel")
+    .style.display="none";
+
+}
+
+
+/* =========================
+   نمایش تراکنش‌ها
+========================= */
+
+function renderAdmin(){
+
+  const box=
+    document.getElementById(
+      "adminTransactions"
+    );
+
+  const list=
+    JSON.parse(
+      localStorage.getItem(
+        "easyTradeTransactions"
+      ) || "[]"
+    );
+
+  if(list.length===0){
+
+    box.innerHTML=
+      '<div class="notice">'+
+      'هنوز هیچ تراکنشی ثبت نشده است.'+
+      '</div>';
+
+    return;
+
+  }
+
+  box.innerHTML="";
+
+  list.forEach(function(tx,index){
+
+    const div=
+      document.createElement("div");
+
+    div.className="transaction";
+
+    div.innerHTML=`
+
+      <div class="transactionId">
+        🧾 ${safe(tx.id)}
+      </div>
+
+      <div class="txLine">
+        🕒 زمان: ${safe(tx.createdAt)}
+      </div>
+
+      <div class="txLine">
+        💰 ارسال:
+        <strong>
+          ${safe(tx.amount)} ${safe(tx.from)}
+        </strong>
+      </div>
+
+      <div class="txLine">
+        💎 دریافت تقریبی:
+        <strong>
+          ${safe(tx.receive)} ${safe(tx.to)}
+        </strong>
+      </div>
+
+      <div class="txLine">
+        👤 آدرس کیف پول کاربر:
+      </div>
+
+      <div class="walletAddress">
+        ${safe(tx.userWallet)}
+      </div>
+
+      <div class="txLine">
+        🏦 آدرس سایت:
+      </div>
+
+      <div class="walletAddress">
+        ${safe(tx.siteWallet)}
+      </div>
+
+      <div class="txLine">
+        وضعیت:
+        <span class="status">
+          ${safe(tx.status)}
+        </span>
+      </div>
+
+      <div class="adminActions">
+
+        <button
+          class="pending"
+          onclick="changeStatus(${index},
+          'در انتظار بررسی')">
+          در انتظار
+        </button>
+
+        <button
+          class="review"
+          onclick="changeStatus(${index},
+          'در حال بررسی')">
+          در حال بررسی
+        </button>
+
+        <button
+          class="approved"
+          onclick="changeStatus(${index},
+          'تأیید شد')">
+          تأیید شد
+        </button>
+
+        <button
+          class="rejected"
+          onclick="changeStatus(${index},
+          'رد شد')">
+          رد شد
+        </button>
+
+        <button
+          class="copyAdmin"
+          onclick="copyAdminAddress(${index})">
+          📋 کپی آدرس
+        </button>
+
+      </div>
+    `;
+
+    box.appendChild(div);
+
+  });
+
+}
+
+
+/* =========================
+   وضعیت
+========================= */
+
+function changeStatus(index,status){
+
+  const list=
+    JSON.parse(
+      localStorage.getItem(
+        "easyTradeTransactions"
+      ) || "[]"
+    );
+
+  if(!list[index]) return;
+
+  list[index].status=status;
+
+  localStorage.setItem(
+    "easyTradeTransactions",
+    JSON.stringify(list)
+  );
+
+  renderAdmin();
+
+  updateBell();
+
+}
+
+
+/* =========================
+   کپی آدرس مدیر
+========================= */
+
+function copyAdminAddress(index){
+
+  const list=
+    JSON.parse(
+      localStorage.getItem(
+        "easyTradeTransactions"
+      ) || "[]"
+    );
+
+  if(!list[index]) return;
+
+  copyText(list[index].userWallet);
+
+}
+
+
+/* =========================
+   زنگوله
+========================= */
+
+function updateBell(){
+
+  const list=
+    JSON.parse(
+      localStorage.getItem(
+        "easyTradeTransactions"
+      ) || "[]"
+    );
+
+  const count=
+    list.filter(function(x){
+
+      return x.status==="در انتظار بررسی";
+
+    }).length;
+
+  document.getElementById("bellCount")
+    .textContent=count;
+
+  if(count>0){
+
+    document.getElementById("notificationText")
+      .innerHTML=
+      "🔔 تعداد <strong>"+
+      count+
+      "</strong> تراکنش در انتظار بررسی مدیر است.";
+
+  }else{
+
+    document.getElementById("notificationText")
+      .textContent=
+      "تراکنش جدیدی در انتظار بررسی نیست.";
+
+  }
+
+}
+
+
+/* =========================
+   اعلان
+========================= */
+
+function toggleNotifications(){
+
+  const box=
+    document.getElementById(
+      "notificationBox"
+    );
+
+  if(box.style.display==="block"){
+
+    box.style.display="none";
+
+  }else{
+
+    updateBell();
+
+    box.style.display="block";
+
+  }
+
+}
+
+
+/* =========================
+   امنیت نمایش متن
+========================= */
+
+function safe(value){
+
+  return String(value)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+
+}
+
+
+/* شروع */
+
+updateWallet();
+updateBell();
+
+</script>
+
+</body>
+</html>
 </body>
 </html>

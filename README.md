@@ -3860,5 +3860,648 @@ KB_renderNotifications();
 <!-- =========================================================
      پایان سیستم زنگوله
 ========================================================= -->
+<!-- 🔧 دکمه تنظیمات دایره‌ای -->
+<div id="kbSettingsButton" onclick="kbOpenSettings()" title="تنظیمات">
+  🔧
+</div>
+
+<!-- 🎨 پنل تم‌ها -->
+<div id="kbSettingsPanel">
+
+  <div class="kbSettingsHeader">
+    <span>⚙️ تنظیمات سایت</span>
+    <button onclick="kbCloseSettings(event)">✕</button>
+  </div>
+
+  <div class="kbSettingsTitle">
+    🎨 انتخاب تم
+  </div>
+
+  <div class="kbThemeList">
+
+    <button onclick="kbChangeTheme('forest')">
+      <span>🌲</span>
+      <div>
+        <b>جنگل</b>
+        <small>Forest</small>
+      </div>
+    </button>
+
+    <button onclick="kbChangeTheme('ocean')">
+      <span>🌊</span>
+      <div>
+        <b>دریا</b>
+        <small>Ocean</small>
+      </div>
+    </button>
+
+    <button onclick="kbChangeTheme('galaxy')">
+      <span>🌌</span>
+      <div>
+        <b>کهکشان</b>
+        <small>Galaxy</small>
+      </div>
+    </button>
+
+    <button onclick="kbChangeTheme('mountain')">
+      <span>🏔️</span>
+      <div>
+        <b>کوهستان</b>
+        <small>Mountain</small>
+      </div>
+    </button>
+
+    <button onclick="kbChangeTheme('desert')">
+      <span>🏜️</span>
+      <div>
+        <b>دشت و صحرا</b>
+        <small>Desert</small>
+      </div>
+    </button>
+
+  </div>
+
+</div>
+
+
+<style>
+
+/* =========================================
+   🔧 آچار دایره‌ای بالای سمت چپ
+========================================= */
+
+#kbSettingsButton {
+
+  position: fixed;
+
+  top: 15px;
+  left: 18px;
+
+  width: 58px;
+  height: 58px;
+
+  border-radius: 50%;
+
+  background:
+    linear-gradient(
+      145deg,
+      #fff5a8,
+      #ffd700,
+      #b8860b
+    );
+
+  border: 3px solid #fff1a8;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 29px;
+
+  cursor: pointer;
+
+  z-index: 2147483647;
+
+  box-shadow:
+    0 0 8px #ffd700,
+    0 0 20px rgba(255,215,0,.75),
+    inset 0 2px 5px rgba(255,255,255,.8);
+
+  animation:
+    kbSettingsGlow 2s infinite;
+
+  transition: .25s ease;
+
+  user-select: none;
+}
+
+
+/* درخشش */
+
+@keyframes kbSettingsGlow {
+
+  0%,100% {
+
+    box-shadow:
+      0 0 8px #ffd700,
+      0 0 18px rgba(255,215,0,.5);
+
+  }
+
+  50% {
+
+    box-shadow:
+      0 0 15px #ffd700,
+      0 0 35px rgba(255,215,0,.95);
+
+  }
+
+}
+
+
+/* حرکت آچار هنگام لمس */
+
+#kbSettingsButton:hover {
+
+  transform:
+    rotate(35deg)
+    scale(1.08);
+
+}
+
+
+/* =========================================
+   ⚙️ پنل تنظیمات
+========================================= */
+
+#kbSettingsPanel {
+
+  position: fixed;
+
+  top: 85px;
+  left: 18px;
+
+  width: 330px;
+
+  max-width:
+    calc(100vw - 36px);
+
+  background:
+    rgba(10,10,10,.97);
+
+  color: white;
+
+  border:
+    1px solid #d4af37;
+
+  border-radius: 17px;
+
+  overflow: hidden;
+
+  z-index: 2147483646;
+
+  display: none;
+
+  box-shadow:
+    0 15px 45px rgba(0,0,0,.8);
+
+}
+
+
+/* =========================================
+   عنوان پنل
+========================================= */
+
+.kbSettingsHeader {
+
+  height: 55px;
+
+  padding: 0 13px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  background:
+    linear-gradient(
+      135deg,
+      #d4af37,
+      #8f6b12
+    );
+
+  font-weight: bold;
+
+}
+
+
+.kbSettingsHeader button {
+
+  width: 31px;
+  height: 31px;
+
+  border-radius: 8px;
+
+  border: 1px solid white;
+
+  background: #111;
+
+  color: white;
+
+  cursor: pointer;
+
+}
+
+
+/* =========================================
+   عنوان تم
+========================================= */
+
+.kbSettingsTitle {
+
+  padding:
+    15px 15px 8px;
+
+  color: #ffd700;
+
+  font-size: 14px;
+
+}
+
+
+/* =========================================
+   لیست تم‌ها
+========================================= */
+
+.kbThemeList {
+
+  padding:
+    8px 12px 15px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 9px;
+
+}
+
+
+.kbThemeList button {
+
+  width: 100%;
+
+  min-height: 60px;
+
+  border-radius: 12px;
+
+  border: 1px solid #333;
+
+  background: #181818;
+
+  color: white;
+
+  cursor: pointer;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 13px;
+
+  padding: 8px 12px;
+
+  text-align: right;
+
+  transition: .2s;
+
+}
+
+
+.kbThemeList button:hover {
+
+  border-color: #ffd700;
+
+  background: #292929;
+
+  transform:
+    translateX(4px);
+
+}
+
+
+.kbThemeList button > span {
+
+  width: 43px;
+  height: 43px;
+
+  border-radius: 10px;
+
+  background:
+    rgba(255,255,255,.08);
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  font-size: 25px;
+
+}
+
+
+.kbThemeList b {
+
+  display: block;
+
+  font-size: 14px;
+
+}
+
+
+.kbThemeList small {
+
+  display: block;
+
+  margin-top: 3px;
+
+  color: #999;
+
+  font-size: 10px;
+
+}
+
+
+/* =========================================
+   📱 موبایل
+========================================= */
+
+@media (max-width:600px) {
+
+  #kbSettingsButton {
+
+    top: 10px;
+    left: 10px;
+
+    width: 53px;
+    height: 53px;
+
+    font-size: 26px;
+
+  }
+
+  #kbSettingsPanel {
+
+    top: 72px;
+    left: 10px;
+
+    width:
+      calc(100vw - 20px);
+
+  }
+
+}
+
+</style>
+
+
+<script>
+
+/* =========================================
+   🎨 تم‌های سایت
+========================================= */
+
+const KB_THEME_DATA = {
+
+  forest: {
+    bg:
+      "linear-gradient(135deg,#031d0d,#075b2b,#123d22)",
+    color:
+      "#ffffff",
+    primary:
+      "#32d65b",
+    surface:
+      "rgba(7,45,24,.94)"
+  },
+
+  ocean: {
+    bg:
+      "linear-gradient(135deg,#001b35,#006994,#00a6c7)",
+    color:
+      "#ffffff",
+    primary:
+      "#00d5ff",
+    surface:
+      "rgba(0,39,67,.94)"
+  },
+
+  galaxy: {
+    bg:
+      "radial-gradient(circle at 30% 20%,#641a9c,#17052f 45%,#020006)",
+    color:
+      "#ffffff",
+    primary:
+      "#bd5cff",
+    surface:
+      "rgba(24,5,48,.94)"
+  },
+
+  mountain: {
+    bg:
+      "linear-gradient(135deg,#17242b,#426879,#91b6c6)",
+    color:
+      "#ffffff",
+    primary:
+      "#b9e5f5",
+    surface:
+      "rgba(28,48,58,.94)"
+  },
+
+  desert: {
+    bg:
+      "linear-gradient(135deg,#743800,#c7741e,#efbd73)",
+    color:
+      "#ffffff",
+    primary:
+      "#ffd064",
+    surface:
+      "rgba(88,43,7,.94)"
+  }
+
+};
+
+
+/* =========================================
+   🔧 باز کردن تنظیمات
+========================================= */
+
+function kbOpenSettings() {
+
+  const panel =
+    document.getElementById(
+      "kbSettingsPanel"
+    );
+
+  if (!panel) return;
+
+  if (
+    panel.style.display === "block"
+  ) {
+
+    panel.style.display =
+      "none";
+
+  } else {
+
+    panel.style.display =
+      "block";
+
+  }
+
+}
+
+
+/* =========================================
+   ❌ بستن تنظیمات
+========================================= */
+
+function kbCloseSettings(event) {
+
+  if (event) {
+    event.stopPropagation();
+  }
+
+  const panel =
+    document.getElementById(
+      "kbSettingsPanel"
+    );
+
+  if (panel) {
+
+    panel.style.display =
+      "none";
+
+  }
+
+}
+
+
+/* =========================================
+   🎨 تغییر تم
+========================================= */
+
+function kbChangeTheme(themeName) {
+
+  const theme =
+    KB_THEME_DATA[themeName];
+
+  if (!theme) return;
+
+
+  /* پس‌زمینه */
+
+  document.body.style.background =
+    theme.bg;
+
+
+  /* رنگ متن */
+
+  document.body.style.color =
+    theme.color;
+
+
+  /* متغیرهای عمومی */
+
+  document.documentElement.style
+    .setProperty(
+      "--site-bg",
+      theme.bg
+    );
+
+  document.documentElement.style
+    .setProperty(
+      "--site-primary",
+      theme.primary
+    );
+
+  document.documentElement.style
+    .setProperty(
+      "--site-surface",
+      theme.surface
+    );
+
+  document.documentElement.style
+    .setProperty(
+      "--site-text",
+      theme.color
+    );
+
+
+  /* ذخیره انتخاب */
+
+  localStorage.setItem(
+    "KB_SELECTED_THEME",
+    themeName
+  );
+
+
+  /* بستن پنل */
+
+  const panel =
+    document.getElementById(
+      "kbSettingsPanel"
+    );
+
+  if (panel) {
+
+    panel.style.display =
+      "none";
+
+  }
+
+}
+
+
+/* =========================================
+   💾 بارگذاری تم قبلی
+========================================= */
+
+(function() {
+
+  const saved =
+    localStorage.getItem(
+      "KB_SELECTED_THEME"
+    );
+
+  if (
+    saved &&
+    KB_THEME_DATA[saved]
+  ) {
+
+    kbChangeTheme(saved);
+
+  }
+
+})();
+
+
+/* =========================================
+   👆 بستن پنل با کلیک بیرون
+========================================= */
+
+document.addEventListener(
+  "click",
+  function(event) {
+
+    const panel =
+      document.getElementById(
+        "kbSettingsPanel"
+      );
+
+    const button =
+      document.getElementById(
+        "kbSettingsButton"
+      );
+
+    if (!panel || !button)
+      return;
+
+
+    if (
+      panel.style.display === "block" &&
+      !panel.contains(event.target) &&
+      !button.contains(event.target)
+    ) {
+
+      panel.style.display =
+        "none";
+
+    }
+
+  }
+);
+
+</script>
 </body>
 </html>

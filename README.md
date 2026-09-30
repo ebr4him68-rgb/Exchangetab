@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Crypto Exchange</title>
 
 <style>
@@ -31,8 +30,6 @@ body.orange{background:#ff7800}
   margin:auto;
   padding:18px 0 40px;
 }
-
-/* HEADER */
 
 .header{
   background:rgba(0,0,0,.94);
@@ -70,9 +67,7 @@ body.orange{background:#ff7800}
 
 .status-light.online{
   background:#00ff55;
-  box-shadow:
-    0 0 8px #00ff55,
-    0 0 18px #00ff55;
+  box-shadow:0 0 8px #00ff55,0 0 18px #00ff55;
   animation:blink 1s infinite;
 }
 
@@ -90,8 +85,6 @@ body.orange{background:#ff7800}
   0%,100%{opacity:1}
   50%{opacity:.25}
 }
-
-/* THEMES */
 
 .themes{
   display:flex;
@@ -112,8 +105,6 @@ body.orange{background:#ff7800}
 .theme-blue{background:#087cf5}
 .theme-purple{background:#7028c9}
 .theme-orange{background:#ff7800}
-
-/* MARKET */
 
 .market{
   display:grid;
@@ -155,8 +146,6 @@ body.orange{background:#ff7800}
   font-size:10px;
   color:#00ff55;
 }
-
-/* EXCHANGE */
 
 .exchange{
   background:rgba(0,0,0,.95);
@@ -219,8 +208,6 @@ input{
   font-weight:bold;
 }
 
-/* BUY SELL */
-
 .trade-buttons{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -251,14 +238,12 @@ input{
 
 .buy{
   background:#08a842;
-  box-shadow:
-    0 0 15px rgba(0,255,80,.35);
+  box-shadow:0 0 15px rgba(0,255,80,.35);
 }
 
 .sell{
   background:#df1834;
-  box-shadow:
-    0 0 15px rgba(255,0,40,.35);
+  box-shadow:0 0 15px rgba(255,0,40,.35);
 }
 
 .trade::after{
@@ -278,8 +263,6 @@ input{
   45%,100%{left:150%}
 }
 
-/* MESSAGE */
-
 .message{
   text-align:center;
   margin-top:15px;
@@ -287,8 +270,6 @@ input{
   font-size:13px;
   min-height:25px;
 }
-
-/* INFO */
 
 .info{
   margin-top:18px;
@@ -301,14 +282,242 @@ input{
   text-align:center;
 }
 
-/* RESPONSIVE */
+/* =========================
+   TRANSACTIONS
+========================= */
+
+.transactions{
+  margin-top:20px;
+  background:rgba(0,0,0,.95);
+  border-radius:25px;
+  padding:22px;
+  box-shadow:0 12px 35px rgba(0,0,0,.3);
+}
+
+.section-title{
+  text-align:center;
+  font-size:23px;
+  font-weight:bold;
+  margin-bottom:18px;
+}
+
+.address-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+
+.address-box{
+  background:#171717;
+  border-radius:17px;
+  padding:15px;
+}
+
+.address-name{
+  font-weight:bold;
+  margin-bottom:8px;
+}
+
+.network{
+  color:#aaa;
+  font-size:11px;
+  margin-bottom:8px;
+}
+
+.address-row{
+  display:flex;
+  gap:8px;
+  align-items:center;
+}
+
+.address-value{
+  flex:1;
+  direction:ltr;
+  text-align:left;
+  background:#292929;
+  border-radius:10px;
+  padding:11px;
+  font-size:11px;
+  word-break:break-all;
+}
+
+.copy-btn{
+  border:0;
+  background:#087cf5;
+  color:#fff;
+  border-radius:10px;
+  padding:11px 13px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+.copy-btn:active{
+  transform:scale(.95);
+}
+
+.register-box{
+  margin-top:20px;
+  background:#171717;
+  border-radius:20px;
+  padding:18px;
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+
+.form-item label{
+  display:block;
+  font-size:13px;
+  margin-bottom:7px;
+}
+
+.form-item input,
+.form-item select{
+  margin-top:0;
+}
+
+.public-address{
+  margin-top:10px;
+  background:#202020;
+  border-radius:12px;
+  padding:12px;
+  direction:ltr;
+  text-align:left;
+  word-break:break-all;
+  font-size:12px;
+}
+
+.register-btn{
+  width:100%;
+  margin-top:15px;
+  padding:17px;
+  border:0;
+  border-radius:15px;
+  background:#08a842;
+  color:#fff;
+  font-size:19px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.tracking-result{
+  margin-top:15px;
+  background:#202020;
+  border-radius:14px;
+  padding:15px;
+  text-align:center;
+  line-height:2;
+  display:none;
+}
+
+.tracking-code{
+  direction:ltr;
+  font-size:20px;
+  font-weight:bold;
+  color:#ffd000;
+  letter-spacing:1px;
+}
+
+.all-transactions{
+  margin-top:20px;
+  background:#171717;
+  border-radius:20px;
+  padding:18px;
+}
+
+.transaction-list{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  max-height:650px;
+  overflow:auto;
+}
+
+.transaction-item{
+  background:#202020;
+  border-radius:15px;
+  padding:15px;
+  border-right:5px solid #ffd000;
+}
+
+.transaction-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin-bottom:10px;
+}
+
+.transaction-code{
+  direction:ltr;
+  font-weight:bold;
+  color:#ffd000;
+}
+
+.buy-label{
+  background:#08a842;
+  padding:5px 9px;
+  border-radius:8px;
+  font-size:11px;
+}
+
+.sell-label{
+  background:#df1834;
+  padding:5px 9px;
+  border-radius:8px;
+  font-size:11px;
+}
+
+.transaction-details{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:7px;
+  color:#ddd;
+  font-size:12px;
+}
+
+.transaction-details div{
+  background:#292929;
+  padding:8px;
+  border-radius:8px;
+  word-break:break-all;
+}
+
+.empty-transactions{
+  text-align:center;
+  color:#aaa;
+  padding:20px;
+}
+
+.status-pending{
+  color:#ffd000;
+  font-weight:bold;
+}
+
+.status-confirmed{
+  color:#00ff55;
+  font-weight:bold;
+}
+
+.notice{
+  margin-top:12px;
+  color:#aaa;
+  font-size:11px;
+  text-align:center;
+  line-height:1.9;
+}
 
 @media(max-width:950px){
-
   .market{
     grid-template-columns:repeat(3,1fr);
   }
 
+  .address-grid{
+    grid-template-columns:1fr;
+  }
 }
 
 @media(max-width:650px){
@@ -333,6 +542,13 @@ input{
     font-size:21px;
   }
 
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+
+  .transaction-details{
+    grid-template-columns:1fr;
+  }
 }
 </style>
 </head>
@@ -341,377 +557,480 @@ input{
 
 <div class="container">
 
-  <!-- HEADER -->
+<div class="header">
+  <div class="header-row">
+    <div class="logo">₿ Crypto Exchange</div>
 
-  <div class="header">
-
-    <div class="header-row">
-
-      <div class="logo">
-        ₿ Crypto Exchange
-      </div>
-
-      <div class="status">
-
-        <span id="globalLight"
-              class="status-light offline"></span>
-
-        <span id="globalStatus">
-          در حال اتصال به بازار...
-        </span>
-
-      </div>
-
+    <div class="status">
+      <span id="globalLight" class="status-light offline"></span>
+      <span id="globalStatus">در حال اتصال به بازار...</span>
     </div>
-
   </div>
+</div>
 
+<div class="themes">
 
-  <!-- THEMES -->
+  <button class="theme theme-yellow" onclick="setTheme('')"></button>
+  <button class="theme theme-blue" onclick="setTheme('blue')"></button>
+  <button class="theme theme-purple" onclick="setTheme('purple')"></button>
+  <button class="theme theme-orange" onclick="setTheme('orange')"></button>
 
-  <div class="themes">
+</div>
 
-    <button
-      class="theme theme-yellow"
-      onclick="setTheme('')">
-    </button>
+<div class="market">
 
-    <button
-      class="theme theme-blue"
-      onclick="setTheme('blue')">
-    </button>
+<div class="coin">
+<img src="https://assets.coingecko.com/coins/images/1/large/bitcoin.png" alt="Bitcoin">
+<div class="coin-name">Bitcoin</div>
+<div id="price-BTC" class="coin-price">در حال دریافت...</div>
+<div id="state-BTC" class="coin-state">● اتصال</div>
+</div>
 
-    <button
-      class="theme theme-purple"
-      onclick="setTheme('purple')">
-    </button>
+<div class="coin">
+<img src="https://assets.coingecko.com/coins/images/780/large/bitcoin-cash-circle.png" alt="Bitcoin Cash">
+<div class="coin-name">Bitcoin Cash</div>
+<div id="price-BCH" class="coin-price">در حال دریافت...</div>
+<div id="state-BCH" class="coin-state">● اتصال</div>
+</div>
 
-    <button
-      class="theme theme-orange"
-      onclick="setTheme('orange')">
-    </button>
+<div class="coin">
+<img src="https://assets.coingecko.com/coins/images/1094/large/tron-logo.png" alt="TRON">
+<div class="coin-name">TRON</div>
+<div id="price-TRX" class="coin-price">در حال دریافت...</div>
+<div id="state-TRX" class="coin-state">● اتصال</div>
+</div>
 
-  </div>
+<div class="coin">
+<img src="https://assets.coingecko.com/coins/images/2/large/litecoin.png" alt="Litecoin">
+<div class="coin-name">Litecoin</div>
+<div id="price-LTC" class="coin-price">در حال دریافت...</div>
+<div id="state-LTC" class="coin-state">● اتصال</div>
+</div>
 
+<div class="coin">
+<img src="https://assets.coingecko.com/coins/images/5/large/dogecoin.png" alt="Dogecoin">
+<div class="coin-name">Dogecoin</div>
+<div id="price-DOGE" class="coin-price">در حال دریافت...</div>
+<div id="state-DOGE" class="coin-state">● اتصال</div>
+</div>
 
-  <!-- MARKET -->
+<div class="coin">
+<img src="https://assets.coingecko.com/coins/images/325/large/Tether.png" alt="USDT">
+<div class="coin-name">Tether</div>
+<div id="price-USDT" class="coin-price">$1.00</div>
+<div class="coin-state" style="color:#00ff55">● فعال</div>
+</div>
 
-  <div class="market">
+</div>
 
-    <!-- BTC -->
+<div class="exchange">
 
-    <div class="coin">
+<div class="exchange-title">تبدیل ارز</div>
 
-      <img
-        src="https://assets.coingecko.com/coins/images/1/large/bitcoin.png"
-        alt="Bitcoin">
+<div class="exchange-grid">
 
-      <div class="coin-name">
-        Bitcoin
-      </div>
+<div class="card">
 
-      <div
-        id="price-BTC"
-        class="coin-price">
-        در حال دریافت...
-      </div>
+<div class="card-title">ارزی که می‌دهی</div>
 
-      <div
-        id="state-BTC"
-        class="coin-state">
-        ● اتصال
-      </div>
+<select id="fromCoin">
 
-    </div>
+<option value="BTC">BTC - Bitcoin</option>
+<option value="BCH">BCH - Bitcoin Cash</option>
+<option value="TRX">TRX - TRON</option>
+<option value="LTC">LTC - Litecoin</option>
+<option value="DOGE">DOGE - Dogecoin</option>
+<option value="USDT">USDT - Tether</option>
 
+</select>
 
-    <!-- BCH -->
+<input id="fromAmount"
+       type="number"
+       min="0"
+       step="any"
+       placeholder="مقدار">
 
-    <div class="coin">
+</div>
 
-      <img
-        src="https://assets.coingecko.com/coins/images/780/large/bitcoin-cash-circle.png"
-        alt="Bitcoin Cash">
+<div class="card">
 
-      <div class="coin-name">
-        Bitcoin Cash
-      </div>
+<div class="card-title">ارزی که می‌گیری</div>
 
-      <div
-        id="price-BCH"
-        class="coin-price">
-        در حال دریافت...
-      </div>
+<select id="toCoin">
 
-      <div
-        id="state-BCH"
-        class="coin-state">
-        ● اتصال
-      </div>
+<option value="USDT">USDT - Tether</option>
+<option value="BTC">BTC - Bitcoin</option>
+<option value="BCH">BCH - Bitcoin Cash</option>
+<option value="TRX">TRX - TRON</option>
+<option value="LTC">LTC - Litecoin</option>
+<option value="DOGE">DOGE - Dogecoin</option>
 
-    </div>
+</select>
 
+<div id="toAmount" class="result">مقدار دریافتی</div>
 
-    <!-- TRX -->
+</div>
 
-    <div class="coin">
+</div>
 
-      <img
-        src="https://assets.coingecko.com/coins/images/1094/large/tron-logo.png"
-        alt="TRON">
+<div class="trade-buttons">
 
-      <div class="coin-name">
-        TRON
-      </div>
+<button class="trade buy" onclick="trade('BUY')">
+🟢 BUY
+</button>
 
-      <div
-        id="price-TRX"
-        class="coin-price">
-        در حال دریافت...
-      </div>
+<button class="trade sell" onclick="trade('SELL')">
+🔴 SELL
+</button>
 
-      <div
-        id="state-TRX"
-        class="coin-state">
-        ● اتصال
-      </div>
+</div>
 
-    </div>
+<div id="message" class="message">
+قیمت‌ها در حال دریافت هستند...
+</div>
 
+<div class="info">
 
-    <!-- LTC -->
+قیمت‌ها از چندین منبع بازار بررسی می‌شوند.
+اگر یک منبع قطع شود، منابع دیگر استفاده می‌شوند.
+اگر تمام منابع موقتاً قطع شوند، آخرین قیمت معتبر
+روی سایت باقی می‌ماند تا اتصال دوباره برقرار شود.
 
-    <div class="coin">
+</div>
 
-      <img
-        src="https://assets.coingecko.com/coins/images/2/large/litecoin.png"
-        alt="Litecoin">
+</div>
 
-      <div class="coin-name">
-        Litecoin
-      </div>
 
-      <div
-        id="price-LTC"
-        class="coin-price">
-        در حال دریافت...
-      </div>
+<!-- =====================================================
+     TRANSACTION SECTION
+===================================================== -->
 
-      <div
-        id="state-LTC"
-        class="coin-state">
-        ● اتصال
-      </div>
+<div class="transactions">
 
-    </div>
+<div class="section-title">
+ثبت معامله و آدرس‌های واریز
+</div>
 
 
-    <!-- DOGE -->
+<!-- PUBLIC ADDRESSES -->
 
-    <div class="coin">
+<div class="address-grid">
 
-      <img
-        src="https://assets.coingecko.com/coins/images/5/large/dogecoin.png"
-        alt="Dogecoin">
+<div class="address-box">
 
-      <div class="coin-name">
-        Dogecoin
-      </div>
+<div class="address-name">₿ BTC</div>
+<div class="network">شبکه Bitcoin</div>
 
-      <div
-        id="price-DOGE"
-        class="coin-price">
-        در حال دریافت...
-      </div>
+<div class="address-row">
+<div class="address-value">
+1Q99GpYnEU9yELNLjiJUWopNT1HatRYQrV
+</div>
 
-      <div
-        id="state-DOGE"
-        class="coin-state">
-        ● اتصال
-      </div>
+<button class="copy-btn"
+onclick="copyAddress('1Q99GpYnEU9yELNLjiJUWopNT1HatRYQrV',this)">
+کپی
+</button>
+</div>
 
-    </div>
+</div>
 
 
-    <!-- USDT -->
+<div class="address-box">
 
-    <div class="coin">
+<div class="address-name">₿ BCH</div>
+<div class="network">شبکه Bitcoin Cash</div>
 
-      <img
-        src="https://assets.coingecko.com/coins/images/325/large/Tether.png"
-        alt="USDT">
+<div class="address-row">
+<div class="address-value">
+bitcoincash:qrj64uh0xlah2wzksudq3g5eeg2ewdyg6urq5kywku
+</div>
 
-      <div class="coin-name">
-        Tether
-      </div>
+<button class="copy-btn"
+onclick="copyAddress('bitcoincash:qrj64uh0xlah2wzksudq3g5eeg2ewdyg6urq5kywku',this)">
+کپی
+</button>
+</div>
 
-      <div
-        id="price-USDT"
-        class="coin-price">
-        $1.00
-      </div>
+</div>
 
-      <div
-        class="coin-state"
-        style="color:#00ff55">
-        ● فعال
-      </div>
 
-    </div>
+<div class="address-box">
 
-  </div>
+<div class="address-name">TRX</div>
+<div class="network">شبکه TRON</div>
 
+<div class="address-row">
+<div class="address-value">
+TRb33idZSi7svRyBTRsEKq8BfL54ADYMh3
+</div>
 
-  <!-- EXCHANGE -->
+<button class="copy-btn"
+onclick="copyAddress('TRb33idZSi7svRyBTRsEKq8BfL54ADYMh3',this)">
+کپی
+</button>
+</div>
 
-  <div class="exchange">
+</div>
 
-    <div class="exchange-title">
-      تبدیل ارز
-    </div>
 
+<div class="address-box">
 
-    <div class="exchange-grid">
+<div class="address-name">LTC</div>
+<div class="network">شبکه Litecoin</div>
 
+<div class="address-row">
+<div class="address-value">
+LZeRDFWbPLpuqeAw7m5i5YcYiu32KRAM6c
+</div>
 
-      <!-- FROM -->
+<button class="copy-btn"
+onclick="copyAddress('LZeRDFWbPLpuqeAw7m5i5YcYiu32KRAM6c',this)">
+کپی
+</button>
+</div>
 
-      <div class="card">
+</div>
 
-        <div class="card-title">
-          ارزی که می‌دهی
-        </div>
 
-        <select id="fromCoin">
+<div class="address-box">
 
-          <option value="BTC">
-            BTC - Bitcoin
-          </option>
+<div class="address-name">Ð DOGE</div>
+<div class="network">شبکه Dogecoin</div>
 
-          <option value="BCH">
-            BCH - Bitcoin Cash
-          </option>
+<div class="address-row">
+<div class="address-value">
+DA9b1AqJqgsdFNuJNjzRo2g5wFj1rEeQLk
+</div>
 
-          <option value="TRX">
-            TRX - TRON
-          </option>
+<button class="copy-btn"
+onclick="copyAddress('DA9b1AqJqgsdFNuJNjzRo2g5wFj1rEeQLk',this)">
+کپی
+</button>
+</div>
 
-          <option value="LTC">
-            LTC - Litecoin
-          </option>
+</div>
 
-          <option value="DOGE">
-            DOGE - Dogecoin
-          </option>
 
-          <option value="USDT">
-            USDT - Tether
-          </option>
+<div class="address-box">
 
-        </select>
+<div class="address-name">₮ USDT</div>
+<div class="network">شبکه BNB Smart Chain - BEP20</div>
 
+<div class="address-row">
+<div class="address-value">
+0x3765C083F36B7D874d3a6249436a84C9e9bDAbA6
+</div>
 
-        <input
-          id="fromAmount"
-          type="number"
-          min="0"
-          step="any"
-          placeholder="مقدار">
+<button class="copy-btn"
+onclick="copyAddress('0x3765C083F36B7D874d3a6249436a84C9e9bDAbA6',this)">
+کپی
+</button>
+</div>
 
-      </div>
+</div>
 
+</div>
 
-      <!-- TO -->
 
-      <div class="card">
+<!-- REGISTER -->
 
-        <div class="card-title">
-          ارزی که می‌گیری
-        </div>
+<div class="register-box">
 
-        <select id="toCoin">
+<div class="section-title">
+ثبت تراکنش
+</div>
 
-          <option value="USDT">
-            USDT - Tether
-          </option>
+<div class="form-grid">
 
-          <option value="BTC">
-            BTC - Bitcoin
-          </option>
 
-          <option value="BCH">
-            BCH - Bitcoin Cash
-          </option>
+<div class="form-item">
 
-          <option value="TRX">
-            TRX - TRON
-          </option>
+<label>نوع معامله</label>
 
-          <option value="LTC">
-            LTC - Litecoin
-          </option>
+<select id="transactionType">
 
-          <option value="DOGE">
-            DOGE - Dogecoin
-          </option>
+<option value="BUY">🟢 BUY - خرید</option>
+<option value="SELL">🔴 SELL - فروش</option>
 
-        </select>
+</select>
 
+</div>
 
-        <div
-          id="toAmount"
-          class="result">
-          مقدار دریافتی
-        </div>
 
-      </div>
+<div class="form-item">
 
-    </div>
+<label>ارزی که می‌دهی</label>
 
+<select id="transactionFrom">
 
-    <!-- BUY SELL -->
+<option value="BTC">BTC - Bitcoin</option>
+<option value="BCH">BCH - Bitcoin Cash</option>
+<option value="TRX">TRX - TRON</option>
+<option value="LTC">LTC - Litecoin</option>
+<option value="DOGE">DOGE - Dogecoin</option>
+<option value="USDT">USDT - Tether BEP20</option>
 
-    <div class="trade-buttons">
+</select>
 
-      <button
-        class="trade buy"
-        onclick="trade('BUY')">
+</div>
 
-        🟢 BUY
 
-      </button>
+<div class="form-item">
 
+<label>مقدار معامله</label>
 
-      <button
-        class="trade sell"
-        onclick="trade('SELL')">
+<input id="transactionAmount"
+       type="number"
+       min="0"
+       step="any"
+       placeholder="مقدار ارز">
 
-        🔴 SELL
+</div>
 
-      </button>
 
-    </div>
+<div class="form-item">
 
+<label>ارزی که می‌گیری</label>
 
-    <div
-      id="message"
-      class="message">
+<select id="transactionTo">
 
-      قیمت‌ها در حال دریافت هستند...
+<option value="USDT">USDT - Tether</option>
+<option value="BTC">BTC - Bitcoin</option>
+<option value="BCH">BCH - Bitcoin Cash</option>
+<option value="TRX">TRX - TRON</option>
+<option value="LTC">LTC - Litecoin</option>
+<option value="DOGE">DOGE - Dogecoin</option>
 
-    </div>
+</select>
 
+</div>
 
-    <div class="info">
 
-      قیمت‌ها از چندین منبع بازار بررسی می‌شوند.
-      اگر یک منبع قطع شود، منابع دیگر استفاده می‌شوند.
-      اگر تمام منابع موقتاً قطع شوند، آخرین قیمت معتبر
-      روی سایت باقی می‌ماند تا اتصال دوباره برقرار شود.
+<div class="form-item">
 
-    </div>
+<label>آدرس کیف پول شما</label>
 
-  </div>
+<input id="userWallet"
+       type="text"
+       placeholder="آدرس کیف پول دریافت شما">
+
+</div>
+
+
+<div class="form-item">
+
+<label>TXID / هش تراکنش - اختیاری</label>
+
+<input id="txid"
+       type="text"
+       placeholder="TXID تراکنش واریز">
+
+</div>
+
+</div>
+
+
+<div style="margin-top:15px">
+
+<div class="card-title">
+آدرس عمومی برای واریز ارز انتخاب‌شده
+</div>
+
+<div id="selectedNetwork" class="network">
+شبکه
+</div>
+
+<div class="public-address"
+     id="selectedAddress">
+آدرس
+</div>
+
+<button class="copy-btn"
+        style="width:100%;margin-top:10px"
+        onclick="copySelectedAddress()">
+📋 کپی آدرس واریز
+</button>
+
+</div>
+
+
+<button class="register-btn"
+        onclick="registerTransaction()">
+ثبت تراکنش و دریافت کد پیگیری
+</button>
+
+
+<div id="trackingResult" class="tracking-result">
+
+<div>تراکنش شما ثبت شد</div>
+
+<div style="margin-top:5px">
+کد پیگیری:
+</div>
+
+<div id="newTrackingCode"
+     class="tracking-code">
+</div>
+
+<div style="margin-top:8px;color:#ffd000">
+وضعیت: در انتظار بررسی
+</div>
+
+</div>
+
+<div class="notice">
+ثبت این فرم به معنی ثبت درخواست معامله است.
+تأیید نهایی تراکنش پس از بررسی واریز و تراکنش شبکه انجام می‌شود.
+</div>
+
+</div>
+
+
+<!-- TRACKING -->
+
+<div class="register-box">
+
+<div class="section-title">
+پیگیری تراکنش
+</div>
+
+<input id="trackingSearch"
+       type="text"
+       placeholder="کد پیگیری را وارد کنید">
+
+<button class="register-btn"
+        style="background:#087cf5"
+        onclick="findTransaction()">
+🔎 پیگیری
+</button>
+
+<div id="trackingSearchResult"
+     class="tracking-result">
+</div>
+
+</div>
+
+
+<!-- ALL TRANSACTIONS -->
+
+<div class="all-transactions">
+
+<div class="section-title">
+همه تراکنش‌های ثبت‌شده
+</div>
+
+<div id="transactionList"
+     class="transaction-list">
+
+<div class="empty-transactions">
+هنوز تراکنشی ثبت نشده است.
+</div>
+
+</div>
+
+</div>
+
+</div>
 
 </div>
 
@@ -736,19 +1055,12 @@ const COINS = [
 ===================================================== */
 
 const prices = {
-
   BTC:null,
-
   BCH:null,
-
   TRX:null,
-
   LTC:null,
-
   DOGE:null,
-
   USDT:1
-
 };
 
 
@@ -757,17 +1069,11 @@ const prices = {
 ===================================================== */
 
 const binanceSymbols = {
-
   BTC:"BTCUSDT",
-
   BCH:"BCHUSDT",
-
   TRX:"TRXUSDT",
-
   LTC:"LTCUSDT",
-
   DOGE:"DOGEUSDT"
-
 };
 
 
@@ -799,7 +1105,6 @@ function formatPrice(value){
         maximumFractionDigits:digits
       }
     );
-
 }
 
 
@@ -834,7 +1139,6 @@ function median(list){
     values[middle - 1] +
     values[middle]
   ) / 2;
-
 }
 
 
@@ -842,10 +1146,7 @@ function median(list){
    FETCH
 ===================================================== */
 
-async function getJSON(
-  url,
-  timeout = 7000
-){
+async function getJSON(url,timeout=7000){
 
   const controller =
     new AbortController();
@@ -875,10 +1176,7 @@ async function getJSON(
       );
 
     if(!response.ok){
-      throw new Error(
-        "HTTP " +
-        response.status
-      );
+      throw new Error("HTTP "+response.status);
     }
 
     return await response.json();
@@ -888,7 +1186,6 @@ async function getJSON(
     clearTimeout(timer);
 
   }
-
 }
 
 
@@ -900,7 +1197,7 @@ async function getBinance(coin){
 
   const data =
     await getJSON(
-      "https://api.binance.com/api/v3/ticker/price?symbol=" +
+      "https://api.binance.com/api/v3/ticker/price?symbol="+
       binanceSymbols[coin]
     );
 
@@ -912,7 +1209,6 @@ async function getBinance(coin){
   }
 
   throw new Error("Binance");
-
 }
 
 
@@ -924,8 +1220,8 @@ async function getCoinbase(coin){
 
   const data =
     await getJSON(
-      "https://api.coinbase.com/v2/prices/" +
-      coin +
+      "https://api.coinbase.com/v2/prices/"+
+      coin+
       "-USD/spot"
     );
 
@@ -937,7 +1233,6 @@ async function getCoinbase(coin){
   }
 
   throw new Error("Coinbase");
-
 }
 
 
@@ -948,29 +1243,21 @@ async function getCoinbase(coin){
 async function getKraken(coin){
 
   const pairs = {
-
     BTC:"XBTUSD",
-
     BCH:"BCHUSD",
-
     TRX:"TRXUSD",
-
     LTC:"LTCUSD",
-
     DOGE:"DOGEUSD"
-
   };
 
   const data =
     await getJSON(
-      "https://api.kraken.com/0/public/Ticker?pair=" +
+      "https://api.kraken.com/0/public/Ticker?pair="+
       pairs[coin]
     );
 
   const key =
-    Object.keys(
-      data?.result || {}
-    )[0];
+    Object.keys(data?.result || {})[0];
 
   const price =
     Number(
@@ -982,7 +1269,6 @@ async function getKraken(coin){
   }
 
   throw new Error("Kraken");
-
 }
 
 
@@ -994,22 +1280,19 @@ async function getKuCoin(coin){
 
   const data =
     await getJSON(
-      "https://api.kucoin.com/api/v1/market/orderbook/level1?symbol=" +
-      coin +
+      "https://api.kucoin.com/api/v1/market/orderbook/level1?symbol="+
+      coin+
       "-USDT"
     );
 
   const price =
-    Number(
-      data?.data?.price
-    );
+    Number(data?.data?.price);
 
   if(price > 0){
     return price;
   }
 
   throw new Error("KuCoin");
-
 }
 
 
@@ -1021,22 +1304,19 @@ async function getOKX(coin){
 
   const data =
     await getJSON(
-      "https://www.okx.com/api/v5/market/ticker?instId=" +
-      coin +
+      "https://www.okx.com/api/v5/market/ticker?instId="+
+      coin+
       "-USDT"
     );
 
   const price =
-    Number(
-      data?.data?.[0]?.last
-    );
+    Number(data?.data?.[0]?.last);
 
   if(price > 0){
     return price;
   }
 
   throw new Error("OKX");
-
 }
 
 
@@ -1048,22 +1328,19 @@ async function getBybit(coin){
 
   const data =
     await getJSON(
-      "https://api.bybit.com/v5/market/tickers?category=spot&symbol=" +
-      coin +
+      "https://api.bybit.com/v5/market/tickers?category=spot&symbol="+
+      coin+
       "USDT"
     );
 
   const price =
-    Number(
-      data?.result?.list?.[0]?.lastPrice
-    );
+    Number(data?.result?.list?.[0]?.lastPrice);
 
   if(price > 0){
     return price;
   }
 
   throw new Error("Bybit");
-
 }
 
 
@@ -1075,22 +1352,19 @@ async function getGate(coin){
 
   const data =
     await getJSON(
-      "https://api.gateio.ws/api/v4/spot/tickers?currency_pair=" +
-      coin +
+      "https://api.gateio.ws/api/v4/spot/tickers?currency_pair="+
+      coin+
       "_USDT"
     );
 
   const price =
-    Number(
-      data?.[0]?.last
-    );
+    Number(data?.[0]?.last);
 
   if(price > 0){
     return price;
   }
 
   throw new Error("Gate");
-
 }
 
 
@@ -1102,22 +1376,19 @@ async function getBitget(coin){
 
   const data =
     await getJSON(
-      "https://api.bitget.com/api/v2/spot/market/tickers?symbol=" +
-      coin +
+      "https://api.bitget.com/api/v2/spot/market/tickers?symbol="+
+      coin+
       "USDT"
     );
 
   const price =
-    Number(
-      data?.data?.[0]?.lastPr
-    );
+    Number(data?.data?.[0]?.lastPr);
 
   if(price > 0){
     return price;
   }
 
   throw new Error("Bitget");
-
 }
 
 
@@ -1129,8 +1400,8 @@ async function getMexc(coin){
 
   const data =
     await getJSON(
-      "https://api.mexc.com/api/v3/ticker/price?symbol=" +
-      coin +
+      "https://api.mexc.com/api/v3/ticker/price?symbol="+
+      coin+
       "USDT"
     );
 
@@ -1142,7 +1413,6 @@ async function getMexc(coin){
   }
 
   throw new Error("MEXC");
-
 }
 
 
@@ -1154,22 +1424,19 @@ async function getHtx(coin){
 
   const data =
     await getJSON(
-      "https://api.huobi.pro/market/detail/merged?symbol=" +
-      coin.toLowerCase() +
+      "https://api.huobi.pro/market/detail/merged?symbol="+
+      coin.toLowerCase()+
       "usdt"
     );
 
   const price =
-    Number(
-      data?.tick?.close
-    );
+    Number(data?.tick?.close);
 
   if(price > 0){
     return price;
   }
 
   throw new Error("HTX");
-
 }
 
 
@@ -1181,8 +1448,8 @@ async function getLbank(coin){
 
   const data =
     await getJSON(
-      "https://api.lbkex.com/v2/ticker/24hr.do?symbol=" +
-      coin.toLowerCase() +
+      "https://api.lbkex.com/v2/ticker/24hr.do?symbol="+
+      coin.toLowerCase()+
       "_usdt"
     );
 
@@ -1190,8 +1457,7 @@ async function getLbank(coin){
 
   if(Array.isArray(data?.data)){
 
-    const item =
-      data.data[0];
+    const item = data.data[0];
 
     price =
       Number(
@@ -1218,7 +1484,6 @@ async function getLbank(coin){
   }
 
   throw new Error("LBank");
-
 }
 
 
@@ -1230,8 +1495,8 @@ async function getCoinEx(coin){
 
   const data =
     await getJSON(
-      "https://api.coinex.com/v2/spot/ticker?market=" +
-      coin.toLowerCase() +
+      "https://api.coinex.com/v2/spot/ticker?market="+
+      coin.toLowerCase()+
       "usdt"
     );
 
@@ -1249,7 +1514,6 @@ async function getCoinEx(coin){
   }
 
   throw new Error("CoinEx");
-
 }
 
 
@@ -1261,8 +1525,8 @@ async function getBitMart(coin){
 
   const data =
     await getJSON(
-      "https://api-cloud.bitmart.com/spot/v1/ticker?symbol=" +
-      coin +
+      "https://api-cloud.bitmart.com/spot/v1/ticker?symbol="+
+      coin+
       "_USDT"
     );
 
@@ -1276,7 +1540,6 @@ async function getBitMart(coin){
   }
 
   throw new Error("BitMart");
-
 }
 
 
@@ -1288,8 +1551,8 @@ async function getCryptoCom(coin){
 
   const data =
     await getJSON(
-      "https://api.crypto.com/exchange/v1/public/get-ticker?instrument_name=" +
-      coin +
+      "https://api.crypto.com/exchange/v1/public/get-ticker?instrument_name="+
+      coin+
       "_USDT"
     );
 
@@ -1303,7 +1566,6 @@ async function getCryptoCom(coin){
   }
 
   throw new Error("Crypto");
-
 }
 
 
@@ -1315,8 +1577,8 @@ async function getGemini(coin){
 
   const data =
     await getJSON(
-      "https://api.gemini.com/v1/pubticker/" +
-      coin.toLowerCase() +
+      "https://api.gemini.com/v1/pubticker/"+
+      coin.toLowerCase()+
       "usd"
     );
 
@@ -1328,7 +1590,6 @@ async function getGemini(coin){
   }
 
   throw new Error("Gemini");
-
 }
 
 
@@ -1340,8 +1601,8 @@ async function getBitstamp(coin){
 
   const data =
     await getJSON(
-      "https://www.bitstamp.net/api/v2/ticker/" +
-      coin.toLowerCase() +
+      "https://www.bitstamp.net/api/v2/ticker/"+
+      coin.toLowerCase()+
       "usd/"
     );
 
@@ -1353,7 +1614,6 @@ async function getBitstamp(coin){
   }
 
   throw new Error("Bitstamp");
-
 }
 
 
@@ -1365,22 +1625,19 @@ async function getWhiteBit(coin){
 
   const data =
     await getJSON(
-      "https://whitebit.com/api/v4/public/ticker?market=" +
-      coin +
+      "https://whitebit.com/api/v4/public/ticker?market="+
+      coin+
       "_USDT"
     );
 
   const price =
-    Number(
-      data?.last_price
-    );
+    Number(data?.last_price);
 
   if(price > 0){
     return price;
   }
 
   throw new Error("WhiteBit");
-
 }
 
 
@@ -1392,8 +1649,8 @@ async function getPhemex(coin){
 
   const data =
     await getJSON(
-      "https://api.phemex.com/md/ticker/24hr?symbol=" +
-      coin +
+      "https://api.phemex.com/md/ticker/24hr?symbol="+
+      coin+
       "USDT"
     );
 
@@ -1408,7 +1665,6 @@ async function getPhemex(coin){
   }
 
   throw new Error("Phemex");
-
 }
 
 
@@ -1420,22 +1676,19 @@ async function getAscendEX(coin){
 
   const data =
     await getJSON(
-      "https://ascendex.com/api/pro/v1/ticker?symbol=" +
-      coin +
+      "https://ascendex.com/api/pro/v1/ticker?symbol="+
+      coin+
       "/USDT"
     );
 
   const price =
-    Number(
-      data?.data?.close
-    );
+    Number(data?.data?.close);
 
   if(price > 0){
     return price;
   }
 
   throw new Error("AscendEX");
-
 }
 
 
@@ -1447,37 +1700,22 @@ async function getCoinGecko(){
 
   const data =
     await getJSON(
-      "https://api.coingecko.com/api/v3/simple/price" +
-      "?ids=bitcoin,bitcoin-cash,tron,litecoin,dogecoin" +
+      "https://api.coingecko.com/api/v3/simple/price"+
+      "?ids=bitcoin,bitcoin-cash,tron,litecoin,dogecoin"+
       "&vs_currencies=usd"
     );
 
   return {
 
-    BTC:
-      Number(
-        data?.bitcoin?.usd
-      ),
+    BTC:Number(data?.bitcoin?.usd),
 
-    BCH:
-      Number(
-        data?.["bitcoin-cash"]?.usd
-      ),
+    BCH:Number(data?.["bitcoin-cash"]?.usd),
 
-    TRX:
-      Number(
-        data?.tron?.usd
-      ),
+    TRX:Number(data?.tron?.usd),
 
-    LTC:
-      Number(
-        data?.litecoin?.usd
-      ),
+    LTC:Number(data?.litecoin?.usd),
 
-    DOGE:
-      Number(
-        data?.dogecoin?.usd
-      )
+    DOGE:Number(data?.dogecoin?.usd)
 
   };
 
@@ -1493,41 +1731,23 @@ function sourcesFor(coin){
   return [
 
     getBinance(coin),
-
     getCoinbase(coin),
-
     getKraken(coin),
-
     getKuCoin(coin),
-
     getOKX(coin),
-
     getBybit(coin),
-
     getGate(coin),
-
     getBitget(coin),
-
     getMexc(coin),
-
     getHtx(coin),
-
     getLbank(coin),
-
     getCoinEx(coin),
-
     getBitMart(coin),
-
     getCryptoCom(coin),
-
     getGemini(coin),
-
     getBitstamp(coin),
-
     getWhiteBit(coin),
-
     getPhemex(coin),
-
     getAscendEX(coin)
 
   ];
@@ -1556,18 +1776,12 @@ async function updateCoin(coin){
       result.value > 0
     ){
 
-      validPrices.push(
-        result.value
-      );
+      validPrices.push(result.value);
 
     }
 
   });
 
-
-  /*
-    CoinGecko separately checked.
-  */
 
   try{
 
@@ -1588,9 +1802,7 @@ async function updateCoin(coin){
 
   }catch(error){
 
-    console.log(
-      "CoinGecko unavailable"
-    );
+    console.log("CoinGecko unavailable");
 
   }
 
@@ -1598,15 +1810,14 @@ async function updateCoin(coin){
   const finalPrice =
     median(validPrices);
 
-
   const priceElement =
     document.getElementById(
-      "price-" + coin
+      "price-"+coin
     );
 
   const stateElement =
     document.getElementById(
-      "state-" + coin
+      "state-"+coin
     );
 
 
@@ -1615,44 +1826,30 @@ async function updateCoin(coin){
     prices[coin] =
       finalPrice;
 
-
-    /*
-      Save last valid price.
-    */
-
     try{
 
       localStorage.setItem(
-        "lastPrice_" + coin,
+        "lastPrice_"+coin,
         String(finalPrice)
       );
 
     }catch(error){}
 
-
     priceElement.textContent =
       formatPrice(finalPrice);
 
-
     stateElement.textContent =
-      "● آنلاین | " +
-      validPrices.length +
+      "● آنلاین | "+
+      validPrices.length+
       " منبع";
-
 
     stateElement.style.color =
       "#00ff55";
-
 
     return true;
 
   }
 
-
-  /*
-    No current source.
-    Load last valid price.
-  */
 
   if(prices[coin] === null){
 
@@ -1661,7 +1858,7 @@ async function updateCoin(coin){
       const saved =
         Number(
           localStorage.getItem(
-            "lastPrice_" + coin
+            "lastPrice_"+coin
           )
         );
 
@@ -1683,9 +1880,7 @@ async function updateCoin(coin){
   if(prices[coin] !== null){
 
     priceElement.textContent =
-      formatPrice(
-        prices[coin]
-      );
+      formatPrice(prices[coin]);
 
     stateElement.textContent =
       "● آخرین قیمت معتبر";
@@ -1706,7 +1901,6 @@ async function updateCoin(coin){
 
   }
 
-
   return false;
 
 }
@@ -1725,7 +1919,6 @@ async function updateAllPrices(){
           updateCoin(coin)
       )
     );
-
 
   let onlineCount = 0;
 
@@ -1755,8 +1948,8 @@ async function updateAllPrices(){
       "status-light online";
 
     status.textContent =
-      "بازار آنلاین | " +
-      onlineCount +
+      "بازار آنلاین | "+
+      onlineCount+
       " ارز به‌روز شد";
 
   }else{
@@ -1768,7 +1961,6 @@ async function updateAllPrices(){
       "اتصال موقتاً قطع | آخرین قیمت حفظ شد";
 
   }
-
 
   calculate();
 
@@ -1803,16 +1995,11 @@ function calculate(){
       "toAmount"
     );
 
-
   const fromPrice =
-    Number(
-      prices[from]
-    );
+    Number(prices[from]);
 
   const toPrice =
-    Number(
-      prices[to]
-    );
+    Number(prices[to]);
 
 
   if(
@@ -1832,13 +2019,10 @@ function calculate(){
 
 
   const usdValue =
-    amount *
-    fromPrice;
-
+    amount * fromPrice;
 
   const received =
-    usdValue /
-    toPrice;
+    usdValue / toPrice;
 
 
   output.textContent =
@@ -1847,10 +2031,613 @@ function calculate(){
       {
         maximumFractionDigits:10
       }
-    ) +
-    " " +
+    )+
+    " "+
     to;
 
+}
+
+
+/* =====================================================
+   WALLET ADDRESSES
+===================================================== */
+
+const walletAddresses = {
+
+  BTC:{
+    network:"Bitcoin",
+    address:"1Q99GpYnEU9yELNLjiJUWopNT1HatRYQrV"
+  },
+
+  BCH:{
+    network:"Bitcoin Cash",
+    address:"bitcoincash:qrj64uh0xlah2wzksudq3g5eeg2ewdyg6urq5kywku"
+  },
+
+  TRX:{
+    network:"TRON",
+    address:"TRb33idZSi7svRyBTRsEKq8BfL54ADYMh3"
+  },
+
+  LTC:{
+    network:"Litecoin",
+    address:"LZeRDFWbPLpuqeAw7m5i5YcYiu32KRAM6c"
+  },
+
+  DOGE:{
+    network:"Dogecoin",
+    address:"DA9b1AqJqgsdFNuJNjzRo2g5wFj1rEeQLk"
+  },
+
+  USDT:{
+    network:"BNB Smart Chain - BEP20",
+    address:"0x3765C083F36B7D874d3a6249436a84C9e9bDAbA6"
+  }
+
+};
+
+
+/* =====================================================
+   UPDATE SELECTED ADDRESS
+===================================================== */
+
+function updateSelectedAddress(){
+
+  const coin =
+    document.getElementById(
+      "transactionFrom"
+    ).value;
+
+  const data =
+    walletAddresses[coin];
+
+  document.getElementById(
+    "selectedNetwork"
+  ).textContent =
+    "شبکه: "+data.network;
+
+  document.getElementById(
+    "selectedAddress"
+  ).textContent =
+    data.address;
+
+}
+
+
+/* =====================================================
+   COPY ADDRESS
+===================================================== */
+
+function copyAddress(address,button){
+
+  if(
+    navigator.clipboard &&
+    window.isSecureContext
+  ){
+
+    navigator.clipboard.writeText(address);
+
+  }else{
+
+    const area =
+      document.createElement("textarea");
+
+    area.value = address;
+    document.body.appendChild(area);
+    area.select();
+    document.execCommand("copy");
+    area.remove();
+
+  }
+
+  const oldText =
+    button.textContent;
+
+  button.textContent =
+    "✓ کپی شد";
+
+  setTimeout(
+    ()=>{
+      button.textContent =
+        oldText;
+    },
+    1500
+  );
+
+}
+
+
+/* =====================================================
+   COPY SELECTED ADDRESS
+===================================================== */
+
+function copySelectedAddress(){
+
+  const coin =
+    document.getElementById(
+      "transactionFrom"
+    ).value;
+
+  const address =
+    walletAddresses[coin].address;
+
+  copyAddress(
+    address,
+    document.querySelector(
+      ".register-box .copy-btn"
+    )
+  );
+
+}
+
+
+/* =====================================================
+   TRACKING CODE
+===================================================== */
+
+function createTrackingCode(){
+
+  const now =
+    new Date();
+
+  const date =
+    now.getFullYear()+
+    String(now.getMonth()+1).padStart(2,"0")+
+    String(now.getDate()).padStart(2,"0");
+
+  const random =
+    Math.random()
+      .toString(36)
+      .substring(2,8)
+      .toUpperCase();
+
+  return "TX-"+date+"-"+random;
+
+}
+
+
+/* =====================================================
+   SAFE HTML
+===================================================== */
+
+function escapeHTML(value){
+
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* =====================================================
+   GET TRANSACTIONS
+===================================================== */
+
+function getTransactions(){
+
+  try{
+
+    return JSON.parse(
+      localStorage.getItem(
+        "exchangeTransactions"
+      ) || "[]"
+    );
+
+  }catch(error){
+
+    return [];
+
+  }
+
+}
+
+
+/* =====================================================
+   SAVE TRANSACTIONS
+===================================================== */
+
+function saveTransactions(list){
+
+  localStorage.setItem(
+    "exchangeTransactions",
+    JSON.stringify(list)
+  );
+
+}
+
+
+/* =====================================================
+   REGISTER TRANSACTION
+===================================================== */
+
+function registerTransaction(){
+
+  const type =
+    document.getElementById(
+      "transactionType"
+    ).value;
+
+  const from =
+    document.getElementById(
+      "transactionFrom"
+    ).value;
+
+  const to =
+    document.getElementById(
+      "transactionTo"
+    ).value;
+
+  const amount =
+    Number(
+      document.getElementById(
+        "transactionAmount"
+      ).value
+    );
+
+  const userWallet =
+    document.getElementById(
+      "userWallet"
+    ).value.trim();
+
+  const txid =
+    document.getElementById(
+      "txid"
+    ).value.trim();
+
+
+  if(
+    !Number.isFinite(amount) ||
+    amount <= 0
+  ){
+
+    alert("لطفاً مقدار معامله را وارد کنید.");
+    return;
+
+  }
+
+
+  if(!userWallet){
+
+    alert("لطفاً آدرس کیف پول خود را وارد کنید.");
+    return;
+
+  }
+
+
+  const trackingCode =
+    createTrackingCode();
+
+  const publicAddress =
+    walletAddresses[from].address;
+
+  const network =
+    walletAddresses[from].network;
+
+
+  let receivedAmount =
+    "";
+
+  const fromPrice =
+    Number(prices[from]);
+
+  const toPrice =
+    Number(prices[to]);
+
+
+  if(
+    Number.isFinite(fromPrice) &&
+    Number.isFinite(toPrice) &&
+    toPrice > 0
+  ){
+
+    receivedAmount =
+      (
+        amount *
+        fromPrice /
+        toPrice
+      ).toLocaleString(
+        "en-US",
+        {
+          maximumFractionDigits:10
+        }
+      );
+
+  }
+
+
+  const transaction = {
+
+    trackingCode:trackingCode,
+
+    type:type,
+
+    from:from,
+
+    to:to,
+
+    amount:amount,
+
+    receivedAmount:receivedAmount,
+
+    publicAddress:publicAddress,
+
+    network:network,
+
+    userWallet:userWallet,
+
+    txid:txid,
+
+    status:"در انتظار بررسی",
+
+    createdAt:new Date().toISOString()
+
+  };
+
+
+  const transactions =
+    getTransactions();
+
+  transactions.unshift(transaction);
+
+  saveTransactions(transactions);
+
+
+  document.getElementById(
+    "newTrackingCode"
+  ).textContent =
+    trackingCode;
+
+
+  document.getElementById(
+    "trackingResult"
+  ).style.display =
+    "block";
+
+
+  document.getElementById(
+    "trackingSearch"
+  ).value =
+    trackingCode;
+
+
+  renderTransactions();
+
+
+  document.getElementById(
+    "trackingResult"
+  ).scrollIntoView({
+    behavior:"smooth",
+    block:"center"
+  });
+
+}
+
+
+/* =====================================================
+   RENDER ALL TRANSACTIONS
+===================================================== */
+
+function renderTransactions(){
+
+  const list =
+    document.getElementById(
+      "transactionList"
+    );
+
+  const transactions =
+    getTransactions();
+
+
+  if(transactions.length === 0){
+
+    list.innerHTML =
+      '<div class="empty-transactions">'+
+      'هنوز تراکنشی ثبت نشده است.'+
+      '</div>';
+
+    return;
+
+  }
+
+
+  list.innerHTML =
+    transactions.map(tx=>{
+
+      const typeClass =
+        tx.type === "BUY"
+        ? "buy-label"
+        : "sell-label";
+
+      const typeText =
+        tx.type === "BUY"
+        ? "🟢 BUY | خرید"
+        : "🔴 SELL | فروش";
+
+
+      const date =
+        new Date(
+          tx.createdAt
+        ).toLocaleString(
+          "fa-IR"
+        );
+
+
+      return `
+
+<div class="transaction-item">
+
+<div class="transaction-head">
+
+<div class="transaction-code">
+${escapeHTML(tx.trackingCode)}
+</div>
+
+<div class="${typeClass}">
+${typeText}
+</div>
+
+</div>
+
+
+<div class="transaction-details">
+
+<div>
+<b>ارز پرداختی:</b>
+${escapeHTML(tx.from)}
+</div>
+
+<div>
+<b>مقدار:</b>
+${escapeHTML(tx.amount)}
+${escapeHTML(tx.from)}
+</div>
+
+<div>
+<b>ارز دریافتی:</b>
+${escapeHTML(tx.to)}
+</div>
+
+<div>
+<b>مقدار دریافتی:</b>
+${escapeHTML(tx.receivedAmount || "در انتظار محاسبه")}
+${escapeHTML(tx.to)}
+</div>
+
+<div>
+<b>شبکه:</b>
+${escapeHTML(tx.network)}
+</div>
+
+<div>
+<b>وضعیت:</b>
+<span class="status-pending">
+${escapeHTML(tx.status)}
+</span>
+</div>
+
+<div>
+<b>آدرس عمومی واریز:</b>
+${escapeHTML(tx.publicAddress)}
+</div>
+
+<div>
+<b>آدرس کیف پول کاربر:</b>
+${escapeHTML(tx.userWallet)}
+</div>
+
+<div>
+<b>زمان ثبت:</b>
+${escapeHTML(date)}
+</div>
+
+<div>
+<b>TXID:</b>
+${escapeHTML(tx.txid || "ثبت نشده")}
+</div>
+
+</div>
+
+</div>
+
+`;
+
+    }).join("");
+
+}
+
+
+/* =====================================================
+   FIND TRANSACTION
+===================================================== */
+
+function findTransaction(){
+
+  const code =
+    document.getElementById(
+      "trackingSearch"
+    ).value
+    .trim()
+    .toUpperCase();
+
+
+  const result =
+    document.getElementById(
+      "trackingSearchResult"
+    );
+
+
+  if(!code){
+
+    result.style.display =
+      "block";
+
+    result.innerHTML =
+      "کد پیگیری را وارد کنید.";
+
+    return;
+
+  }
+
+
+  const transactions =
+    getTransactions();
+
+  const tx =
+    transactions.find(
+      item =>
+        String(
+          item.trackingCode
+        ).toUpperCase() === code
+    );
+
+
+  result.style.display =
+    "block";
+
+
+  if(!tx){
+
+    result.innerHTML =
+      "❌ تراکنشی با این کد پیگیری پیدا نشد.";
+
+    return;
+
+  }
+
+
+  result.innerHTML = `
+
+<div>
+<b>کد پیگیری</b>
+</div>
+
+<div class="tracking-code">
+${escapeHTML(tx.trackingCode)}
+</div>
+
+<div style="margin-top:8px">
+نوع:
+${tx.type === "BUY" ? "🟢 خرید" : "🔴 فروش"}
+</div>
+
+<div>
+${escapeHTML(tx.amount)}
+${escapeHTML(tx.from)}
+→
+${escapeHTML(tx.to)}
+</div>
+
+<div style="margin-top:8px">
+وضعیت:
+<span class="status-pending">
+${escapeHTML(tx.status)}
+</span>
+</div>
+
+`;
 
 }
 
@@ -1878,7 +2665,6 @@ function trade(type){
       ).value
     );
 
-
   const message =
     document.getElementById(
       "message"
@@ -1898,27 +2684,59 @@ function trade(type){
   }
 
 
+  document.getElementById(
+    "transactionType"
+  ).value =
+    type;
+
+  document.getElementById(
+    "transactionFrom"
+  ).value =
+    from;
+
+  document.getElementById(
+    "transactionTo"
+  ).value =
+    to;
+
+  document.getElementById(
+    "transactionAmount"
+  ).value =
+    amount;
+
+
+  updateSelectedAddress();
+
+
   if(type === "BUY"){
 
     message.textContent =
-      "🟢 BUY | خرید " +
-      to +
-      " با " +
-      from +
-      " | مقدار " +
+      "🟢 BUY | خرید "+
+      to+
+      " با "+
+      from+
+      " | مقدار "+
       amount;
 
   }else{
 
     message.textContent =
-      "🔴 SELL | فروش " +
-      from +
-      " برای دریافت " +
-      to +
-      " | مقدار " +
+      "🔴 SELL | فروش "+
+      from+
+      " برای دریافت "+
+      to+
+      " | مقدار "+
       amount;
 
   }
+
+
+  document.querySelector(
+    ".transactions"
+  ).scrollIntoView({
+    behavior:"smooth",
+    block:"start"
+  });
 
 }
 
@@ -1928,25 +2746,32 @@ function trade(type){
 ===================================================== */
 
 document
-  .getElementById("fromAmount")
-  .addEventListener(
-    "input",
-    calculate
-  );
+.getElementById("fromAmount")
+.addEventListener(
+  "input",
+  calculate
+);
 
 document
-  .getElementById("fromCoin")
-  .addEventListener(
-    "change",
-    calculate
-  );
+.getElementById("fromCoin")
+.addEventListener(
+  "change",
+  calculate
+);
 
 document
-  .getElementById("toCoin")
-  .addEventListener(
-    "change",
-    calculate
-  );
+.getElementById("toCoin")
+.addEventListener(
+  "change",
+  calculate
+);
+
+document
+.getElementById("transactionFrom")
+.addEventListener(
+  "change",
+  updateSelectedAddress
+);
 
 
 /* =====================================================
@@ -1961,7 +2786,6 @@ function setTheme(theme){
     "orange"
   );
 
-
   if(theme){
 
     document.body.classList.add(
@@ -1969,7 +2793,6 @@ function setTheme(theme){
     );
 
   }
-
 
   try{
 
@@ -2003,12 +2826,14 @@ try{
    START
 ===================================================== */
 
+updateSelectedAddress();
+
+renderTransactions();
+
 updateAllPrices();
 
 
-/*
-  Every 20 seconds
-*/
+/* Every 20 seconds */
 
 setInterval(
   updateAllPrices,
@@ -2016,9 +2841,7 @@ setInterval(
 );
 
 
-/*
-  Extra check after 5 seconds
-*/
+/* Extra check after 5 seconds */
 
 setTimeout(
   updateAllPrices,

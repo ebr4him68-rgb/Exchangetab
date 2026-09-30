@@ -9466,6 +9466,392 @@ document.addEventListener(
   ⚡ تبادل آسان
 </a>
 ```
+```html
+<!-- ===============================
+     اخبار لحظه‌ای ارزهای دیجیتال
+     =============================== -->
+
+<style>
+  .crypto-news-section {
+    width: 100%;
+    max-width: 1200px;
+    margin: 60px auto 30px;
+    padding: 0 15px;
+    box-sizing: border-box;
+  }
+
+  .crypto-news-title {
+    text-align: center;
+    margin-bottom: 25px;
+  }
+
+  .crypto-news-title h2 {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 900;
+    color: #111827;
+  }
+
+  .crypto-news-title p {
+    margin: 8px 0 0;
+    color: #6b7280;
+    font-size: 14px;
+  }
+
+  .live-news-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: 12px;
+    padding: 7px 14px;
+    border-radius: 20px;
+    background: #f0fdf4;
+    color: #15803d;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .live-news-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #22c55e;
+    animation: newsLiveBlink 1s infinite;
+  }
+
+  @keyframes newsLiveBlink {
+    0%,100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: .35;
+      transform: scale(.75);
+    }
+  }
+
+  .crypto-news-box {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 22px;
+    padding: 20px;
+    box-shadow: 0 8px 30px rgba(0,0,0,.08);
+  }
+
+  .crypto-news-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+
+  .crypto-news-card {
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    transition: .25s ease;
+  }
+
+  .crypto-news-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0,0,0,.10);
+  }
+
+  .crypto-news-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+    background: #f3f4f6;
+  }
+
+  .crypto-news-content {
+    padding: 16px;
+  }
+
+  .crypto-news-source {
+    font-size: 12px;
+    color: #2563eb;
+    font-weight: 800;
+    margin-bottom: 8px;
+  }
+
+  .crypto-news-card h3 {
+    margin: 0 0 10px;
+    font-size: 17px;
+    line-height: 1.55;
+    color: #111827;
+  }
+
+  .crypto-news-card p {
+    margin: 0 0 12px;
+    color: #6b7280;
+    font-size: 13px;
+    line-height: 1.7;
+  }
+
+  .crypto-news-card a {
+    display: inline-block;
+    color: #0891b2;
+    font-size: 13px;
+    font-weight: 800;
+    text-decoration: none;
+  }
+
+  .crypto-news-time {
+    margin-top: 10px;
+    font-size: 11px;
+    color: #9ca3af;
+  }
+
+  .news-loading {
+    text-align: center;
+    padding: 40px 10px;
+    color: #6b7280;
+    font-size: 15px;
+  }
+
+  .news-error {
+    text-align: center;
+    padding: 35px 15px;
+    color: #6b7280;
+    line-height: 1.8;
+  }
+
+  @media (max-width: 900px) {
+    .crypto-news-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .crypto-news-section {
+      margin-top: 40px;
+    }
+
+    .crypto-news-title h2 {
+      font-size: 23px;
+    }
+
+    .crypto-news-box {
+      padding: 12px;
+      border-radius: 18px;
+    }
+
+    .crypto-news-grid {
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+    .crypto-news-image {
+      height: 190px;
+    }
+  }
+</style>
+
+
+<section class="crypto-news-section" id="crypto-news">
+
+  <div class="crypto-news-title">
+
+    <h2>📰 اخبار لحظه‌ای ارزهای دیجیتال</h2>
+
+    <p>
+      آخرین اخبار و رویدادهای بازار رمزارزها
+    </p>
+
+    <div class="live-news-status">
+      <span class="live-news-dot"></span>
+      اخبار در حال به‌روزرسانی
+    </div>
+
+  </div>
+
+
+  <div class="crypto-news-box">
+
+    <div id="cryptoNewsGrid" class="crypto-news-grid">
+
+      <div class="news-loading">
+        در حال دریافت آخرین اخبار ارزهای دیجیتال...
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<script>
+(function () {
+
+  const newsGrid = document.getElementById("cryptoNewsGrid");
+
+  const fallbackNews = [
+    {
+      title: "آخرین تحولات بازار ارزهای دیجیتال",
+      description: "برای مشاهده آخرین اخبار و تحلیل‌های بازار رمزارزها، خبرهای جدید را دنبال کنید.",
+      image: "https://images.unsplash.com/photo-1621761191319-c6fb62004040?auto=format&fit=crop&w=900&q=80",
+      source: "Crypto News",
+      link: "https://www.google.com/search?q=crypto+news"
+    },
+    {
+      title: "تحولات جدید بازار بیت‌کوین",
+      description: "آخرین اطلاعات و اخبار مرتبط با بیت‌کوین و بازار رمزارزها.",
+      image: "https://images.unsplash.com/photo-1518546305927-5a555bb7020d?auto=format&fit=crop&w=900&q=80",
+      source: "Crypto Market",
+      link: "https://www.google.com/search?q=bitcoin+news"
+    },
+    {
+      title: "اخبار مهم بازار رمزارزها",
+      description: "جدیدترین رویدادهای مهم بازار ارزهای دیجیتال را دنبال کنید.",
+      image: "https://images.unsplash.com/photo-1621416894569-0f39ed31d247?auto=format&fit=crop&w=900&q=80",
+      source: "Crypto World",
+      link: "https://www.google.com/search?q=cryptocurrency+news"
+    }
+  ];
+
+
+  function escapeHTML(text) {
+
+    const div = document.createElement("div");
+
+    div.textContent = text || "";
+
+    return div.innerHTML;
+
+  }
+
+
+  function renderNews(news) {
+
+    newsGrid.innerHTML = "";
+
+    news.slice(0, 6).forEach(function (item) {
+
+      const card = document.createElement("article");
+
+      card.className = "crypto-news-card";
+
+      card.innerHTML = `
+        <img
+          class="crypto-news-image"
+          src="${escapeHTML(item.image)}"
+          alt="اخبار ارزهای دیجیتال"
+          loading="lazy"
+          onerror="this.style.display='none'"
+        >
+
+        <div class="crypto-news-content">
+
+          <div class="crypto-news-source">
+            ${escapeHTML(item.source || "اخبار رمزارز")}
+          </div>
+
+          <h3>
+            ${escapeHTML(item.title)}
+          </h3>
+
+          <p>
+            ${escapeHTML(item.description || "برای مشاهده جزئیات خبر کلیک کنید.")}
+          </p>
+
+          <a
+            href="${escapeHTML(item.link || "#")}"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            مشاهده خبر ←
+          </a>
+
+          <div class="crypto-news-time">
+            آخرین به‌روزرسانی: ${new Date().toLocaleTimeString("fa-IR")}
+          </div>
+
+        </div>
+      `;
+
+      newsGrid.appendChild(card);
+
+    });
+
+  }
+
+
+  async function loadCryptoNews() {
+
+    try {
+
+      /*
+       * RSS2JSON خبرهای RSS را به JSON تبدیل می‌کند.
+       * در صورت محدودیت سرویس، اخبار نمونه نمایش داده می‌شوند.
+       */
+
+      const rssURL =
+        "https://api.rss2json.com/v1/api.json?rss_url=" +
+        encodeURIComponent(
+          "https://news.google.com/rss/search?q=cryptocurrency%20OR%20bitcoin%20OR%20ethereum&hl=en-US&gl=US&ceid=US:en"
+        );
+
+      const response = await fetch(rssURL, {
+        cache: "no-store"
+      });
+
+      if (!response.ok) {
+        throw new Error("News API error");
+      }
+
+      const data = await response.json();
+
+      if (!data.items || !data.items.length) {
+        throw new Error("No news");
+      }
+
+      const news = data.items.map(function (item) {
+
+        return {
+          title: item.title,
+          description: item.description
+            ? item.description.replace(/<[^>]*>/g, "").slice(0, 180)
+            : "آخرین اخبار بازار ارزهای دیجیتال.",
+          image:
+            item.thumbnail ||
+            "https://images.unsplash.com/photo-1621761191319-c6fb62004040?auto=format&fit=crop&w=900&q=80",
+          source: item.author || "Crypto News",
+          link: item.link
+        };
+
+      });
+
+      renderNews(news);
+
+    } catch (error) {
+
+      console.log("Crypto news:", error);
+
+      renderNews(fallbackNews);
+
+    }
+
+  }
+
+
+  // بارگذاری اولیه
+  loadCryptoNews();
+
+
+  // به‌روزرسانی خودکار هر 5 دقیقه
+  setInterval(function () {
+
+    loadCryptoNews();
+
+  }, 5 * 60 * 1000);
+
+
+})();
+</script>
+```
 
 </body>
 </html>

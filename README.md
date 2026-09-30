@@ -2060,6 +2060,242 @@ setInterval(
 );
 
 </script>
+<!-- ===== Bitcoin Live Price Widget ===== -->
+<div id="btc-live-widget">
+  <div class="btc-box">
 
+    <div class="btc-left">
+      <img
+        src="https://assets.coingecko.com/coins/images/1/large/bitcoin.png"
+        class="btc-logo"
+        alt="Bitcoin"
+      >
+
+      <div>
+        <div class="btc-title">Bitcoin</div>
+        <div class="btc-symbol">BTC / USD</div>
+      </div>
+    </div>
+
+    <div class="btc-center">
+      <div id="btc-price">در حال دریافت...</div>
+      <div id="btc-status">
+        <span id="btc-light"></span>
+        <span id="btc-status-text">در حال اتصال...</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<style>
+#btc-live-widget{
+  width:100%;
+  max-width:650px;
+  margin:18px auto;
+  font-family:Arial,Tahoma,sans-serif;
+}
+
+.btc-box{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  padding:18px 20px;
+  border-radius:18px;
+  background:rgba(20,20,20,.94);
+  box-shadow:0 8px 30px rgba(0,0,0,.25);
+  color:white;
+  border:1px solid rgba(255,255,255,.12);
+}
+
+.btc-left{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.btc-logo{
+  width:55px;
+  height:55px;
+  border-radius:50%;
+  display:block;
+}
+
+.btc-title{
+  font-size:20px;
+  font-weight:bold;
+}
+
+.btc-symbol{
+  margin-top:5px;
+  font-size:13px;
+  opacity:.65;
+}
+
+.btc-center{
+  text-align:right;
+}
+
+#btc-price{
+  font-size:25px;
+  font-weight:bold;
+  direction:ltr;
+  white-space:nowrap;
+}
+
+#btc-status{
+  margin-top:7px;
+  font-size:12px;
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:6px;
+}
+
+#btc-light{
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  background:#777;
+  display:inline-block;
+}
+
+/* چراغ روشن */
+#btc-light.online{
+  background:#00ff66;
+  box-shadow:0 0 8px #00ff66,0 0 16px #00ff66;
+  animation:btcBlink 1.2s infinite;
+}
+
+/* چراغ خاموش */
+#btc-light.offline{
+  background:#ff3030;
+  box-shadow:0 0 7px #ff3030;
+}
+
+@keyframes btcBlink{
+  0%,100%{
+    opacity:1;
+  }
+  50%{
+    opacity:.25;
+  }
+}
+
+@media(max-width:500px){
+  .btc-box{
+    padding:14px;
+  }
+
+  .btc-logo{
+    width:45px;
+    height:45px;
+  }
+
+  .btc-title{
+    font-size:17px;
+  }
+
+  #btc-price{
+    font-size:18px;
+  }
+}
+</style>
+
+<script>
+(function(){
+
+  const BTC_API =
+    "https://api.coingecko.com/api/v3/simple/price" +
+    "?ids=bitcoin&vs_currencies=usd&include_last_updated_at=true";
+
+  let lastBTCPrice = null;
+
+  const priceElement = document.getElementById("btc-price");
+  const lightElement = document.getElementById("btc-light");
+  const statusElement = document.getElementById("btc-status-text");
+
+  function showOnline(price){
+
+    lastBTCPrice = price;
+
+    priceElement.textContent =
+      "$" + Number(price).toLocaleString("en-US", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
+
+    lightElement.className = "online";
+    statusElement.textContent = "آنلاین";
+    statusElement.style.color = "#00ff66";
+  }
+
+  function showOffline(){
+
+    lightElement.className = "offline";
+
+    if(lastBTCPrice !== null){
+
+      priceElement.textContent =
+        "$" + Number(lastBTCPrice).toLocaleString("en-US", {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2
+        });
+
+      statusElement.textContent = "آخرین قیمت";
+      statusElement.style.color = "#ffcc00";
+
+    }else{
+
+      priceElement.textContent = "قیمت در دسترس نیست";
+      statusElement.textContent = "قطع";
+      statusElement.style.color = "#ff3030";
+    }
+  }
+
+  async function getBitcoinPrice(){
+
+    try{
+
+      const response = await fetch(
+        BTC_API + "&_=" + Date.now(),
+        {
+          method:"GET",
+          cache:"no-store"
+        }
+      );
+
+      if(!response.ok){
+        throw new Error("API Error");
+      }
+
+      const data = await response.json();
+
+      const price = Number(data?.bitcoin?.usd);
+
+      if(!Number.isFinite(price) || price <= 0){
+        throw new Error("Invalid BTC price");
+      }
+
+      showOnline(price);
+
+    }catch(error){
+
+      console.log("Bitcoin price API error:", error);
+
+      showOffline();
+    }
+  }
+
+  // بار اول
+  getBitcoinPrice();
+
+  // بررسی دوباره هر 60 ثانیه
+  setInterval(getBitcoinPrice, 60000);
+
+})();
+</script>
+<!-- ===== End Bitcoin Live Price Widget ===== -->
 </body>
 </html>

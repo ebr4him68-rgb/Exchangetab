@@ -10591,6 +10591,72 @@ document.addEventListener(
 })();
 </script>
 ```
+```
+<script>
+(function () {
+    function moveExchangeButtonIntoSettings() {
+        // پیدا کردن عنوان تنظیمات
+        const settingsTitle = [...document.querySelectorAll('*')].find(el => {
+            const t = (el.textContent || '').replace(/\s+/g, ' ').trim();
+            return t === '⚙️ تنظیمات سایت';
+        });
+
+        if (!settingsTitle) return;
+
+        // پیدا کردن دکمه اصلی معامله آسان
+        const exchangeButton = [...document.querySelectorAll('button')].find(btn => {
+            const t = (btn.textContent || '').replace(/\s+/g, ' ').trim();
+            return t === '⇄ معامله آسان' || t === 'معامله آسان';
+        });
+
+        if (!exchangeButton) return;
+
+        // پیدا کردن پنل واقعی تنظیمات
+        let settingsPanel = settingsTitle.parentElement;
+
+        // اگر والد مستقیم فقط عنوان بود، چند مرحله بالاتر را بررسی کن
+        for (let i = 0; i < 5 && settingsPanel; i++) {
+            if (
+                settingsPanel.contains(settingsTitle) &&
+                settingsPanel.querySelectorAll('button').length >= 1
+            ) {
+                break;
+            }
+            settingsPanel = settingsPanel.parentElement;
+        }
+
+        if (!settingsPanel) return;
+
+        // انتقال خود دکمه به داخل تنظیمات
+        if (!settingsPanel.contains(exchangeButton)) {
+            settingsPanel.appendChild(exchangeButton);
+        }
+
+        // ظاهر دکمه را دست نمی‌زنیم
+        // فقط جای آن داخل تنظیمات است
+        exchangeButton.style.removeProperty('position');
+        exchangeButton.style.removeProperty('left');
+        exchangeButton.style.removeProperty('right');
+        exchangeButton.style.removeProperty('top');
+        exchangeButton.style.removeProperty('bottom');
+        exchangeButton.style.removeProperty('transform');
+    }
+
+    moveExchangeButtonIntoSettings();
+
+    window.addEventListener('load', moveExchangeButtonIntoSettings);
+
+    const observer = new MutationObserver(function () {
+        moveExchangeButtonIntoSettings();
+    });
+
+    observer.observe(document.body, {
+        childList: true,
+        subtree: true
+    });
+})();
+</script>
+```
 
 </body>
 </html>
